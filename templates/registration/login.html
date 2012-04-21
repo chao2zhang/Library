@@ -1,0 +1,15 @@
+{% extends 'one_box.html' %}
+{% load helper %}
+{% block title %}登录{% endblock %}
+{% block header %}
+{% endblock %}
+{% block main %}
+<div id='main_holder'>
+	<form class="login" action="" method="post">
+		{{ form.non_field_errors }}
+	    {{ form.username }}
+	    {{ form.password }}
+	    {% div_submit "登录" %}
+	</form>
+</div>
+{% endblock %}

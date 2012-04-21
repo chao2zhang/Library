@@ -1,0 +1,90 @@
+{% extends 'one_box.html' %}
+{% load helper %}
+{% block title %}重新激活{% endblock %}
+{% block header %}
+<script type="text/javascript">
+	$('ul#nav li#nav_reactivate').addClass('selected');
+</script>
+{% endblock %}
+{% block main %}
+<div id='main_holder'>
+	{% div_text "重新激活" "react_title" "title" %}
+	{% hr_dot %}
+	{% if has_account %}
+		<ul class="errorlist"><li>
+			您已经登录！请登出后再激活！<a class="inner" href={% url django.contrib.auth.views.logout %}>点击此处</a>登出!
+		</li></ul>
+	{% endif %}
+	{% if activated %}
+		<ul class="errorlist"><li>
+			您已经激活！
+		</li></ul>
+	{% endif %}
+	{% if illegal %}
+		<ul class="errorlist"><li>
+			请输入正确的用户名和密码。请注意两者都是大小写敏感的。
+		</li></ul>
+	{% endif %}
+	{% if success %}
+		<div class="message">
+			请登录邮箱{{ email }}完成激活！
+		</div>
+	{% endif %}
+	{% if form %}
+	<div class="message">
+		如果要更换邮箱，请填写；否则，邮箱一栏置空。
+	</div>
+	<form class="react" action="" method="post">
+		{{ form.non_field_errors }}
+	    {% form_label_text "用户名" "react_item" "id_username" form.username %}
+	    {% form_label_text "密码" "react_item" "id_password" form.password %}	
+	    {% form_label_text "邮箱" "react_item" "id_email" form.email %}	
+		{% div_submit "重新激活" "react_button" %}
+	</form>
+	<script type="text/javascript">
+    	$('form.react input#id_username').change(function(){
+    	if (!/^[a-zA-Z][a-zA-Z0-9_]{3,15}$/.test($(this).val()))
+    		$(this).parent().err($.error.username_invalid);
+    	else $(this).parent().err();
+    	});
+		$('form.react input#id_password').change(function(){
+			var i = $('form.register input#id_password_confirm');
+			if ($(this).val().length < 6 || $(this).val().length > 16)
+				$(this).parent().err($.error.password_invalid);
+        	else if (i.val() && $(this).val() != i.val()) {
+        		$(this).parent().err();
+            	i.parent().err($.error.password_mismatch);
+        	}
+			else {
+        		$(this).parent().err();
+        		i.parent().err();
+			}
+		});
+		$('form.react input#id_email').change(function(){
+			if (!/^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/.test($(this).val())) 
+				$(this).parent().err($.error.email_invalid);
+			else
+				$(this).parent().err();
+		});
+    	$('form.react').submit(function(){
+        	var u = $(this).find('input#id_username');
+        	var p = $(this).find('input#id_password');
+        	var e = $(this).find('input#id_email');
+        	if (!/^[a-zA-Z][a-zA-Z0-9_]{3,15}$/.test(u.val())) {
+            	u.parent().err($.error.username_invalid);
+            	return false;
+        	}
+        	if (p.val().length < 6 || p.val().length > 16) {
+            	p.parent().err($.error.password_invalid);
+            	return false;
+        	} 
+        	if (e.val() && !/^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/.test(e.val())) {
+            	e.parent().err($.error.email_invalid);
+            	return false;
+        	}
+        	return true;
+    	});
+    </script>
+	{% endif %}
+</div>
+{% endblock %}

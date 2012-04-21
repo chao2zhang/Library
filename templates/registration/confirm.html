@@ -1,0 +1,29 @@
+{% extends 'one_box.html' %}
+{% load helper %}
+{% block title %}激活{% endblock %}
+{% block main %}
+<div id='main_holder'>
+	{% div_text "激活" "confirm_title" "title" %}
+	{% hr_dot %}
+	{% if has_account %}
+		<ul class="errorlist"><li>
+			您已经登录！请登出后再激活！<a class="inner" href={% url django.contrib.auth.views.logout %}>点击此处</a>登出!
+		</li></ul>
+	{% endif %}
+	{% if expired %}
+		<ul class="errorlist"><li>
+			激活失效，<a class="inner" href={% url reg.views.reactivate %}>点击此处</a>返回并重新激活
+		</li></ul>
+	{% endif %}
+	{% if resend %}
+		<div class="message">
+			请登录邮箱{{ email }}完成激活！
+		</div>
+	{% endif %}
+	{% if success %}
+		<div class="message">
+			成功激活！<a class="inner" href={% url django.contrib.auth.views.login %}>点击此处</a>登录
+		</div>
+	{% endif %}
+</div>
+{% endblock %}

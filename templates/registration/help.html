@@ -1,0 +1,15 @@
+{% extends 'one_box.html' %}
+{% load helper %}
+{% block title %}帮助{% endblock %}
+{% block header %}
+<script type="text/javascript">
+$('ul#nav li#nav_help').addClass('selected');
+</script>
+{% endblock %}
+{% block main %}
+<div id='main_large_holder'>
+	{% div_text "帮助" "logout_title" "title" %}
+	{% hr_dot %}
+	{% help_text %}
+</div>
+{% endblock %}
