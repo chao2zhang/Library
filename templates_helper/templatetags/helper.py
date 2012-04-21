@@ -79,21 +79,24 @@ def div_quote_text(text, text_id=None, text_class=None, label_val=None):
             'text_id' : text_id,
             'text_class' : text_class,
             'label_val' : label_val}
-    
+
+'''
 @register.inclusion_tag('templatetags/div_label_text.html')
-def div_label_text(text, text_id=None, text_class=None, label_val=None):
+def div_label_text(text, id=None, clazz=None, value=None):
     return {'text' : text,
-            'text_id' : text_id,
-            'text_class' : text_class,
-            'label_val' : label_val}
+            'id' : id,
+            'clazz' : clazz,
+            'val' : val}
+
 
 @register.inclusion_tag('templatetags/form_label_text.html')
-def form_label_text(field_name, class_name, label_name, object):
-    return {'field_name' : field_name,
-            'class_name' : class_name,
+def form_label_text(object, field_name, label_name, clazz):
+    return {'object' : object,
+            'field_name' : field_name,
             'label_name' : label_name,
-            'object' : object}
+            'clazz' : clazz}
     
+'''
 @register.inclusion_tag('templatetags/form_label_quote_text.html')
 def form_label_quote_text(field_name, class_name, label_name, object):
     return {'field_name' : field_name,
