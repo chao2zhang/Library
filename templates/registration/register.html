@@ -1,0 +1,29 @@
+{% extends 'one_box.html' %}
+{% load helper %}
+{% block title %}注册{% endblock %}
+{% block header %}
+{% endblock %}
+{% block main %}
+<div id='main_holder'>
+	{% if has_account %}
+		<ul class="errorlist"><li>
+			您已经登录！请登出后再注册！<a class="inner" href={% url django.contrib.auth.views.logout %}>点击此处</a>登出!
+		</li></ul>
+	{% endif %}
+	{% if success %}
+		<div class="message">
+			成功注册！请登录邮箱{{ email }}完成激活！
+		</div>
+	{% endif %}
+	{% if form %}
+	<form class="register" action="" method="post">
+		{{ form.non_field_errors }}
+	    {% form_label_text form.username "用户名" "id_username" "reg-item" %}
+	    {% form_label_text form.password "密码" "id_password" "reg-item" %}	
+	    {% form_label_text form.password_confirm "重复密码" "id_password_confirm" "reg-item" %}
+	    {% form_label_text form.email "邮箱" "id_email" "reg-item" %}	
+		{% div_submit "注册"%}
+	</form>
+	{% endif %}
+</div>
+{% endblock %}

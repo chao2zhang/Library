@@ -1,0 +1,11 @@
+{% extends 'one_box.html' %}
+{% load helper %}
+{% block title %}登出{% endblock %}
+{% block header %}
+{% endblock %}
+{% block main %}
+<div id='main-holder'>
+	{%div_text "您已成功登出"%}
+	{%div_link "/login" "返回此处登录"%}
+</div>
+{% endblock %}

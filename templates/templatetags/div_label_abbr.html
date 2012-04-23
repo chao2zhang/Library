@@ -1,0 +1,5 @@
+<div{%if text_id%} id="{{text_id}}"{%endif%}{%if text_class%} class="{{text_class}}"{%endif%}>
+	{%if label_val%}<label>{{ label_val }}</label>{%endif%}
+	<abbr class="timeago" title="{{time.isoformat}}"></abbr>
+	<div class="clearfix"></div>
+</div>

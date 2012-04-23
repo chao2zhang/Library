@@ -1,0 +1,42 @@
+{% extends 'one_box.html' %}
+{% load helper %}
+{% block title %}重新激活{% endblock %}
+{% block header %}
+{% endblock %}
+{% block main %}
+<div id='main_holder'>
+	{% div_text "重新激活" "react_title" "title" %}
+	{% if has_account %}
+		<ul class="errorlist"><li>
+			您已经登录！请登出后再激活！<a class="inner" href={% url django.contrib.auth.views.logout %}>点击此处</a>登出!
+		</li></ul>
+	{% endif %}
+	{% if activated %}
+		<ul class="errorlist"><li>
+			您已经激活！
+		</li></ul>
+	{% endif %}
+	{% if illegal %}
+		<ul class="errorlist"><li>
+			请输入正确的用户名和密码。请注意两者都是大小写敏感的。
+		</li></ul>
+	{% endif %}
+	{% if success %}
+		<div class="message">
+			请登录邮箱{{ email }}完成激活！
+		</div>
+	{% endif %}
+	{% if form %}
+	<div class="message">
+		如果要更换邮箱，请填写；否则，邮箱一栏置空。
+	</div>
+	<form class="react" action="" method="post">
+		{{ form.non_field_errors }}
+	    {% form_label_text form.username "用户名" "id_username" "react-item" %}
+	    {% form_label_text form.password "密码" "id_password" "react-item" %}	
+	    {% form_label_text form.email "邮箱" "id_email" "react-item" %}	
+		{% div_submit "重新激活"%}
+	</form>
+	{% endif %}
+</div>
+{% endblock %}

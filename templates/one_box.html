@@ -1,0 +1,31 @@
+<!DOCTYPE HTML>
+{% load helper %}
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	{% js_tag "/media/javascripts/jquery-1.7.min.js" %}
+	{% js_tag "/media/javascripts/jquery.uniform.min.js" %}
+  	{% js_tag "/media/javascripts/renren-gc.js" %}
+	{% js_tag "/media/javascripts/jquery.custom.js" %}
+	{% css_tag "/media/stylesheets/uniform.default.css" %}	
+	{% css_tag "/media/stylesheets/common.css" %}
+	{% css_tag "/media/stylesheets/one_box.css" %}
+	<title>{% block title %}{% endblock %}</title>
+</head>
+<body>
+	<div id='header-wrap'>
+			<div id="header-holder">
+			{% block header %}
+			{% endblock %}
+			</div>
+	</div>
+	<div id='main-wrap'>
+		{% block main %}
+		<div id='main-holder'>
+		</div>
+		{% endblock %}
+	</div>
+	<div id='footer-wrap'>
+		{% block footer %}
+		{% endblock %}
+	</div>
+</body>
