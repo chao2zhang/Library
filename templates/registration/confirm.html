@@ -3,8 +3,6 @@
 {% block title %}激活{% endblock %}
 {% block main %}
 <div id='main_holder'>
-	{% div_text "激活" "confirm_title" "title" %}
-	{% hr_dot %}
 	{% if has_account %}
 		<ul class="errorlist"><li>
 			您已经登录！请登出后再激活！<a class="inner" href={% url django.contrib.auth.views.logout %}>点击此处</a>登出!

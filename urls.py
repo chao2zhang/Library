@@ -7,6 +7,10 @@ admin.autodiscover()
 urlpatterns = patterns('',
     url(r'^login/$', login),
     url(r'^logout/$', logout),
+    url(r'^register/$', 'registrations.views.register'),
+    url(r'^reactivate/$', 'registrations.views.reactivate'), 
+    url(r'^confirm/(\w{30})/$', 'registrations.views.confirm'),
+    
     # Examples:
     # url(r'^$', 'library.views.home', name='home'),
     # url(r'^library/', include('library.foo.urls')),

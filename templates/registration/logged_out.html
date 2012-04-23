@@ -1,12 +1,11 @@
 {% extends 'one_box.html' %}
 {% load helper %}
 {% block title %}登出{% endblock %}
+{% block header %}
+{% endblock %}
 {% block main %}
-<div id='main_holder'>
-	{% div_text "登出" "logout_title" "title" %}
-	{% hr_dot %}
-	<div class="message">
-		您已经成功登出！<a class="inner" href="/login/">点击此处</a>重新登录!
-	</div>
+<div id='main-holder'>
+	{%div_text "您已成功登出"%}
+	{%div_link "/login" "返回此处登录"%}
 </div>
 {% endblock %}

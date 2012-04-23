@@ -32,15 +32,13 @@ def js_tag(url):
 def css_tag(url):
     return  {'url' : url}
 
-'''
 @register.inclusion_tag('templatetags/div_link.html')
-def div_link(url, value, link_id=None, link_class=None):
+def div_link(url, value, id=None, clazz=None):
     return  {'url' : url,
              'value' : value,
-            'link_id' : link_id,
-            'link_class' : link_class}
+             'id' : id,
+             'clazz' : clazz}
 
-'''
 @register.inclusion_tag('templatetags/div_submit.html')
 def div_submit(value, id=None, clazz=None):
     return  {'value' : value,
@@ -54,12 +52,14 @@ def div_image(image_url, image_id=None, image_class=None):
             'image_id' : image_id,
             'image_class' : image_class}
 
+'''
 @register.inclusion_tag('templatetags/div_text.html')
-def div_text(text, text_id=None, text_class=None):
+def div_text(text, id=None, clazz=None):
     return  {'text' : text,
-            'text_id' : text_id,
-            'text_class' : text_class}
-
+            'id' : id,
+            'clazz' : clazz}
+    
+'''
 @register.inclusion_tag('templatetags/div_abbr.html')
 def div_abbr(time, text_id=None, text_class=None):
     return  {'time' : time,
@@ -103,22 +103,7 @@ def form_label_quote_text(field_name, class_name, label_name, object):
             'class_name' : class_name,
             'label_name' : label_name,
             'object' : object}
-
-@register.inclusion_tag('templatetags/simple_user.html')
-def simple_user(user):
-    return {'user' : user}
-
-@register.inclusion_tag('templatetags/simplest_user.html')
-def simplest_user(user):
-    return {'user' : user}
-    
-@register.inclusion_tag('templatetags/complex_user.html')
-def complex_user(user):
-    return {'user' : user}
-
-@register.inclusion_tag('templatetags/div_signup.html')
-def div_signup(user):
-    return {'user' : user}'''
+'''
 
 
     
