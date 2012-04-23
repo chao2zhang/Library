@@ -51,6 +51,15 @@ class ReactivateForm(forms.Form):
     password = forms.CharField(min_length=6, max_length=16, widget=forms.PasswordInput)
     email = forms.EmailField(required=False, max_length=30)
     
+    
+    def clean_username(self):
+        value = self.cleaned_data['username']
+        try:
+            User.objects.get(username=value)
+        except User.DoesNotExist:
+            return ValidationError(u'Username "%s" does not exist.' % value)
+        raise value
+    
 def waitActivate(user_profile):
     user = user_profile.user
     salt = hashlib.sha512(str(random.random())).hexdigest()[:5]
@@ -59,7 +68,6 @@ def waitActivate(user_profile):
     # Create and save their user_profile            
     user_profile.key_expires = key_expires 
     user_profile.activation_key = activation_key
-    user_profile.init_signup()
     user_profile.save()
     # Send an email with the confirmation link                                                                                                                      
     email_subject = 'Your Library Management System Account Confirmation'

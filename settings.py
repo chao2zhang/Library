@@ -125,6 +125,12 @@ INSTALLED_APPS = (
     'registrations',
 )
 
+EMAIL_HOST = 'smtp.gmail.com' 
+EMAIL_PORT = '25' 
+EMAIL_HOST_USER = 'fducsai@gmail.com' 
+EMAIL_HOST_PASSWORD = 'fducsai'
+EMAIL_USE_TLS = True
+
 AUTH_PROFILE_MODULE = 'registrations.UserProfile'
 
 TEMPLATE_CONTEXT_PROCESSORS = (
