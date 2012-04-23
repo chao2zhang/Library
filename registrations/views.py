@@ -71,10 +71,17 @@ def waitActivate(user_profile):
     user_profile.save()
     # Send an email with the confirmation link                                                                                                                      
     email_subject = 'Your Library Management System Account Confirmation'
+<<<<<<< HEAD
     email_body = u'''%s, Welcome To FDUCS AI Contest!\n\n
     Please click within 48 hours to activate:\n\n
     http://localhost:8000/confirm/%s/''' % (user.username, user_profile.activation_key)
     send_mail(email_subject, email_body, 'fudancsai@gmail.com', [user.email], fail_silently = False)
+=======
+    email_body = u'''%s, Welcome To Library Management System!\n\n
+    Please click within 48 hours to activate:\n\n
+    http://localhost:8000/confirm/%s/''' % (user.username, user_profile.activation_key)
+    send_mail(email_subject, email_body, 'accounts@library.com', [user.email], fail_silently = False)
+>>>>>>> a1de5c51978df166ab3cad8042db56267130c32d
 
 def register(request):
     t = 'registration/register.html'

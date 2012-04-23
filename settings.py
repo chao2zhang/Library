@@ -13,7 +13,11 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
+<<<<<<< HEAD
         'NAME': 'fduai',                      # Or path to database file if using sqlite3.
+=======
+        'NAME': 'library',                      # Or path to database file if using sqlite3.
+>>>>>>> a1de5c51978df166ab3cad8042db56267130c32d
         'USER': 'c',                      # Not used with sqlite3.
         'PASSWORD': '2010fudan',                  # Not used with sqlite3.
         'HOST': 'localhost',                      # Set to empty string for localhost. Not used with sqlite3.
@@ -102,7 +106,11 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
 )
 
+<<<<<<< HEAD
 ROOT_URLCONF = 'fduai.urls'
+=======
+ROOT_URLCONF = 'library.urls'
+>>>>>>> a1de5c51978df166ab3cad8042db56267130c32d
 
 TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
@@ -119,14 +127,24 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.admin',
+<<<<<<< HEAD
+=======
+    # Uncomment the next line to enable admin documentation:
+    # 'django.contrib.admindocs',
+>>>>>>> a1de5c51978df166ab3cad8042db56267130c32d
     'templates_helper',
     'registrations',
 )
 
 EMAIL_HOST = 'smtp.gmail.com' 
 EMAIL_PORT = '25' 
+<<<<<<< HEAD
 EMAIL_HOST_USER = 'fudancsai@gmail.com' 
 EMAIL_HOST_PASSWORD = 'fudancsai'
+=======
+EMAIL_HOST_USER = 'fducsai@gmail.com' 
+EMAIL_HOST_PASSWORD = 'fducsai'
+>>>>>>> a1de5c51978df166ab3cad8042db56267130c32d
 EMAIL_USE_TLS = True
 
 AUTH_PROFILE_MODULE = 'registrations.UserProfile'
