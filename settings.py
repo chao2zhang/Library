@@ -119,10 +119,11 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.admin',
-    # Uncomment the next line to enable admin documentation:
-    # 'django.contrib.admindocs',
     'templates_helper',
     'registrations',
+    'manage',
+    'books',
+    'members',
 )
 
 EMAIL_HOST = 'smtp.gmail.com' 
