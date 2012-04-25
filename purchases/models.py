@@ -1,5 +1,5 @@
 from django.db import models
-from library.books.models import Book
+from books.models import Book
 
 class Purchase(models.Model):
     book = models.ForeignKey(Book, related_name='purchases')

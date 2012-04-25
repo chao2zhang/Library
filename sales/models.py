@@ -1,6 +1,6 @@
 from django.db import models
-from library.books.models import Book
-from library.members.models import Member
+from books.models import Book
+from members.models import Member
 
 class Sale(models.Model):
     book = models.ForeignKey(Book, related_name='sales')

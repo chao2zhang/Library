@@ -1,0 +1,7 @@
+{% extends "layout/two_col.html" %}
+{% block title %}书籍{% endblock %}
+{% block main_right %}
+	{% for book in books %}
+		{{ book }}
+	{% endfor %}
+{% endblock %}

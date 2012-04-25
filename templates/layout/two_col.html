@@ -1,0 +1,32 @@
+<!DOCTYPE HTML>
+{% block loader %}
+	{% load helper %}
+{% endblock %}
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<title>{% block title %}{% endblock %}</title>
+	{% block media %}{% endblock %}
+</head>
+<body>
+	<div id="header_wrap">
+		{% block header %}
+		{% endblock %}
+	</div>
+	<div id='main_wrap'>
+		<div id='main_holder'>
+			<div id='main_left'>
+			{% block main_left %}
+			{% endblock %}
+			</div>
+			<div id='main_right'>
+			{% block main_right %}
+			{% endblock %}
+			</div>
+			<div class='clearfix'></div>
+		</div>
+	</div>
+	<div id='footer_wrap'>
+		{% block footer %}
+		{% endblock %}
+	</div>
+</body>

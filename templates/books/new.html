@@ -1,0 +1,16 @@
+{% extends "layout/two_col.html" %}
+{% load helper %}
+{% block title %}书籍{% endblock %}
+{% block main_right %}
+	<form id="new_book_form" action="" method="post">
+		{{ form.non_field_errors }}
+	    {% for field in form %}
+	        <div class="book-form-item">
+	            {{ field.errors }}
+	            {{ field.label_tag }}
+	            {{ field }}
+	        </div>
+	    {% endfor %}
+	    {% div_submit "创建书籍" %}
+	</form>
+{% endblock %}

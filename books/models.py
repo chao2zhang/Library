@@ -1,6 +1,4 @@
 from django.db import models
-from django.contrib import admin
-from library.members.models import Member
 
 class Book(models.Model):
     isbn = models.CharField(max_length=13)

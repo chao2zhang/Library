@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib import admin
-from library.groups.models import Group
+from groups.models import Group
 
 class Member(models.Model):
     GENDER_CHOICES = (
