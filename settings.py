@@ -135,6 +135,11 @@ EMAIL_HOST_USER = 'fudancsai@gmail.com'
 EMAIL_HOST_PASSWORD = 'fudancsai'
 EMAIL_USE_TLS = True
 
+# Login Url
+LOGIN_URL = '/login/'
+LOGIN_REDIRECT_URL = '/books/'
+LOGOUT_URL = '/logout/'
+
 AUTH_PROFILE_MODULE = 'registrations.UserProfile'
 
 TEMPLATE_CONTEXT_PROCESSORS = (

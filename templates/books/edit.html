@@ -2,7 +2,7 @@
 {% load helper %}
 {% block title %}书籍{% endblock %}
 {% block main_right %}
-	<form id="new_book_form" action="/books/new/" method="post">
+	<form id="new_book_form" action="/books/edit/" method="post">
 		{{ form.non_field_errors }}
 	    {% for field in form %}
 	        <div class="book-form-item">
@@ -11,6 +11,6 @@
 	            {{ field }}
 	        </div>
 	    {% endfor %}
-	    {% div_submit "创建书籍" %}
+	    {% div_submit "修改书籍" %}
 	</form>
 {% endblock %}
