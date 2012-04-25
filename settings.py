@@ -123,6 +123,9 @@ INSTALLED_APPS = (
     'registrations',
     'manage',
     'books',
+    'purchases',
+    'sales',
+    'groups',
     'members',
 )
 

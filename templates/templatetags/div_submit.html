@@ -1,3 +1,5 @@
-<div{%if id%} id="{{id}}"{%endif%}{%if clazz%} class="{{clazz}}"{%endif%}>
-	<input type="submit" value="{{value}}" />     
-</div>
+{% spaceless %}
+	<div{%if id%} id="{{id}}"{%endif%}{%if clazz%} class="{{clazz}}"{%endif%}>
+		<input type="submit" value="{{value}}" />     
+	</div>
+{% endspaceless %}

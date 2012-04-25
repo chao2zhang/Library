@@ -4,8 +4,9 @@
 {% block header %}
 {% endblock %}
 {% block main %}
-<div id='main-holder'>
-	{%div_text "您已成功登出"%}
-	{%div_link "/login" "返回此处登录"%}
-</div>
+	<div id='main-holder'>
+		{% div_text "您已成功登出" %}
+		{% url django.contrib.auth.views.login as login_url %}
+		{% div_link login_url "返回此处登录" %}
+	</div>
 {% endblock %}

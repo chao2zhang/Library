@@ -1,6 +1,8 @@
+{% spaceless %}
 <div{%if clazz%} class="{{ clazz }}"{%endif%}>
 	{{ object.errors }}
 	{%if field_name%}<label for="{{ label_name }}">{{field_name}}</label>{%endif%}
 	{{ object }}        
 	<div class="clearfix"></div>
 </div>
+{% endspaceless %}
