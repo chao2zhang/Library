@@ -5,7 +5,9 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 	<title>{% block title %}{% endblock %}</title>
-	{% block media %}{% endblock %}
+	{% css_tag "/media/common.css" %}
+	{% block media %}
+	{% endblock %}
 </head>
 <body>
 	<div id="header_wrap">

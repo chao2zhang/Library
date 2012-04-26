@@ -1,0 +1,21 @@
+table {
+	border-collapse: collapse;
+}
+
+th {
+	text-align: left;
+	border: 1px solid #DDD;
+}
+
+thead th {
+	color: #666;
+}
+
+form label {
+	float: left;
+	width: 8em;
+}
+
+input[type="text"], input[type="password"], textarea, select {
+	border: 1px solid #CCC;
+}

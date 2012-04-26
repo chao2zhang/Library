@@ -1,9 +1,8 @@
 {% extends "layout/two_col.html" %}
 {% load helper %}
-{% block title %}书籍{% endblock %}
+{% block title %}显示书目{% endblock %}
 {% block main_right %}
-	{% url books.views.edit id as u%}
-	<form id="new_book_form" action="{{u}}" method="post">
+	<form id="new_book_form" action="" method="post">
 		{{ form.non_field_errors }}
 	    {% for field in form %}
 	        <div class="book-form-item">
@@ -12,6 +11,6 @@
 	            {{ field }}
 	        </div>
 	    {% endfor %}
-	    {% div_submit "修改书籍" %}
+	    {% div_submit "展示书籍" %}
 	</form>
 {% endblock %}

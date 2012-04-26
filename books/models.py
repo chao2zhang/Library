@@ -12,3 +12,4 @@ class Book(models.Model):
     def __unicode__(self):
         return u'%s : %s' % (self.title, self.author)
     
+    

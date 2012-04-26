@@ -1,7 +1,37 @@
 {% extends "layout/two_col.html" %}
-{% block title %}书籍{% endblock %}
+{% load helper %}
+{% block title %}书目列表{% endblock %}
 {% block main_right %}
-	{% for book in books %}
-		{{ book }}
-	{% endfor %}
+	<h1>书目列表</h1>
+	<table cellspacing="0">
+		<thead>
+			<tr>
+				<th>标题</th>
+				<th>作者</th>
+				<th>出版社</th>
+				<th>库存</th>
+				<th>零售价</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for book in books %}
+				<tr>
+					<th>{{book.title}}</th>
+					<th>{{book.author}}</th>
+					<th>{{book.press}}</th>
+					<th>{{book.count}}</th>
+					<th>{{book.sale_price}}</th>
+					<th>
+						{%url books.views.edit book.id as u%}
+						{%div_link u "编辑"%}
+					</th>
+					<th>
+						{%url books.views.delete book.id as u%}
+						{%div_link u "删除"%}
+					</th>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+	{{books.count}}&nbsp;Book{{books.count|pluralize}}
 {% endblock %}
