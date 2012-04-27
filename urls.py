@@ -12,6 +12,7 @@ urlpatterns = patterns('',
     url(r'^reactivate/$', 'registrations.views.reactivate'), 
     url(r'^confirm/(\w{30})/$', 'registrations.views.confirm'),
     url(r'^books/', include('books.urls')),
+    url(r'^members/', include('members.urls')),
     url(r'^purchases/', include('purchases.urls')),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {
