@@ -1,7 +1,7 @@
 {% extends "layout/two_col.html" %}
 {% load helper %}
 {% block title %}显示书目{% endblock %}
-{% block main_right %}
+{% block main %}
 	<form id="new_book_form" action="" method="post">
 		{{ form.non_field_errors }}
 	    {% for field in form %}

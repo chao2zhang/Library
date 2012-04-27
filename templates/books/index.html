@@ -1,7 +1,11 @@
 {% extends "layout/two_col.html" %}
 {% load helper %}
 {% block title %}书目列表{% endblock %}
-{% block main_right %}
+{% block nav %}
+	<a href="../">首页</a>&gt;
+	<a href="#">书目列表</a>
+{% endblock %}
+{% block main %}
 	<h1>书目列表</h1>
 	<table cellspacing="0">
 		<thead>

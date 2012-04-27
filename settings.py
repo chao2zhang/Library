@@ -14,8 +14,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
         'NAME': 'library',                      # Or path to database file if using sqlite3.
-        'USER': 'fm',                      # Not used with sqlite3.
-        'PASSWORD': 'lolololo',                  # Not used with sqlite3.
+        'USER': 'c',                      # Not used with sqlite3.
+        'PASSWORD': '2010fudan',                  # Not used with sqlite3.
         'HOST': 'localhost',                      # Set to empty string for localhost. Not used with sqlite3.
         'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
     }
@@ -46,12 +46,12 @@ USE_L10N = True
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/home/media/media.lawrence.com/media/"
-MEDIA_ROOT = ''
+MEDIA_ROOT = '/home/c/djangos/work/library/assets/'
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
 # Examples: "http://media.lawrence.com/media/", "http://example.com/media/"
-MEDIA_URL = ''
+MEDIA_URL = '/media/'
 
 # Absolute path to the directory static files should be collected to.
 # Don't put anything in this directory yourself; store your static files
@@ -137,7 +137,7 @@ EMAIL_USE_TLS = True
 
 # Login Url
 LOGIN_URL = '/login/'
-LOGIN_REDIRECT_URL = '/books/'
+LOGIN_REDIRECT_URL = '/'
 LOGOUT_URL = '/logout/'
 
 AUTH_PROFILE_MODULE = 'registrations.UserProfile'

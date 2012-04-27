@@ -50,10 +50,10 @@ def delete(request, id):
     book.delete()
     return redirect(index)
 
-@login_required
+'''@login_required
 def show(request, id):
     id = int(id)
     book = get_object_or_404(Book, pk=id)
     return render_to_response('books/show.html', {'book': book}, context_instance=RequestContext(request))
-    
+''' 
 

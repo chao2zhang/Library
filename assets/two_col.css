@@ -1,0 +1,21 @@
+#header {
+	background: #417690;
+	color: #FFC;
+	overflow: hidden;
+}
+
+#main_holder {
+	overflow: hidden;
+}
+
+#nav {
+	height: 40px;
+	overflow: hidden;
+}
+
+#main {
+	width: 90%;
+	margin: 0 auto;
+	overflow: hidden;
+	float: left;
+}

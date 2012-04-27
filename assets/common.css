@@ -1,3 +1,12 @@
+.clearfix {
+	clear: both;
+	height: 0px;
+}
+
+a {
+	text-decoration: none;
+}
+
 table {
 	border-collapse: collapse;
 }

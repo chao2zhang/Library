@@ -6,29 +6,34 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 	<title>{% block title %}{% endblock %}</title>
 	{% css_tag "/media/common.css" %}
+	{% css_tag "/media/two_col.css" %}
 	{% block media %}
 	{% endblock %}
 </head>
 <body>
-	<div id="header_wrap">
-		{% block header %}
-		{% endblock %}
+	<div id='header_wrap'>
+		<div id='header'>
+			<div id='branding'>
+				<h1 id='site_name'>Django 管理</h1>
+			</div>
+			<div id='user_tool'>
+				欢迎，<strong>{{user.username}}</strong>.
+				{% url django.contrib.auth.views.logout as u%}
+				<a href='{{u}}'>注销</a>
+			</div>
+		</div>
 	</div>
 	<div id='main_wrap'>
 		<div id='main_holder'>
-			<div id='main_left'>
-			{% block main_left %}
+			<div id='nav'>
+			{% block nav %}
 			{% endblock %}
 			</div>
-			<div id='main_right'>
-			{% block main_right %}
+			<div id='main'>
+			{% block main %}
 			{% endblock %}
 			</div>
 			<div class='clearfix'></div>
 		</div>
-	</div>
-	<div id='footer_wrap'>
-		{% block footer %}
-		{% endblock %}
 	</div>
 </body>

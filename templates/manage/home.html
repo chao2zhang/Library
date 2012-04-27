@@ -1,0 +1,12 @@
+{% extends "layout/two_col.html" %}
+{% load helper %}
+{% block title %}管理系统{% endblock %}
+{% block nav %}
+	<a href="#">首页</a>
+{% endblock %}
+{% block main %}
+	{% url books.views.index as u%}
+	{% div_link u "管理书目" "" "module" %}
+	{% url purchases.views.index as u%}
+	{% div_link u "管理进货" "" "module" %}
+{% endblock %}
