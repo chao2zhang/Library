@@ -7,3 +7,5 @@ class Group(models.Model):
     update_at = models.DateTimeField(auto_now=True, null=False)
     def __unicode__(self):
         return u'%s : %s' % (self.id, self.name)
+    def get_absolute_url(self):
+        return "/groups/%i/show/" % self.id

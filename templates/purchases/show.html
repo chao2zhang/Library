@@ -1,17 +1,15 @@
 {% extends "layout/two_col.html" %}
 {% load helper %}
-{% block title %}查看书目{% endblock %}
+{% block title %}查看进货{% endblock %}
 {% block nav %}
 	<a href="../../../">首页</a>&gt;
-	<a href="../../">书目列表</a>&gt;
-	<a href="#">查看书目</a>
+	<a href="../../">进货列表</a>&gt;
+	<a href="#">查看进货</a>
 {% endblock %}
 {% block main %}
-	<h1>查看书目</h1>
-	{% div_label_text book.isbn "id_isbn" "" "ISBN编号" %}
-	{% div_label_text book.title "id_title" "" "标题" %}
-	{% div_label_text book.author "id_author" "" "作者" %}
-	{% div_label_text book.press "id_press" "" "出版社" %}
-	{% div_label_text book.count "id_count" "" "库存" %}
-	{% div_label_text book.sale_price "id_sale_price" "" "零售价" %}
+	<h1>查看进货</h1>
+	{% div_label_text purchase.book "id_book" "" "书目标题" %}
+	{% div_label_text purchase.price "id_price" "" "进货价" %}
+	{% div_label_text purchase.count "id_count" "" "数量" %}
+	{% div_label_text purchase.paid "id_paid" "" "是否支付" %}
 {% endblock %}

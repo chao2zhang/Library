@@ -10,3 +10,5 @@ class Sale(models.Model):
     update_at = models.DateTimeField(auto_now=True, null=False)
     def __unicode__(self):
         return u'%s : %s' % (self.book.title, self.count)
+    def get_absolute_url(self):
+        return "/sales/%i/show/" % self.id

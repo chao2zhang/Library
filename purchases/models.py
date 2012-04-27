@@ -10,3 +10,5 @@ class Purchase(models.Model):
     update_at = models.DateTimeField(auto_now=True, null=False)
     def __unicode__(self):
         return u'%s : %s' % (self.book.title, self.price)
+    def get_absolute_url(self):
+        return "/purchases/%i/show/" % self.id

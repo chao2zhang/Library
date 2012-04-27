@@ -11,5 +11,7 @@ class Book(models.Model):
     update_at = models.DateTimeField(auto_now=True, null=False)
     def __unicode__(self):
         return u'<%s> by %s' % (self.title, self.author)
+    def get_absolute_url(self):
+        return "/books/%i/show/" % self.id
     
     
