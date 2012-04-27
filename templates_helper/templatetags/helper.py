@@ -86,7 +86,7 @@ def div_label_text(text, id=None, clazz=None, value=None):
     return {'text' : text,
             'id' : id,
             'clazz' : clazz,
-            'val' : val}
+            'value' : value}
 
 
 @register.inclusion_tag('templatetags/form_label_text.html')
@@ -96,14 +96,6 @@ def form_label_text(object, field_name, label_name, clazz):
             'label_name' : label_name,
             'clazz' : clazz}
     
-'''
-@register.inclusion_tag('templatetags/form_label_quote_text.html')
-def form_label_quote_text(field_name, class_name, label_name, object):
-    return {'field_name' : field_name,
-            'class_name' : class_name,
-            'label_name' : label_name,
-            'object' : object}
-'''
 
 
     

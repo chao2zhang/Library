@@ -24,6 +24,10 @@
 					<th>{{p.count}}</th>
 					<th>{{p.paid}}</th>
 					<th>
+						{%url purchases.views.show p.id as u%}
+						{%div_link u "查看"%}
+					</th>
+					<th>
 						{%url purchases.views.edit p.id as u%}
 						{%div_link u "编辑"%}
 					</th>

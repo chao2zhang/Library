@@ -51,3 +51,10 @@ def delete(request, id):
     purchase.delete()
     return redirect(index)
 
+@login_required
+def show(request, id):
+    id = int(id)
+    purchase = get_object_or_404(Purchase, pk=id)
+    return render_to_response('purchases/show.html', {'purchase': purchase}, context_instance=RequestContext(request))
+    
+
