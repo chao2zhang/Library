@@ -33,7 +33,8 @@ TIME_ZONE = 'Asia/Shanghai'
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
 LANGUAGE_CODE = 'zh-cn'
-
+DATE_FORMAT = 'Y-m-d D'
+DATETIME_FORMAT = 'Y-m-d D H:i:s'
 SITE_ID = 1
 
 # If you set this to False, Django will make some optimizations so as not
@@ -46,7 +47,7 @@ USE_L10N = True
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/home/media/media.lawrence.com/media/"
-MEDIA_ROOT = '/home/c/djangos/work/library/assets'
+MEDIA_ROOT = os.path.join(os.path.dirname(__file__), 'assets')
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
@@ -100,6 +101,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfResponseMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    'pagination.middleware.PaginationMiddleware',
 )
 
 ROOT_URLCONF = 'library.urls'
@@ -119,6 +121,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.admin',
+    'pagination',
     'templates_helper',
     'registrations',
     'manage',

@@ -5,9 +5,15 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 	<title>{% block title %}{% endblock %}</title>
-	{% css_tag "/media/common.css" %}
-	{% css_tag "/media/two_col.css" %}
+	{% js_tag "/media/js/jquery-1.7.2.min.js" %}
+	{% js_tag "/media/js/jquery-ui-1.8.19.custom.min.js" %}
+	{% js_tag "/media/js/jquery.ui.datepicker-zh-CN.js" %}
+	{% css_tag "/media/css/common.css" %}
+	{% css_tag "/media/css/two_col.css" %}
+	{% css_tag "/media/css/jquery-ui-1.8.19.custom.css" %}
 	{% block media %}
+	{% endblock %}
+	{% block script %}
 	{% endblock %}
 </head>
 <body>

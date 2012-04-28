@@ -1,13 +1,14 @@
 # -*- coding: utf-8 -*-
 # Create your views here.
 from django import forms
+from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render_to_response, redirect, get_object_or_404
 from django.template import RequestContext
 from models import Member
 from groups.models import Group
 
-class GroupForm(forms.ModelForm):
+class MemberForm(forms.ModelForm):
     name = forms.CharField(max_length=200, label=u'姓名')
     password = forms.CharField(max_length=128, label=u'密码', widget=forms.PasswordInput)
     gender = forms.ChoiceField(choices=Member.GENDER_CHOICES, label=u'性别')
@@ -16,6 +17,15 @@ class GroupForm(forms.ModelForm):
     valid = forms.BooleanField(required=False, widget=forms.CheckboxInput, label=u'是否有效')
     identify_number = forms.RegexField(regex='^[0-9]{18}$', label=u'身份证')
     group = forms.ModelChoiceField(required=False, queryset=Group.objects.all(), label=u'会员组')
+    def save(self):
+        d = self.cleaned_data
+        m = self.instance
+        for key in d:
+            if key != 'password':
+                setattr(m, key, d[key])
+        m.set_password(d['password'])
+        m.save()
+        return
     class Meta:
         model = Member
         exclude = ('balance', 'point', 'create_at', 'update_at')
@@ -26,9 +36,9 @@ def index(request):
 
 @login_required
 def new(request):
-    form = GroupForm()
+    form = MemberForm()
     if request.POST:
-        form = GroupForm(request.POST)
+        form = MemberForm(request.POST)
         if form.is_valid():
             form.save()
             return redirect(index)
@@ -38,9 +48,9 @@ def new(request):
 def edit(request, id):
     id = int(id)
     member = get_object_or_404(Member, pk=id)
-    form = GroupForm(instance=member);
+    form = MemberForm(instance=member);
     if request.POST:
-        form = GroupForm(request.POST, instance=member)
+        form = MemberForm(request.POST, instance=member)
         if form.is_valid():
             form.save()
             return redirect(index)

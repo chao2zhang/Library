@@ -4,10 +4,9 @@ from django import forms
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render_to_response, redirect, get_object_or_404
 from django.template import RequestContext
-from members.models import Member
 from models import Group
 
-class GroupForm(forms.ModelForm):
+class MemberForm(forms.ModelForm):
     name = forms.CharField(max_length=200, label=u'名称')
     discount = forms.FloatField(label=u'折扣')
     class Meta:
@@ -20,9 +19,9 @@ def index(request):
 
 @login_required
 def new(request):
-    form = GroupForm()
+    form = MemberForm()
     if request.POST:
-        form = GroupForm(request.POST)
+        form = MemberForm(request.POST)
         if form.is_valid():
             form.save()
             return redirect(index)
@@ -32,9 +31,9 @@ def new(request):
 def edit(request, id):
     id = int(id)
     group = get_object_or_404(Group, pk=id)
-    form = GroupForm(instance=group);
+    form = MemberForm(instance=group);
     if request.POST:
-        form = GroupForm(request.POST, instance=group)
+        form = MemberForm(request.POST, instance=group)
         if form.is_valid():
             form.save()
             return redirect(index)

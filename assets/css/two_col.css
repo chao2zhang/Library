@@ -19,3 +19,8 @@
 	overflow: hidden;
 	float: left;
 }
+
+div.add a {
+    padding-left: 12px;
+    background: url(/media/image/icon_addlink.gif) 0 .2em no-repeat;
+}

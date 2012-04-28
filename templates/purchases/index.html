@@ -1,4 +1,22 @@
 {% extends "layout/two_col.html" %}
+{% block script %}
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$("div.delete a").click(function(event){
+				if (confirm("你确定要删除此进货记录?"))
+					return true;
+				else
+					return false;
+			});
+			$("div.pay a").click(function(event){
+				if (confirm("你确定已经支付了此批进货?"))
+					return true;
+				else
+					return false;
+			});
+		});
+	</script>
+{% endblock %}
 {% load helper %}
 {% block title %}进货列表{% endblock %}
 {% block nav %}
@@ -7,6 +25,8 @@
 {% endblock %}
 {% block main %}
 	<h1>进货列表</h1>
+	{% url purchases.views.new as u %}
+	{% div_link u "添加进货" "" "add link"%}
 	<table cellspacing="0">
 		<thead>
 			<tr>
@@ -27,15 +47,23 @@
 					<th>{{p.paid}}</th>
 					<th>
 						{%url purchases.views.show p.id as u%}
-						{%div_link u "查看"%}
+						{%div_link u "查看" "" "show link"%}
 					</th>
 					<th>
 						{%url purchases.views.edit p.id as u%}
-						{%div_link u "编辑"%}
+						{%div_link u "编辑" "" "edit link"%}
 					</th>
 					<th>
 						{%url purchases.views.delete p.id as u%}
-						{%div_link u "删除"%}
+						{%div_link u "删除" "" "delete link"%}
+					</th>
+					<th>
+						{% if p.paid %}
+							{%div_text "已支付" %}
+						{% else %}
+							{%url purchases.views.pay p.id as u%}
+							{%div_link u "支付" "" "pay link"%}
+						{% endif %}
 					</th>
 				</tr>
 			{% endfor %}

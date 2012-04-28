@@ -22,4 +22,14 @@ class Member(models.Model):
         return u'%s : %s' % (self.name, self.gender)
     def get_absolute_url(self):
         return "/members/%i/show/" % self.id
+    def set_password(self, raw_password):            
+        import random
+        from django.contrib.auth.models import get_hexdigest
+        algo = 'sha1'
+        salt = get_hexdigest(algo, str(random.random()), str(random.random()))[:5]
+        hsh = get_hexdigest(algo, salt, raw_password)
+        self.password = '%s$%s$%s' % (algo, salt, hsh)
+    def check_password(self, raw_password):
+        from django.contrib.auth.models import check_password
+        return check_password(raw_password, self.password)
     

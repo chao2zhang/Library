@@ -12,3 +12,9 @@ class Purchase(models.Model):
         return u'%s : %s' % (self.book.title, self.price)
     def get_absolute_url(self):
         return "/purchases/%i/show/" % self.id
+    def pay(self):
+        if not self.paid:
+            self.paid = True
+            self.save()
+            self.book.count += self.count
+            self.book.save()
