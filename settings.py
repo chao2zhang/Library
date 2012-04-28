@@ -130,6 +130,7 @@ INSTALLED_APPS = (
     'sales',
     'groups',
     'members',
+    'pagination',
 )
 
 EMAIL_HOST = 'smtp.gmail.com' 

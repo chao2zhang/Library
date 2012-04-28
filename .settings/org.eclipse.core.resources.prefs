@@ -1,4 +1,4 @@
-#Sat Apr 28 16:17:35 CST 2012
+#Sun Apr 29 01:16:48 CST 2012
 eclipse.preferences.version=1
 encoding//books/views.py=utf-8
 encoding//groups/views.py=utf-8
@@ -11,9 +11,11 @@ encoding//templates/books/edit.html=UTF-8
 encoding//templates/books/index.html=UTF-8
 encoding//templates/books/new.html=UTF-8
 encoding//templates/books/show.html=UTF-8
+encoding//templates/groups/index.html=UTF-8
+encoding//templates/members/index.html=UTF-8
 encoding//templates/purchases/edit.html=UTF-8
 encoding//templates/purchases/index.html=UTF-8
 encoding//templates/purchases/new.html=UTF-8
 encoding//templates/purchases/show.html=UTF-8
 encoding//templates/sales/index.html=UTF-8
-encoding//templates/sales/new_deal.html=UTF-8
+encoding//templates/sales/new.html=UTF-8
