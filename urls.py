@@ -14,6 +14,7 @@ urlpatterns = patterns('',
     url(r'^books/', include('books.urls')),
     url(r'^members/', include('members.urls')),
     url(r'^purchases/', include('purchases.urls')),
+    url(r'^sales/', include('sales.urls')),
     url(r'^groups/', include('groups.urls')),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {

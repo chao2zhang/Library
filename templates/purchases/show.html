@@ -15,4 +15,8 @@
 	{% div_label_text purchase.paid "id_paid" "" "是否支付" %}
 	{% div_label_text purchase.create_at "id_create_at" "" "创建时间" %}
 	{% div_label_text purchase.update_at "id_update_at" "" "修改时间" %}
+	{% ifequal purchase.paid 0 %}
+		{%url purchases.views.setPaid purchase.id as u%}
+		{%div_link u "付过了"%}
+	{% endifequal %}
 {% endblock %}
