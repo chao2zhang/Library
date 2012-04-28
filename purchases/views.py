@@ -54,6 +54,18 @@ def delete(request, id):
 def show(request, id):
     id = int(id)
     purchase = get_object_or_404(Purchase, pk=id)
+    if purchase.paid == 0:
+        paybutton = 1
     return render_to_response('purchases/show.html', {'purchase': purchase}, context_instance=RequestContext(request))
     
+@login_required
+def setPaid(request, id):
+    id = int(id)
+    purchase = get_object_or_404(Purchase, pk=id)
+    purchase.paid = 1
+    purchase.save()
+    book = Book.objects.get(id = purchase.book_id)
+    book.count += purchase.count
+    book.save()
+    return render_to_response('purchases/show.html', {'purchase': purchase}, context_instance=RequestContext(request))
 
