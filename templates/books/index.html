@@ -10,6 +10,7 @@
 	<table cellspacing="0">
 		<thead>
 			<tr>
+				<th>编号</th>
 				<th>标题</th>
 				<th>作者</th>
 				<th>出版社</th>
@@ -20,6 +21,7 @@
 		<tbody>
 			{% for book in books %}
 				<tr>
+					<th>{{book.id}}</th>
 					<th>{{book.title}}</th>
 					<th>{{book.author}}</th>
 					<th>{{book.press}}</th>

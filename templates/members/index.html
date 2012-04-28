@@ -10,6 +10,7 @@
 	<table cellspacing="0">
 		<thead>
 			<tr>
+				<th>编号</th>
 				<th>姓名</th>
 				<th>性别</th>
 				<th>生日</th>
@@ -19,12 +20,12 @@
 				<th>积分</th>
 				<th>余额</th>
 				<th>会员组</th>
-				<th>创建日期</th>
 			</tr>
 		</thead>
 		<tbody>
 			{% for member in members %}
 				<tr>
+					<th>{{member.id}}</th>
 					<th>{{member.name}}</th>
 					<th>{{member.gender}}</th>
 					<th>{{member.birthday}}</th>
@@ -34,7 +35,6 @@
 					<th>{{member.point}}</th>
 					<th>{{member.balance}}</th>
 					<th>{{member.group}}</th>
-					<th>{{member.created_at}}</th>
 					<th>
 						{%url members.views.show member.id as u%}
 						{%div_link u "查看"%}

@@ -5,7 +5,6 @@ from models import Purchase
 from books.models import Book
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render_to_response, redirect, get_object_or_404
-from django.http import HttpResponse, Http404
 from django.template import RequestContext
 
 

@@ -1,18 +1,18 @@
 {% extends "layout/two_col.html" %}
 {% load helper %}
-{% block title %}编辑书目{% endblock %}
+{% block title %}编辑会员组{% endblock %}
 {% block nav %}
 	<a href="../../../">首页</a>&gt;
-	<a href="../../">书目列表</a>&gt;
-	<a href="#">编辑书目</a>
+	<a href="../../">会员组列表</a>&gt;
+	<a href="#">编辑会员组</a>
 {% endblock %}
 {% block main %}
-	<h1>编辑书目</h1>
-	{% url books.views.edit id as u%}
-	<form id="new_book_form" action="{{u}}" method="post">
+	<h1>编辑会员组</h1>
+	{% url groups.views.edit id as u%}
+	<form id="new_group_form" action="{{u}}" method="post">
 		{{ form.non_field_errors }}
 	    {% for field in form %}
-	        <div class="book-form-item">
+	        <div class="group-form-item">
 	            {{ field.errors }}
 	            {{ field.label_tag }}
 	            {{ field }}

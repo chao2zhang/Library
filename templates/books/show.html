@@ -8,6 +8,7 @@
 {% endblock %}
 {% block main %}
 	<h1>查看书目</h1>
+	{% div_label_text book.id "id_id" "" "编号" %}
 	{% div_label_text book.isbn "id_isbn" "" "ISBN编号" %}
 	{% div_label_text book.title "id_title" "" "标题" %}
 	{% div_label_text book.author "id_author" "" "作者" %}

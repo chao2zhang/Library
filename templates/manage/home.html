@@ -6,7 +6,9 @@
 {% endblock %}
 {% block main %}
 	{% url books.views.index as u%}
-	{% div_link u "管理书目" "" "module" %}
+	{% div_link u "书目管理" "" "module" %}
 	{% url purchases.views.index as u%}
-	{% div_link u "管理进货" "" "module" %}
+	{% div_link u "进货管理" "" "module" %}
+	{% url members.views.index as u%}
+	{% div_link u "会员管理" "" "module" %}
 {% endblock %}

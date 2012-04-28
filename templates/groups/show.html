@@ -1,0 +1,21 @@
+{% extends "layout/two_col.html" %}
+{% load helper %}
+{% block title %}查看会员组{% endblock %}
+{% block nav %}
+	<a href="../../../">首页</a>&gt;
+	<a href="../../">会员组列表</a>&gt;
+	<a href="#">查看会员组</a>
+{% endblock %}
+{% block main %}
+	<h1>查看会员组</h1>
+	{% div_label_text group.id "id_id" "" "编号" %}
+	{% div_label_text group.name "id_name" "" "名称" %}
+	<label>会员</label>
+	<ul>
+		{% for member in group.members.all %}
+			<li>{{member}}</li>
+		{% endfor %}
+	</ul>
+	{% div_label_text group.create_at "id_create_at" "" "创建时间" %}
+	{% div_label_text group.update_at "id_update_at" "" "更新时间" %}
+{% endblock %}

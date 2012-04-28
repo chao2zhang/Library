@@ -1,5 +1,4 @@
 from django.db import models
-from django.contrib import admin
 from groups.models import Group
 
 class Member(models.Model):
@@ -16,11 +15,11 @@ class Member(models.Model):
     identify_number = models.CharField(max_length=18)
     point = models.IntegerField(default=0)
     balance = models.FloatField(default=0)
-    group = models.ForeignKey(Group, related_name = 'members')
+    group = models.ForeignKey(Group, null=True, blank=True, related_name = 'members')
     create_at = models.DateTimeField(auto_now_add=True, null=False)
     update_at = models.DateTimeField(auto_now=True, null=False)
     def __unicode__(self):
-        return u'%s : %s' % (self)
+        return u'%s : %s' % (self.name, self.gender)
     def get_absolute_url(self):
         return "/members/%i/show/" % self.id
     

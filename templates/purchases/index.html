@@ -10,6 +10,7 @@
 	<table cellspacing="0">
 		<thead>
 			<tr>
+				<th>编号</th>
 				<th>书目标题</th>
 				<th>进货价</th>
 				<th>数量</th>
@@ -19,6 +20,7 @@
 		<tbody>
 			{% for p in purchases %}
 				<tr>
+					<th>{{p.id}}</th>
 					<th>{{p.book}}</th>
 					<th>{{p.price}}</th>
 					<th>{{p.count}}</th>
