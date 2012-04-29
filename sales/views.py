@@ -35,15 +35,7 @@ def new(request):
     if request.POST:
         form = SaleForm(request.POST)
         if form.is_valid():
-            book = form.cleaned_data['book']
-            member = form.cleaned_data['member']
-            group = member.group
-            count = form.cleaned_data['count']
-            discount = group.discount
-            book.count -= count
-            member.balance -= count * book.sale_price * discount
-            member.save()
-            book.save()
             sale = form.save()
+            sale.new_sale();
             return redirect(index)
     return render_to_response('sales/new.html', {'form':form}, context_instance=RequestContext(request))
