@@ -9,7 +9,7 @@
 {% block main %}
 	<h1>编辑会员</h1>
 	{% url members.views.edit id as u%}
-	<form id="new_member_form" action="{{u}}" method="post">
+	<form id="edit_member_form" action="{{u}}" method="post">
 		{{ form.non_field_errors }}
 	    {% for field in form %}
 	        <div class="member-form-item">

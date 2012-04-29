@@ -40,7 +40,7 @@ def edit(request, id):
         form = PurchaseForm(request.POST, instance=purchase)
         if form.is_valid():
             form.save()
-            return redirect(show, id)
+            return redirect(purchase)
     return render_to_response('purchases/edit.html', {'form': form, 'id': id}, context_instance=RequestContext(request))
 
 @login_required
@@ -63,4 +63,4 @@ def pay(request, id):
     id = int(id)
     purchase = get_object_or_404(Purchase, pk=id)
     purchase.pay()
-    return redirect(show, id)
+    return redirect(purchase)

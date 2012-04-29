@@ -23,8 +23,8 @@ def new(request):
     if request.POST:
         form = MemberForm(request.POST)
         if form.is_valid():
-            form.save()
-            return redirect(index)
+            group = form.save()
+            return redirect(group)
     return render_to_response('groups/new.html', {'form':form}, context_instance=RequestContext(request))
 
 @login_required
@@ -36,7 +36,7 @@ def edit(request, id):
         form = MemberForm(request.POST, instance=group)
         if form.is_valid():
             form.save()
-            return redirect(index)
+            return redirect(group)
     return render_to_response('groups/edit.html', {'form': form, 'id': id}, context_instance=RequestContext(request))
 
 @login_required

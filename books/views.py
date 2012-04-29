@@ -26,8 +26,8 @@ def new(request):
     if request.POST:
         form = BookForm(request.POST)
         if form.is_valid():
-            form.save()
-            return redirect(index)
+            book = form.save()
+            return redirect(book)
     return render_to_response('books/new.html', {'form':form}, context_instance=RequestContext(request))
 
 @login_required
@@ -39,7 +39,7 @@ def edit(request, id):
         form = BookForm(request.POST, instance=book)
         if form.is_valid():
             form.save()
-            return redirect(index)
+            return redirect(book)
     return render_to_response('books/edit.html', {'form': form, 'id': id}, context_instance=RequestContext(request))
 
 @login_required

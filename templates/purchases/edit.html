@@ -8,7 +8,7 @@
 {% endblock %}
 {% block main %}
 	{% url purchases.views.edit id as u%}
-	<form id="new_purchase_form" action="{{u}}" method="post">
+	<form id="edit_purchase_form" action="{{u}}" method="post">
 		{{ form.non_field_errors }}
 	    {% for field in form %}
 	        <div class="purchase-form-item">

@@ -9,7 +9,7 @@
 {% block main %}
 	<h1>编辑会员组</h1>
 	{% url groups.views.edit id as u%}
-	<form id="new_group_form" action="{{u}}" method="post">
+	<form id="edit_group_form" action="{{u}}" method="post">
 		{{ form.non_field_errors }}
 	    {% for field in form %}
 	        <div class="group-form-item">

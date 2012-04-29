@@ -13,12 +13,12 @@ class SaleForm(forms.ModelForm):
     book = forms.ModelChoiceField(queryset=Book.objects.all(), label=u'书目')
     member = forms.ModelChoiceField(queryset=Member.objects.all(), label=u'会员')
     count = forms.IntegerField(min_value=0, label=u'数量')
-    def clean_count(self):
+    def clean(self):
         value = self.cleaned_data['count']
-        if value <= self.book.count:
-            return value
+        if value <= self.cleaned_data['book'].count:
+            return self.cleaned_data
         else:
-            raise ValidationError(u'存货不够，当前存货量为%i。' % self.book.count)
+            raise ValidationError(u'存货不够，当前存货量为%i。' % self.cleaned_data['book'].count)
     class Meta:
         model = Sale
         exclude = ('create_at', 'update_at')

@@ -21,7 +21,7 @@
 {% block main %}
 	<h1>会员列表</h1>
 	{% url members.views.new as u %}
-	{% div_link u "添加会员" "" ""%}
+	{% div_link u "添加会员" "" "add link"%}
 	{% autopaginate members 10 %}
 	<table cellspacing="0">
 		<thead>

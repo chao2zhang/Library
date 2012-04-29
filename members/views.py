@@ -61,8 +61,8 @@ def new(request):
     if request.POST:
         form = MemberForm(request.POST)
         if form.is_valid():
-            form.save()
-            return redirect(index)
+            member = form.save()
+            return redirect(member)
     return render_to_response('members/new.html', {'form':form}, context_instance=RequestContext(request))
 
 @login_required
@@ -74,7 +74,7 @@ def edit(request, id):
         form = MemberForm(request.POST, instance=member)
         if form.is_valid():
             form.save()
-            return redirect(index)
+            return redirect(member)
     return render_to_response('members/edit.html', {'form': form, 'id': id}, context_instance=RequestContext(request))
 
 @login_required
@@ -99,5 +99,5 @@ def change_password(request, id):
         form = MemberChangePasswordForm(member, request.POST)
         if form.is_valid():
             form.save()
-            return redirect(index)
+            return redirect(member)
     return render_to_response('members/change_password.html', {'form': form}, context_instance=RequestContext(request))
