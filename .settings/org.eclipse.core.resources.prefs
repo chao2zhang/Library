@@ -1,4 +1,4 @@
-#Sun Apr 29 01:16:48 CST 2012
+#Sun Apr 29 20:29:23 CST 2012
 eclipse.preferences.version=1
 encoding//books/views.py=utf-8
 encoding//groups/views.py=utf-8
@@ -19,3 +19,4 @@ encoding//templates/purchases/new.html=UTF-8
 encoding//templates/purchases/show.html=UTF-8
 encoding//templates/sales/index.html=UTF-8
 encoding//templates/sales/new.html=UTF-8
+encoding/<project>=UTF-8

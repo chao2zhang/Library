@@ -8,6 +8,8 @@
 {% endblock %}
 {% block main %}
 	<h1>交易列表</h1>
+	{% url sales.views.new as u %}
+	{% div_link u "添加交易" "" "add link"%}
 	{% autopaginate sales 5 %}
 	<table cellspacing="0">
 		<thead>

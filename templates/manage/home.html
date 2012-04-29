@@ -5,6 +5,8 @@
 	<a href="#">首页</a>
 {% endblock %}
 {% block main %}
+	{% url sales.views.index as u%}
+	{% div_link u "交易管理" "" "module" %}
 	{% url books.views.index as u%}
 	{% div_link u "书目管理" "" "module" %}
 	{% url purchases.views.index as u%}

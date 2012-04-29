@@ -4,6 +4,7 @@ from django import forms
 from models import Sale
 from books.models import Book
 from members.models import Member
+from groups.models import Group
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ValidationError
 from django.shortcuts import render_to_response, redirect, get_object_or_404
@@ -35,5 +36,6 @@ def new(request):
         form = SaleForm(request.POST)
         if form.is_valid():
             sale = form.save()
-            return redirect(sale)
+            sale.new_sale();
+            return redirect(index)
     return render_to_response('sales/new.html', {'form':form}, context_instance=RequestContext(request))
