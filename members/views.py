@@ -18,6 +18,26 @@ class MemberForm(forms.ModelForm):
     valid = forms.BooleanField(required=False, widget=forms.CheckboxInput, label=u'是否有效')
     identify_number = forms.RegexField(regex='^[0-9]{18}$', label=u'身份证')
     group = forms.ModelChoiceField(required=False, queryset=Group.objects.all(), label=u'会员组')
+    def save(self):      
+        super(MemberForm, self).save()  
+        d = self.cleaned_data
+        m = self.instance
+        m.set_password(d['password'])
+        m.save()
+        return m
+    class Meta:
+        model = Member
+        exclude = ('password', 'balance', 'point', 'create_at', 'update_at')
+        
+class MemberEditForm(forms.ModelForm):
+    name = forms.CharField(max_length=200, label=u'姓名')
+    password = forms.CharField(max_length=16, label=u'新密码', widget=forms.PasswordInput)
+    gender = forms.ChoiceField(choices=Member.GENDER_CHOICES, label=u'性别')
+    birthday = forms.DateField(widget=forms.DateInput, label=u'生日')
+    valid_to = forms.DateField(widget=forms.DateInput, label=u'有效期至')
+    valid = forms.BooleanField(required=False, widget=forms.CheckboxInput, label=u'是否有效')
+    identify_number = forms.RegexField(regex='^[0-9]{18}$', label=u'身份证')
+    group = forms.ModelChoiceField(required=False, queryset=Group.objects.all(), label=u'会员组')
     def clean_password(self):
         d = self.cleaned_data
         m = self.instance

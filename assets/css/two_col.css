@@ -1,7 +1,22 @@
 #header {
+	padding: 5px;
 	background: #417690;
 	color: #FFC;
 	overflow: hidden;
+}
+
+#branding {
+	color: white;
+	float: left;
+}
+
+#user_tool {
+	color: white;
+	float: right;
+}
+
+#user_tool a {
+	color: #add8e6;;
 }
 
 #main_holder {
@@ -9,11 +24,14 @@
 }
 
 #nav {
-	height: 40px;
+	padding: 5px;
+	color: #add8e6;
+	background: #fff1b9;
 	overflow: hidden;
 }
 
 #main {
+	padding: 5px;
 	width: 90%;
 	margin: 0 auto;
 	overflow: hidden;
@@ -23,4 +41,24 @@
 div.add a {
     padding-left: 12px;
     background: url(/media/image/icon_addlink.gif) 0 .2em no-repeat;
+}
+
+div.edit a {
+	padding-left: 12px;
+	background: url(/media/image/icon_changelink.gif) 0 .2em no-repeat;
+}
+
+div.show a {
+	padding-left: 12px;
+	background: url(/media/image/selector-addall.gif) 0 .2em no-repeat;
+}
+
+div.delete a {
+	padding-left: 12px;
+	background: url(/media/image/icon_deletelink.gif) 0 .2em no-repeat;
+}
+
+div.true .text {
+	padding-left: 12px;
+	background: url(/media/image/icon-yes.gif) 0 .2em no-repeat;
 }

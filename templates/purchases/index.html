@@ -28,7 +28,7 @@
 	<h1>进货列表</h1>
 	{% url purchases.views.new as u %}
 	{% div_link u "添加进货" "" "add link"%}
-	{% autopaginate purchases 10 %}
+	{% autopaginate purchases 5 %}
 	<table cellspacing="0">
 		<thead>
 			<tr>
@@ -61,7 +61,7 @@
 					</th>
 					<th>
 						{% if p.paid %}
-							{%div_text "已支付" %}
+							{%div_text "已支付" "" "true"%}
 						{% else %}
 							{%url purchases.views.pay p.id as u%}
 							{%div_link u "支付" "" "pay link"%}
@@ -72,5 +72,4 @@
 		</tbody>
 	</table>
 	{% paginate %}
-	{{purchases.count}}&nbsp;Purchase{{purchases.count|pluralize}}
 {% endblock %}

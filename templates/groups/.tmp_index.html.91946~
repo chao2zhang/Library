@@ -56,4 +56,5 @@
 		</tbody>
 	</table>
 	{% paginate %}
+	{{groups.count}}&nbsp;Group{{groups.count|pluralize}}
 {% endblock %}

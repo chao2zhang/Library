@@ -22,7 +22,7 @@
 	<h1>书目列表</h1>
 	{% url books.views.new as u %}
 	{% div_link u "添加书目" "" "add link"%}
-	{% autopaginate books 10 %}
+	{% autopaginate books 5 %}
 	<table cellspacing="0">
 		<thead>
 			<tr>
@@ -60,5 +60,4 @@
 		</tbody>
 	</table>
 	{% paginate %}
-	{{books.count}}&nbsp;Book{{books.count|pluralize}}
 {% endblock %}
