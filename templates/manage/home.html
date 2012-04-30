@@ -5,12 +5,12 @@
 	<a href="#">首页</a>
 {% endblock %}
 {% block main %}
-	{% url sales.views.index as u%}
-	{% div_link u "交易管理" "" "module" %}
 	{% url books.views.index as u%}
 	{% div_link u "书目管理" "" "module" %}
 	{% url purchases.views.index as u%}
 	{% div_link u "进货管理" "" "module" %}
+	{% url sales.views.index as u%}
+	{% div_link u "交易管理" "" "module" %}
 	{% url members.views.index as u%}
 	{% div_link u "会员管理" "" "module" %}
 	{% url groups.views.index as u%}

@@ -13,18 +13,15 @@ from datetime import *
 class SaleForm(forms.ModelForm):
     book = forms.ModelChoiceField(queryset=Book.objects.all(), label=u'书目')
     member = forms.ModelChoiceField(queryset=Member.objects.filter(valid_to__gte=date.today(), valid=1), required=False, label=u'会员')
-    password = forms.CharField(max_length=16, label=u'密码', widget=forms.PasswordInput)
+    password = forms.CharField(max_length=16, label=u'密码', widget=forms.PasswordInput, required=False)
     count = forms.IntegerField(min_value=0, label=u'数量')
     def clean(self):
         cd = self.cleaned_data
         if not cd.has_key('book'):
             raise ValidationError(u'书目不能为空')
-        m = cd['member']
-        if not m == None:
+        if cd['member']:
             if not(cd.has_key('password') and cd['member'].check_password(cd['password'])):
                 raise ValidationError(u'密码错误')
-        if not cd.has_key('count'):
-            raise ValidationError(u'数量输入错误')
         if cd['count'] > cd['book'].count:
             raise ValidationError(u'存货不够，当前存货量为%i。' % cd['book'].count)
         return self.cleaned_data
