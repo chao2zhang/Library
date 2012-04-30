@@ -26,6 +26,7 @@
 	<table cellspacing="0">
 		<thead>
 			<tr>
+				<th>#</th>			
 				<th>时间</th>
 				<th>书名</th>
 				<th>单价</th>
@@ -36,11 +37,16 @@
 		<tbody>
 			{% for s in sales %}
 				<tr>
+					<th>{{s.id}}</th>
 					<th>{{s.create_at}}</th>
 					<th>{{s.book.title}}</th>
 					<th>{{s.book.sale_price}}</th>
 					<th>{{s.count}}</th>
 					<th>{{s.member.name}}</th>
+					<th>
+						{%url sales.views.show s.id as u%}
+						{%div_link u "查看" "" "show link"%}
+					</th>
 					<th>
 						{%url sales.views.delete s.id as u%}
 						{%div_link u "删除" "" "delete link"%}
