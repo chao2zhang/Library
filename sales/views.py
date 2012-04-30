@@ -45,6 +45,13 @@ def new(request):
             return redirect(index)
     return render_to_response('sales/new.html', {'form':form}, context_instance=RequestContext(request))
 
+@login_required
+def show(request, id):
+    id = int(id)
+    sale = get_object_or_404(Sale, pk=id)
+    return render_to_response('sales/show.html', {'sale':sale}, context_instance=RequestContext(request))
+
+@login_required
 def delete(request, id):
     id = int(id)
     sale = get_object_or_404(Sale, pk=id)
