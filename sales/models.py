@@ -15,9 +15,16 @@ class Sale(models.Model):
         return "/sales/%i/show/" % self.id
     
     def new_sale(self):
-        discount = self.member.group.discount
-        self.book.count -= self.count
-        self.member.balance -= discount * self.count * self.book.sale_price
-        self.member.save()
-        self.book.save()
+        member = self.member
+        book = self.book
+        if member == None or member.group == None:
+            discount = 1
+        else:
+            discount = self.member.group.discount
+        book.count -= self.count
+        if not member == None:
+            member.balance -= discount * self.count * book.sale_price
+            member.point += self.count * book.sale_price
+            member.save()
+        book.save()
         
