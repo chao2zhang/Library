@@ -14,7 +14,7 @@ class Sale(models.Model):
     def get_absolute_url(self):
         return "/sales/%i/show/" % self.id
     
-    def new_sale(self):
+    def new(self):
         member = self.member
         book = self.book
         if member == None or member.group == None:

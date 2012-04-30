@@ -31,7 +31,7 @@ class MemberForm(forms.ModelForm):
         
 class MemberEditForm(forms.ModelForm):
     name = forms.CharField(max_length=200, label=u'姓名')
-    password = forms.CharField(max_length=16, label=u'新密码', widget=forms.PasswordInput)
+    password = forms.CharField(max_length=16, label=u'密码验证', widget=forms.PasswordInput)
     gender = forms.ChoiceField(choices=Member.GENDER_CHOICES, label=u'性别')
     birthday = forms.DateField(widget=forms.DateInput, label=u'生日')
     valid_to = forms.DateField(widget=forms.DateInput, label=u'有效期至')
@@ -71,7 +71,7 @@ class MemberChangePasswordForm(forms.Form):
         return m
     
 class MemberTopupForm(forms.Form):
-    password = forms.CharField(max_length=16, label=u'原密码', widget=forms.PasswordInput)
+    password = forms.CharField(max_length=16, label=u'密码', widget=forms.PasswordInput)
     amount = forms.FloatField(min_value=0, label=u'金额')
     def __init__(self, instance, *args, **kwargs):
         self.instance = instance
@@ -110,10 +110,12 @@ def new(request):
 def edit(request, id):
     id = int(id)
     member = get_object_or_404(Member, pk=id)
-    form = MemberForm(instance=member);
+    form = MemberEditForm(instance=member);
     if request.POST:
-        form = MemberForm(request.POST, instance=member)
+        form = MemberEditForm(request.POST, instance=member)
         if form.is_valid():
+            #cd = form.cleaned_data
+            #assert False
             form.save()
             return redirect(member)
     return render_to_response('members/edit.html', {'form': form, 'id': id}, context_instance=RequestContext(request))

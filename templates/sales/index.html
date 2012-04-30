@@ -1,4 +1,16 @@
 {% extends "layout/two_col.html" %}
+{% block script %}
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$("div.delete a").click(function(event){
+				if (confirm("确定要删除这条交易记录?"))
+					return true;
+				else
+					return false;
+			});
+		});
+	</script>
+{% endblock %}
 {% load helper %}
 {% load pagination_tags %}
 {% block title %}交易列表{% endblock %}
@@ -29,6 +41,10 @@
 					<th>{{s.book.sale_price}}</th>
 					<th>{{s.count}}</th>
 					<th>{{s.member.name}}</th>
+					<th>
+						{%url sales.views.delete s.id as u%}
+						{%div_link u "删除" "" "delete link"%}
+					</th>
 				</tr>
 			{% endfor %}
 		</tbody>

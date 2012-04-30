@@ -1,4 +1,16 @@
 {% extends "layout/two_col.html" %}
+{% block script %}
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$("div.pay a").click(function(event){
+				if (confirm("你确定已经支付了此批进货?"))
+					return true;
+				else
+					return false;
+			});
+		});
+	</script>
+{% endblock %}
 {% load helper %}
 {% block title %}查看进货{% endblock %}
 {% block nav %}
@@ -16,7 +28,7 @@
 	{% div_label_text purchase.create_at "id_create_at" "" "创建时间" %}
 	{% div_label_text purchase.update_at "id_update_at" "" "修改时间" %}
 	{% ifequal purchase.paid 0 %}
-		{%url purchases.views.setPaid purchase.id as u%}
-		{%div_link u "付过了"%}
+		{%url purchases.views.pay purchase.id as u%}
+		{%div_link u "支付" "" "pay link"%}
 	{% endifequal %}
 {% endblock %}

@@ -4,7 +4,6 @@ from django import forms
 from models import Sale
 from books.models import Book
 from members.models import Member
-from groups.models import Group
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ValidationError
 from django.shortcuts import render_to_response, redirect, get_object_or_404
@@ -14,13 +13,21 @@ from datetime import *
 class SaleForm(forms.ModelForm):
     book = forms.ModelChoiceField(queryset=Book.objects.all(), label=u'书目')
     member = forms.ModelChoiceField(queryset=Member.objects.filter(valid_to__gte=date.today(), valid=1), required=False, label=u'会员')
+    password = forms.CharField(max_length=16, label=u'密码', widget=forms.PasswordInput)
     count = forms.IntegerField(min_value=0, label=u'数量')
     def clean(self):
-        value = self.cleaned_data['count']
-        if value <= self.cleaned_data['book'].count:
-            return self.cleaned_data
-        else:
-            raise ValidationError(u'存货不够，当前存货量为%i。' % self.cleaned_data['book'].count)
+        cd = self.cleaned_data
+        if not cd.has_key('book'):
+            raise ValidationError(u'书目不能为空')
+        m = cd['member']
+        if not m == None:
+            if not(cd.has_key('password') and cd['member'].check_password(cd['password'])):
+                raise ValidationError(u'密码错误')
+        if not cd.has_key('count'):
+            raise ValidationError(u'数量输入错误')
+        if cd['count'] > cd['book'].count:
+            raise ValidationError(u'存货不够，当前存货量为%i。' % cd['book'].count)
+        return self.cleaned_data
     class Meta:
         model = Sale
         exclude = ('create_at', 'update_at')
@@ -37,6 +44,12 @@ def new(request):
         form = SaleForm(request.POST)
         if form.is_valid():
             sale = form.save()
-            sale.new_sale();
+            sale.new();
             return redirect(index)
     return render_to_response('sales/new.html', {'form':form}, context_instance=RequestContext(request))
+
+def delete(request, id):
+    id = int(id)
+    sale = get_object_or_404(Sale, pk=id)
+    sale.delete()
+    return redirect(index)
