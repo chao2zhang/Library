@@ -37,6 +37,4 @@ class Member(models.Model):
         self.balance += amount
         self.point += int(amount / 2)
         self.save()
-    def get_valid_members(self):
-        return Member.objects.filter(point < 5, valid = 1)
         
