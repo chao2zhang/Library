@@ -18,7 +18,7 @@ class MemberForm(forms.ModelForm):
     valid = forms.BooleanField(required=False, widget=forms.CheckboxInput, label=u'是否有效')
     identify_number = forms.RegexField(regex='^[0-9]{18}$', label=u'身份证')
     group = forms.ModelChoiceField(required=False, queryset=Group.objects.all(), label=u'会员组')
-    def save(self):      
+    def save(self):
         super(MemberForm, self).save()  
         d = self.cleaned_data
         m = self.instance

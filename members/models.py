@@ -1,5 +1,6 @@
 from django.db import models
 from groups.models import Group
+from datetime import *
 
 class Member(models.Model):
     GENDER_CHOICES = (
@@ -36,5 +37,6 @@ class Member(models.Model):
         self.balance += amount
         self.point += int(amount / 2)
         self.save()
-        
+    def get_valid_members(self):
+        return Member.objects.filter(point < 5, valid = 1)
         

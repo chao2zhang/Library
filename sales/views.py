@@ -13,10 +13,9 @@ from datetime import *
 
 class SaleForm(forms.ModelForm):
     book = forms.ModelChoiceField(queryset=Book.objects.all(), label=u'书目')
-    member = forms.ModelChoiceField(queryset=Member.objects.all(), label=u'会员')
+    member = forms.ModelChoiceField(queryset=Member.objects.filter(valid_to__gte=date.today(), valid=1), label=u'会员')
     count = forms.IntegerField(min_value=0, label=u'数量')
     def clean(self):
-        
         value = self.cleaned_data['count']
         if value <= self.cleaned_data['book'].count:
             return self.cleaned_data
