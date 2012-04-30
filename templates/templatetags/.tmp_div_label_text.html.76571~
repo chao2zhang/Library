@@ -1,5 +1,5 @@
 {% spaceless %}
-<div{%if id%} id="{{id}}"{%endif%}{%if clazz%} class="{{clazz}}"{%endif%}>
+<div{%if text_id%} id="{{text_id}}"{%endif%}{%if text_class%} class="{{text_class}}"{%endif%}>
 	{%if value%}<label>{{ value }}</label>{%endif%}
 	<div class="text">{{ text }}</div>     
 	<div class="clearfix"></div>

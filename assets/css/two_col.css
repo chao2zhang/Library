@@ -62,3 +62,11 @@ div.true .text {
 	padding-left: 12px;
 	background: url(/media/image/icon-yes.gif) 0 .2em no-repeat;
 }
+
+div.item label {
+	font-weight: bold;	
+}
+
+div.item .text {
+	padding-left: 2em;
+}

@@ -20,13 +20,13 @@
 {% endblock %}
 {% block main %}
 	<h1>查看进货</h1>
-	{% div_label_text purchase.id "id_id" "" "编号" %}
-	{% div_label_text purchase.book "id_book" "" "书目标题" %}
-	{% div_label_text purchase.price "id_price" "" "进货价" %}
-	{% div_label_text purchase.count "id_count" "" "数量" %}
-	{% div_label_text purchase.paid "id_paid" "" "是否支付" %}
-	{% div_label_text purchase.create_at "id_create_at" "" "创建时间" %}
-	{% div_label_text purchase.update_at "id_update_at" "" "修改时间" %}
+	{% div_label_text purchase.id "id_id" "item" "编号" %}
+	{% div_label_text purchase.book "id_book" "item" "书目标题" %}
+	{% div_label_text purchase.price "id_price" "item" "进货价" %}
+	{% div_label_text purchase.count "id_count" "item" "数量" %}
+	{% div_label_text purchase.paid "id_paid" "item" "是否支付" %}
+	{% div_label_text purchase.create_at "id_create_at" "item" "创建时间" %}
+	{% div_label_text purchase.update_at "id_update_at" "item" "修改时间" %}
 	{% ifequal purchase.paid 0 %}
 		{%url purchases.views.pay purchase.id as u%}
 		{%div_link u "支付" "" "pay link"%}

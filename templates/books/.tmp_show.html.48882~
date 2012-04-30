@@ -1,0 +1,20 @@
+{% extends "layout/two_col.html" %}
+{% load helper %}
+{% block title %}查看书目{% endblock %}
+{% block nav %}
+	<a href="../../../">首页</a>&gt;
+	<a href="../../">书目列表</a>&gt;
+	<a href="#">查看书目</a>
+{% endblock %}
+{% block main %}
+	<h1>查看书目</h1>
+	{% div_label_text book.id "id_id" "" "编号" %}
+	{% div_label_text book.isbn "id_isbn" "" "ISBN编号" %}
+	{% div_label_text book.title "id_title" "" "标题" %}
+	{% div_label_text book.author "id_author" "" "作者" %}
+	{% div_label_text book.press "id_press" "" "出版社" %}
+	{% div_label_text book.count "id_count" "" "库存" %}
+	{% div_label_text book.sale_price "id_sale_price" "" "零售价" %}
+	{% div_label_text book.create_at "id_create_at" "" "创建时间" %}
+	{% div_label_text book.update_at "id_update_at" "" "修改时间" %}
+{% endblock %}
