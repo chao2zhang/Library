@@ -14,21 +14,21 @@
 	<table cellspacing="0">
 		<thead>
 			<tr>
+				<th>时间</th>
 				<th>书名</th>
 				<th>单价</th>
 				<th>数量</th>
 				<th>购买者</th>
-				<th>购买日期</th>
 			</tr>
 		</thead>
 		<tbody>
 			{% for s in sales %}
 				<tr>
+					<th>{{s.create_at}}</th>
 					<th>{{s.book.title}}</th>
 					<th>{{s.book.sale_price}}</th>
 					<th>{{s.count}}</th>
 					<th>{{s.member.name}}</th>
-					<th>{{s.create_at}}</th>
 				</tr>
 			{% endfor %}
 		</tbody>

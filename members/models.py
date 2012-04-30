@@ -32,4 +32,9 @@ class Member(models.Model):
     def check_password(self, raw_password):
         from django.contrib.auth.models import check_password
         return check_password(raw_password, self.password)
-    
+    def topup(self, amount):
+        self.balance += amount
+        self.point += int(amount / 2)
+        self.save()
+        
+        

@@ -9,12 +9,14 @@ from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ValidationError
 from django.shortcuts import render_to_response, redirect, get_object_or_404
 from django.template import RequestContext
+from datetime import *
 
 class SaleForm(forms.ModelForm):
     book = forms.ModelChoiceField(queryset=Book.objects.all(), label=u'书目')
     member = forms.ModelChoiceField(queryset=Member.objects.all(), label=u'会员')
     count = forms.IntegerField(min_value=0, label=u'数量')
     def clean(self):
+        
         value = self.cleaned_data['count']
         if value <= self.cleaned_data['book'].count:
             return self.cleaned_data
@@ -26,7 +28,7 @@ class SaleForm(forms.ModelForm):
 
 @login_required
 def index(request):
-    sales = Sale.objects.all()
+    sales = Sale.objects.order_by("-create_at")
     return render_to_response('sales/index.html', {'sales': sales}, context_instance=RequestContext(request))
 
 @login_required

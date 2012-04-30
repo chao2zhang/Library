@@ -70,7 +70,28 @@ class MemberChangePasswordForm(forms.Form):
         m.save()
         return m
     
-
+class MemberTopupForm(forms.Form):
+    password = forms.CharField(max_length=16, label=u'原密码', widget=forms.PasswordInput)
+    amount = forms.FloatField(min_value=0, label=u'金额')
+    def __init__(self, instance, *args, **kwargs):
+        self.instance = instance
+        super(MemberTopupForm, self).__init__(*args, **kwargs)
+    def clean(self):
+        d = self.cleaned_data
+        m = self.instance
+        if not m.check_password(d['password']):
+            raise ValidationError(u'密码不正确')
+        if d['amount'] < 0:
+            raise ValidationError(u'金额填写错误')
+        return d
+    def save(self):        
+        d = self.cleaned_data
+        m = self.instance
+        m.topup(d['amount'])
+        m.save()
+        return m
+    
+    
 def index(request):
     members = Member.objects.all()
     return render_to_response('members/index.html', {'members':members}, context_instance=RequestContext(request))
@@ -121,3 +142,15 @@ def change_password(request, id):
             form.save()
             return redirect(member)
     return render_to_response('members/change_password.html', {'form': form}, context_instance=RequestContext(request))
+
+@login_required
+def topup(request, id):
+    id = int(id)
+    member = get_object_or_404(Member, pk=id)
+    form = MemberTopupForm(member)
+    if request.POST:
+        form = MemberTopupForm(member, request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect(member)
+    return render_to_response('members/topup.html', {'form': form}, context_instance=RequestContext(request))
