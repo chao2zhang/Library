@@ -44,5 +44,5 @@ class Member(models.Model):
         self.point += int(amount / 2)
         self.save()
     class Meta:
-        ordering = ['-create_at']
+        ordering = ['-create_at']        
         
