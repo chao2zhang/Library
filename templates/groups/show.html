@@ -10,12 +10,16 @@
 	<h1>查看会员组</h1>
 	{% div_label_text group.id "id_id" "item" "编号" %}
 	{% div_label_text group.name "id_name" "item" "名称" %}
-	<label>会员</label>
-	<ul>
-		{% for member in group.members.all %}
-			<li>{{member}}</li>
-		{% endfor %}
-	</ul>
+	<div id="id_members" class="item">
+		<label>会员</label>
+		<ul class="text">
+			{% for member in group.members.all %}
+				<li>
+					<a href="{{member.get_absolute_url}}">{{member}}</a>
+				</li>
+			{% endfor %}
+		</ul>
+	</div>
 	{% div_label_text group.create_at "id_create_at" "item" "创建时间" %}
 	{% div_label_text group.update_at "id_update_at" "item" "更新时间" %}
 {% endblock %}

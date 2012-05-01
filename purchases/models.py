@@ -9,7 +9,7 @@ class Purchase(models.Model):
     create_at = models.DateTimeField(auto_now_add=True, null=False)
     update_at = models.DateTimeField(auto_now=True, null=False)
     def __unicode__(self):
-        return u'%s : %s' % (self.book.title, self.price)
+        return u'%s * %s(%s)' % (self.book.title, self.count, self.price)
     def get_absolute_url(self):
         return "/purchases/%i/show/" % self.id
     def pay(self):
@@ -18,3 +18,5 @@ class Purchase(models.Model):
             self.save()
             self.book.count += self.count
             self.book.save()
+    class Meta:
+        ordering = ['paid', '-create_at']

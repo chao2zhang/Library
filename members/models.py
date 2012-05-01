@@ -20,7 +20,7 @@ class Member(models.Model):
     create_at = models.DateTimeField(auto_now_add=True, null=False)
     update_at = models.DateTimeField(auto_now=True, null=False)
     def __unicode__(self):
-        return u'%s : %s' % (self.name, self.gender)
+        return u'%s<%s>' % (self.name, self.gender)
     def get_absolute_url(self):
         return "/members/%i/show/" % self.id
     def set_password(self, raw_password):            
@@ -37,4 +37,6 @@ class Member(models.Model):
         self.balance += amount
         self.point += int(amount / 2)
         self.save()
+    class Meta:
+        ordering = ['-create_at']
         

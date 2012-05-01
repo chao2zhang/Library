@@ -15,6 +15,26 @@
 	{% div_label_text book.press "id_press" "item" "出版社" %}
 	{% div_label_text book.count "id_count" "item" "库存" %}
 	{% div_label_text book.sale_price "id_sale_price" "item" "零售价" %}
+	<div id="id_purchases" class="item">
+		<label>进货记录</label>
+		<ul class="text">
+			{% for p in book.purchases.all %}
+				<li>
+					<a href="{{p.get_absolute_url}}">{{p}}</a>
+				</li>
+			{% endfor %}
+		</ul>
+	</div>
+	<div id="id_sales" class="item">
+		<label>销售记录</label>
+		<ul class="text">
+			{% for s in book.sales.all %}
+				<li>
+					<a href="{{s.get_absolute_url}}">{{s}}</a>
+				</li>
+			{% endfor %}
+		</ul>
+	</div>
 	{% div_label_text book.create_at "id_create_at" "item" "创建时间" %}
 	{% div_label_text book.update_at "id_update_at" "item" "修改时间" %}
 {% endblock %}

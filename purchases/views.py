@@ -18,7 +18,7 @@ class PurchaseForm(forms.ModelForm):
 
 
 def index(request):
-    purchases = Purchase.objects.order_by("-create_at")
+    purchases = Purchase.objects.all()
     return render_to_response('purchases/index.html', {'purchases': purchases}, context_instance=RequestContext(request))
 
 @login_required

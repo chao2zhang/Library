@@ -9,3 +9,5 @@ class Group(models.Model):
         return u'<%s>' % (self.name)
     def get_absolute_url(self):
         return "/groups/%i/show/" % self.id
+    class Meta:
+        ordering = ['-create_at']

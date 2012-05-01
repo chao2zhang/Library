@@ -12,7 +12,7 @@ from datetime import *
 
 class SaleForm(forms.ModelForm):
     book = forms.ModelChoiceField(queryset=Book.objects.all(), label=u'书目')
-    member = forms.ModelChoiceField(queryset=Member.objects.filter(valid_to__gte=date.today(), valid=1), required=False, label=u'会员')
+    member = forms.ModelChoiceField(queryset=Member.objects.filter(valid_to__gte=date.today(), valid=1), required=False, label=u'会员', empty_label=u'匿名')
     password = forms.CharField(max_length=16, label=u'密码', widget=forms.PasswordInput, required=False)
     count = forms.IntegerField(min_value=0, label=u'数量')
     def clean(self):
@@ -31,7 +31,7 @@ class SaleForm(forms.ModelForm):
 
 @login_required
 def index(request):
-    sales = Sale.objects.order_by("-create_at")
+    sales = Sale.objects.all()
     return render_to_response('sales/index.html', {'sales': sales}, context_instance=RequestContext(request))
 
 @login_required
