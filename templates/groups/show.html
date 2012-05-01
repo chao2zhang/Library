@@ -29,16 +29,15 @@
 	{%div_link u "编辑" "" "edit link"%}
 	{%url groups.views.delete group.id as u%}
 	{%div_link u "删除" "" "delete link"%}
-
-	{% div_label_text group.id "id_id" "" "编号" %}
-	{% div_label_text group.name "id_name" "" "名称" %}
-	{% div_label_text group.discount "id_discount" "" "折扣" %}
+	{% div_label_text group.id "id_id" "item" "编号" %}
+	{% div_label_text group.name "id_name" "item" "名称" %}
+	{% div_label_text group.discount "id_discount" "item" "折扣" %}
 	<label>会员</label>
 	<ul>
 		{% for member in group.members.all %}
 			<li>{{member}}</li>
 		{% endfor %}
-	<h1>
+	</ul>
 	{% div_label_text group.create_at "id_create_at" "item" "创建时间" %}
 	{% div_label_text group.update_at "id_update_at" "item" "更新时间" %}
 {% endblock %}

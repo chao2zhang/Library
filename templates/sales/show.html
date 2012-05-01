@@ -25,23 +25,12 @@
 	</ul>
 	{% endif %}
 	<h1>查看交易</h1>
-<<<<<<< HEAD
 	{%url sales.views.delete sale.id as u%}
 	{%div_link u "删除" "" "delete link"%}
-	{% div_label_text sale.id "id_id" "" "编号" %}
-	{% div_label_text sale.book "id_book" "" "商品" %}
-	{% div_label_text sale.member "id_member" "" "购买者" %}
-	{% div_label_text sale.count "id_count" "" "数量" %}
-	{% div_label_text sale.create_at "id_create_at" "" "购买时间" %}
-	{% div_label_text sale.create_at "id_create_at" "" "购买时间" %}
-=======
 	{% div_label_text sale.id "id_id" "item" "编号" %}
 	{% div_label_text sale.book "id_book" "item" "商品" %}
 	{% div_label_text sale.member "id_member" "item" "购买者" %}
 	{% div_label_text sale.count "id_count" "item" "数量" %}
 	{% div_label_text sale.create_at "id_create_at" "item" "创建时间" %}
 	{% div_label_text sale.update_at "id_update_at" "item" "更新时间" %}
->>>>>>> ab3bca13b780a19c0e3f53b5db2ae809879a54ff
-	{%url sales.views.delete sale.id as u%}
-	{%div_link u "删除" "" "delete link"%}
 {% endblock %}
