@@ -66,4 +66,17 @@ a:hover {
 	font-weight: bold;
 }
 
+.errorlist li {
+	margin:2px;
+	padding:2px;
+	background:#ffc0cb;
+	border: #ff0000 1px solid;
+}
+
+.messagelist li {
+	margin:2px;
+	padding:2px;
+	background: #c0ffc0;
+	border: #00ff00 1px solid;
+}
 

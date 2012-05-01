@@ -102,7 +102,10 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'pagination.middleware.PaginationMiddleware',
+    'djangoflash.middleware.FlashMiddleware',
 )
+
+FLASH_IGNORE_MEDIA = True
 
 ROOT_URLCONF = 'library.urls'
 
@@ -153,7 +156,8 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.i18n",
     "django.core.context_processors.media",
     "django.core.context_processors.static",
-    "django.contrib.messages.context_processors.messages"
+    "django.contrib.messages.context_processors.messages",
+    "djangoflash.context_processors.flash",
 )
 
 # A sample logging configuration. The only tangible logging

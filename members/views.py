@@ -94,7 +94,7 @@ class MemberTopupForm(forms.Form):
     
 def index(request):
     members = Member.objects.all()
-    return render_to_response('members/index.html', {'members':members}, context_instance=RequestContext(request))
+    return render_to_response('members/index.html', {'members':members, 'message': request.flash.get('message')}, context_instance=RequestContext(request))
 
 @login_required
 def new(request):
@@ -103,6 +103,7 @@ def new(request):
         form = MemberForm(request.POST)
         if form.is_valid():
             member = form.save()
+            request.flash['message']=u'添加成功'
             return redirect(member)
     return render_to_response('members/new.html', {'form':form}, context_instance=RequestContext(request))
 
@@ -114,10 +115,9 @@ def edit(request, id):
     if request.POST:
         form = MemberEditForm(request.POST, instance=member)
         if form.is_valid():
-            #cd = form.cleaned_data
-            #assert False
             form.save()
             return redirect(member)
+            request.flash['message']=u'保存成功'
     return render_to_response('members/edit.html', {'form': form, 'id': id}, context_instance=RequestContext(request))
 
 @login_required
@@ -125,13 +125,14 @@ def delete(request, id):
     id = int(id)
     member = get_object_or_404(Member, pk=id)
     member.delete()
+    request.flash['message']=u'删除成功'
     return redirect(index)
 
 @login_required
 def show(request, id):
     id = int(id)
     member = get_object_or_404(Member, pk=id)
-    return render_to_response('members/show.html', {'member': member}, context_instance=RequestContext(request))
+    return render_to_response('members/show.html', {'member': member, 'message': request.flash.get('message')}, context_instance=RequestContext(request))
 
 @login_required
 def change_password(request, id):
@@ -142,6 +143,7 @@ def change_password(request, id):
         form = MemberChangePasswordForm(member, request.POST)
         if form.is_valid():
             form.save()
+            request.flash['message']=u'密码修改成功'
             return redirect(member)
     return render_to_response('members/change_password.html', {'form': form}, context_instance=RequestContext(request))
 
@@ -154,5 +156,6 @@ def topup(request, id):
         form = MemberTopupForm(member, request.POST)
         if form.is_valid():
             form.save()
+            request.flash['message']=u'充值成功'
             return redirect(member)
     return render_to_response('members/topup.html', {'form': form}, context_instance=RequestContext(request))

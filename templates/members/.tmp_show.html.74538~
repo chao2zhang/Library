@@ -7,11 +7,6 @@
 	<a href="#">查看会员</a>
 {% endblock %}
 {% block main %}
-	{% if message %}
-	<ul class="messagelist">
-		<li>{{message}}</li>
-	</ul>
-	{% endif %}
 	<h1>查看会员</h1>
 	{% div_label_text member.id "id_id" "item" "编号" %}
 	{% div_label_text member.name "id_name" "item" "姓名" %}

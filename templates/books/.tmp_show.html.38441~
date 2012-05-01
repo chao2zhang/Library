@@ -7,11 +7,6 @@
 	<a href="#">查看书目</a>
 {% endblock %}
 {% block main %}
-	{% if message %}
-	<ul class="messagelist">
-		<li>{{message}}</li>
-	</ul>
-	{% endif %}
 	<h1>查看书目</h1>
 	{% div_label_text book.id "id_id" "item" "编号" %}
 	{% div_label_text book.isbn "id_isbn" "item" "ISBN编号" %}

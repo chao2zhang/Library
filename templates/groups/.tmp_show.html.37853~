@@ -7,11 +7,6 @@
 	<a href="#">查看会员组</a>
 {% endblock %}
 {% block main %}
-	{% if message %}
-	<ul class="messagelist">
-		<li>{{message}}</li>
-	</ul>
-	{% endif %}
 	<h1>查看会员组</h1>
 	{% div_label_text group.id "id_id" "item" "编号" %}
 	{% div_label_text group.name "id_name" "item" "名称" %}

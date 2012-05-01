@@ -25,11 +25,6 @@
 	<a href="#">进货列表</a>
 {% endblock %}
 {% block main %}
-	{% if message %}
-	<ul class="messagelist">
-		<li>{{message}}</li>
-	</ul>
-	{% endif %}
 	<h1>进货列表</h1>
 	{% url purchases.views.new as u %}
 	{% div_link u "添加进货" "" "add link"%}

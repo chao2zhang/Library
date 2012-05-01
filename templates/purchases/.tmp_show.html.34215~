@@ -19,11 +19,6 @@
 	<a href="#">查看进货</a>
 {% endblock %}
 {% block main %}
-	{% if message %}
-	<ul class="messagelist">
-		<li>{{message}}</li>
-	</ul>
-	{% endif %}
 	<h1>查看进货</h1>
 	{% div_label_text purchase.id "id_id" "item" "编号" %}
 	{% div_label_text purchase.book "id_book" "item" "书目标题" %}

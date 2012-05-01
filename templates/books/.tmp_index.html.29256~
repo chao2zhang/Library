@@ -3,7 +3,7 @@
 	<script type="text/javascript">
 		$(document).ready(function(){
 			$("div.delete a").click(function(event){
-				if (confirm("你确定要删除此会员组?"))
+				if (confirm("你确定要删除此书目以及其相关的进货记录与销售记录?"))
 					return true;
 				else
 					return false;
@@ -13,47 +13,46 @@
 {% endblock %}
 {% load helper %}
 {% load pagination_tags %}
-{% block title %}会员组列表{% endblock %}
+{% block title %}书目列表{% endblock %}
 {% block nav %}
 	<a href="../">首页</a>&gt;
-	<a href="#">会员组列表</a>
+	<a href="#">书目列表</a>
 {% endblock %}
 {% block main %}
-	{% if message %}
-	<ul class="messagelist">
-		<li>{{message}}</li>
-	</ul>
-	{% endif %}
-	<h1>会员组列表</h1>
-	{% url groups.views.new as u %}
-	{% div_link u "添加会员组" "" "add link"%}
-	{% autopaginate groups 5 %}
+	<h1>书目列表</h1>
+	{% url books.views.new as u %}
+	{% div_link u "添加书目" "" "add link"%}
+	{% autopaginate books 5 %}
 	<table cellspacing="0">
 		<thead>
 			<tr>
 				<th>编号</th>
-				<th>名称</th>
-				<th>折扣</th>
-				<th>会员人数</th>
+				<th>标题</th>
+				<th>作者</th>
+				<th>出版社</th>
+				<th>库存</th>
+				<th>零售价</th>
 			</tr>
 		</thead>
 		<tbody>
-			{% for group in groups %}
+			{% for book in books %}
 				<tr>
-					<th>{{group.id}}</th>
-					<th>{{group.name}}</th>
-					<th>{{group.discount}}</th>
-					<th>{{group.members.count}}</th>
+					<th>{{book.id}}</th>
+					<th>{{book.title}}</th>
+					<th>{{book.author}}</th>
+					<th>{{book.press}}</th>
+					<th>{{book.count}}</th>
+					<th>{{book.sale_price}}</th>
 					<th>
-						{%url groups.views.show group.id as u%}
+						{%url books.views.show book.id as u%}
 						{%div_link u "查看" "" "show link"%}
 					</th>
 					<th>
-						{%url groups.views.edit group.id as u%}
+						{%url books.views.edit book.id as u%}
 						{%div_link u "编辑" "" "edit link"%}
 					</th>
 					<th>
-						{%url groups.views.delete group.id as u%}
+						{%url books.views.delete book.id as u%}
 						{%div_link u "删除" "" "delete link"%}
 					</th>
 				</tr>
