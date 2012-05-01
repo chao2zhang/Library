@@ -20,6 +20,8 @@
 {% endblock %}
 {% block main %}
 	<h1>查看交易</h1>
+	{%url sales.views.delete sale.id as u%}
+	{%div_link u "删除" "" "delete link"%}
 	{% div_label_text sale.id "id_id" "" "编号" %}
 	{% div_label_text sale.book "id_book" "" "商品" %}
 	{% div_label_text sale.member "id_member" "" "购买者" %}

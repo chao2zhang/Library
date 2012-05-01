@@ -20,6 +20,10 @@
 {% endblock %}
 {% block main %}
 	<h1>查看进货</h1>
+	{%url purchases.views.edit purchase.id as u%}
+	{%div_link u "编辑" "" "edit link"%}
+	{%url purchases.views.delete purchase.id as u%}
+	{%div_link u "删除" "" "delete link"%}
 	{% div_label_text purchase.id "id_id" "" "编号" %}
 	{% div_label_text purchase.book "id_book" "" "书目标题" %}
 	{% div_label_text purchase.price "id_price" "" "进货价" %}

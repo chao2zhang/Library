@@ -1,4 +1,16 @@
 {% extends "layout/two_col.html" %}
+{% block script %}
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$("div.delete a").click(function(event){
+				if (confirm("真的要删除这书?"))
+					return true;
+				else
+					return false;
+			});
+		});
+	</script>
+{% endblock %}
 {% load helper %}
 {% block title %}查看书目{% endblock %}
 {% block nav %}
@@ -8,6 +20,10 @@
 {% endblock %}
 {% block main %}
 	<h1>查看书目</h1>
+	{%url books.views.edit book.id as u%}
+	{%div_link u "编辑" "" "edit link"%}
+	{%url books.views.delete book.id as u%}
+	{%div_link u "删除" "" "delete link"%}
 	{% div_label_text book.id "id_id" "" "编号" %}
 	{% div_label_text book.isbn "id_isbn" "" "ISBN编号" %}
 	{% div_label_text book.title "id_title" "" "标题" %}

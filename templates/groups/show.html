@@ -1,4 +1,16 @@
 {% extends "layout/two_col.html" %}
+{% block script %}
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$("div.delete a").click(function(event){
+				if (confirm("真的要删除此会员组？"))
+					return true;
+				else
+					return false;
+			});
+		});
+	</script>
+{% endblock %}
 {% load helper %}
 {% block title %}查看会员组{% endblock %}
 {% block nav %}
@@ -8,6 +20,11 @@
 {% endblock %}
 {% block main %}
 	<h1>查看会员组</h1>
+	{%url groups.views.edit group.id as u%}
+	{%div_link u "编辑" "" "edit link"%}
+	{%url groups.views.delete group.id as u%}
+	{%div_link u "删除" "" "delete link"%}
+
 	{% div_label_text group.id "id_id" "" "编号" %}
 	{% div_label_text group.name "id_name" "" "名称" %}
 	<label>会员</label>
