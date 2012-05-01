@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from django.db import models
 from books.models import Book
 
@@ -9,7 +10,10 @@ class Purchase(models.Model):
     create_at = models.DateTimeField(auto_now_add=True, null=False)
     update_at = models.DateTimeField(auto_now=True, null=False)
     def __unicode__(self):
-        return u'%s : %s' % (self.book.title, self.price)
+        s = '%s * %s(%s)' % (self.book.title, self.count, self.price)
+        if not self.paid:
+            s += u'[未支付]'
+        return s
     def get_absolute_url(self):
         return "/purchases/%i/show/" % self.id
     def pay(self):
@@ -18,3 +22,5 @@ class Purchase(models.Model):
             self.save()
             self.book.count += self.count
             self.book.save()
+    class Meta:
+        ordering = ['paid', '-create_at']

@@ -70,6 +70,13 @@ class MemberChangePasswordForm(forms.Form):
         m.save()
         return m
     
+class MemberSearchForm(forms.Form):
+    id = forms.RegexField(required=False, regex='^[0-9]*$', label=u'编号')
+    name = forms.CharField(required=False, max_length=200, label=u'姓名')
+    gender = forms.TypedChoiceField(required=False, choices=Member.GENDER_CHOICES_WITH_EMPTY, label=u'性别')
+    birthday = forms.DateField(required=False, widget=forms.DateInput, label=u'生日')
+    identify_number = forms.CharField(required=False, max_length=18, label=u'身份证')
+    
 class MemberTopupForm(forms.Form):
     password = forms.CharField(max_length=16, label=u'密码', widget=forms.PasswordInput)
     amount = forms.FloatField(min_value=0, label=u'金额')
@@ -94,7 +101,7 @@ class MemberTopupForm(forms.Form):
     
 def index(request):
     members = Member.objects.all()
-    return render_to_response('members/index.html', {'members':members}, context_instance=RequestContext(request))
+    return render_to_response('members/index.html', {'members':members, 'message': request.flash.get('message')}, context_instance=RequestContext(request))
 
 @login_required
 def new(request):
@@ -103,6 +110,7 @@ def new(request):
         form = MemberForm(request.POST)
         if form.is_valid():
             member = form.save()
+            request.flash['message']=u'添加成功'
             return redirect(member)
     return render_to_response('members/new.html', {'form':form}, context_instance=RequestContext(request))
 
@@ -114,10 +122,9 @@ def edit(request, id):
     if request.POST:
         form = MemberEditForm(request.POST, instance=member)
         if form.is_valid():
-            #cd = form.cleaned_data
-            #assert False
             form.save()
             return redirect(member)
+            request.flash['message']=u'保存成功'
     return render_to_response('members/edit.html', {'form': form, 'id': id}, context_instance=RequestContext(request))
 
 @login_required
@@ -125,13 +132,14 @@ def delete(request, id):
     id = int(id)
     member = get_object_or_404(Member, pk=id)
     member.delete()
+    request.flash['message']=u'删除成功'
     return redirect(index)
 
 @login_required
 def show(request, id):
     id = int(id)
     member = get_object_or_404(Member, pk=id)
-    return render_to_response('members/show.html', {'member': member}, context_instance=RequestContext(request))
+    return render_to_response('members/show.html', {'member': member, 'message': request.flash.get('message')}, context_instance=RequestContext(request))
 
 @login_required
 def change_password(request, id):
@@ -142,6 +150,7 @@ def change_password(request, id):
         form = MemberChangePasswordForm(member, request.POST)
         if form.is_valid():
             form.save()
+            request.flash['message']=u'密码修改成功'
             return redirect(member)
     return render_to_response('members/change_password.html', {'form': form}, context_instance=RequestContext(request))
 
@@ -154,5 +163,40 @@ def topup(request, id):
         form = MemberTopupForm(member, request.POST)
         if form.is_valid():
             form.save()
+            request.flash['message']=u'充值成功'
             return redirect(member)
     return render_to_response('members/topup.html', {'form': form}, context_instance=RequestContext(request))
+
+@login_required
+def search(request):
+    form = MemberSearchForm()
+    if request.POST:
+        form = MemberSearchForm(request.POST)
+        if form.is_valid():
+            f = form.fields
+            cd = form.cleaned_data
+            params = u''
+            message = u''
+            for k in cd:
+                if cd[k]:
+                    add_params = u'%s=%s' % (k, cd[k])
+                    add_message = u'%s包含"%s"' % (f[k].label, cd[k])
+                    if params: params += '&' 
+                    params += add_params
+                    if message: message += u'且'
+                    message += add_message
+            if params: params += '&'
+            params += 'message=' + message
+            return redirect('/members/result/?%s' % params)
+    return render_to_response('members/search.html', {'form':form}, context_instance=RequestContext(request))
+
+@login_required
+def result(request):
+    params = ''
+    for k in request.GET:
+        if k != 'message':
+            params += '%s__contains="%s",' % (k, request.GET[k])
+    query = 'Member.objects.filter(' + params +')'
+    members = eval(query)
+    return render_to_response('members/result.html', {'members':members, 'message':request.GET.get('message')}, context_instance=RequestContext(request))
+

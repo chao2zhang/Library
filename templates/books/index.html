@@ -19,14 +19,22 @@
 	<a href="#">书目列表</a>
 {% endblock %}
 {% block main %}
+	{% if message %}
+	<ul class="messagelist">
+		<li>{{message}}</li>
+	</ul>
+	{% endif %}
 	<h1>书目列表</h1>
 	{% url books.views.new as u %}
 	{% div_link u "添加书目" "" "add link"%}
+	{% url books.views.search as u %}
+	{% div_link u "查找书目" "" "search link"%}
 	{% autopaginate books 5 %}
 	<table cellspacing="0">
 		<thead>
 			<tr>
 				<th>编号</th>
+				<th>ISBN编号</th>
 				<th>标题</th>
 				<th>作者</th>
 				<th>出版社</th>
@@ -38,6 +46,7 @@
 			{% for book in books %}
 				<tr>
 					<th>{{book.id}}</th>
+					<th>{{book.isbn}}</th>
 					<th>{{book.title}}</th>
 					<th>{{book.author}}</th>
 					<th>{{book.press}}</th>

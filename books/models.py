@@ -13,5 +13,7 @@ class Book(models.Model):
         return u'<%s> by %s' % (self.title, self.author)
     def get_absolute_url(self):
         return "/books/%i/show/" % self.id
+    class Meta:
+        ordering = ['-create_at']
     
     

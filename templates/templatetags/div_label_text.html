@@ -1,7 +1,13 @@
 {% spaceless %}
-<div{%if text_id%} id="{{text_id}}"{%endif%}{%if text_class%} class="{{text_class}}"{%endif%}>
+<div{%if id%} id="{{id}}"{%endif%}{%if clazz%} class="{{clazz}}"{%endif%}>
 	{%if value%}<label>{{ value }}</label>{%endif%}
-	<div class="text">{{ text }}</div>     
+	<div class="text">		
+	{%if text.get_absolute_url %}
+		<a href="{{text.get_absolute_url}}">{{ text }}</a>
+	{%else%}
+		{{ text }}
+	{%endif%}
+	</div>
 	<div class="clearfix"></div>
 </div>
 {% endspaceless %}

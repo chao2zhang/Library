@@ -12,9 +12,9 @@ from datetime import *
 
 class SaleForm(forms.ModelForm):
     book = forms.ModelChoiceField(queryset=Book.objects.all(), label=u'书目')
-    member = forms.ModelChoiceField(queryset=Member.objects.filter(valid_to__gte=date.today(), valid=1), required=False, label=u'会员')
+    member = forms.ModelChoiceField(queryset=Member.objects.filter(valid_to__gte=date.today(), valid=1), required=False, label=u'会员', empty_label=u'匿名')
     password = forms.CharField(max_length=16, label=u'密码', widget=forms.PasswordInput, required=False)
-    count = forms.IntegerField(min_value=0, label=u'数量')
+    count = forms.IntegerField(min_value=1, label=u'数量')
     def clean(self):
         cd = self.cleaned_data
         if not cd.has_key('book'):
@@ -31,8 +31,8 @@ class SaleForm(forms.ModelForm):
 
 @login_required
 def index(request):
-    sales = Sale.objects.order_by("-create_at")
-    return render_to_response('sales/index.html', {'sales': sales}, context_instance=RequestContext(request))
+    sales = Sale.objects.all()
+    return render_to_response('sales/index.html', {'sales': sales, 'message': request.flash.get('message')}, context_instance=RequestContext(request))
 
 @login_required
 def new(request):
@@ -41,7 +41,8 @@ def new(request):
         form = SaleForm(request.POST)
         if form.is_valid():
             sale = form.save()
-            sale.new();
+            sale.new()
+            request.flash['message']=u'添加成功'
             return redirect(index)
     return render_to_response('sales/new.html', {'form':form}, context_instance=RequestContext(request))
 
@@ -49,11 +50,12 @@ def new(request):
 def show(request, id):
     id = int(id)
     sale = get_object_or_404(Sale, pk=id)
-    return render_to_response('sales/show.html', {'sale':sale}, context_instance=RequestContext(request))
+    return render_to_response('sales/show.html', {'sale':sale, 'message': request.flash.get('message')}, context_instance=RequestContext(request))
 
 @login_required
 def delete(request, id):
     id = int(id)
     sale = get_object_or_404(Sale, pk=id)
     sale.delete()
+    request.flash['message']=u'删除成功'
     return redirect(index)

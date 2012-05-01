@@ -39,26 +39,44 @@
 }
 
 div.add a {
-    padding-left: 12px;
-    background: url(/media/image/icon_addlink.gif) 0 .2em no-repeat;
+    padding-left: 15px;
+    background: url(/media/image/icon_addlink.gif) .25em .25em no-repeat;
 }
 
 div.edit a {
-	padding-left: 12px;
-	background: url(/media/image/icon_changelink.gif) 0 .2em no-repeat;
+	padding-left: 15px;
+	background: url(/media/image/icon_changelink.gif) .25em .25em no-repeat;
 }
 
 div.show a {
-	padding-left: 12px;
-	background: url(/media/image/selector-addall.gif) 0 .2em no-repeat;
+	padding-left: 15px;
+	background: url(/media/image/selector-addall.gif) .25em .25em no-repeat;
 }
 
 div.delete a {
-	padding-left: 12px;
-	background: url(/media/image/icon_deletelink.gif) 0 .2em no-repeat;
+	padding-left: 15px;
+	background: url(/media/image/icon_deletelink.gif) .25em .25em no-repeat;
+}
+
+div.search a {
+	padding-left: 15px;
+	background: url(/media/image/icon_searchbox.png) 0  no-repeat;	
 }
 
 div.true .text {
-	padding-left: 12px;
-	background: url(/media/image/icon-yes.gif) 0 .2em no-repeat;
+	padding-left: 15px;
+	background: url(/media/image/icon-yes.gif) 0 .25em no-repeat;
+}
+
+div.item label {
+	font-weight: bold;	
+}
+
+div.item .text {
+	padding-left: 2em;
+}
+
+.book-form-item, .purchase-form-item, .sale-form-item, .member-form-item, .group-form-item {
+	margin: 2px;
+	padding: 2px;
 }

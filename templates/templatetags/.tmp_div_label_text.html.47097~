@@ -1,0 +1,7 @@
+{% spaceless %}
+<div{%if id%} id="{{id}}"{%endif%}{%if clazz%} class="{{clazz}}"{%endif%}>
+	{%if value%}<label>{{ value }}</label>{%endif%}
+	<div class="text">{{ text }}</div>     
+	<div class="clearfix"></div>
+</div>
+{% endspaceless %}

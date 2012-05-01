@@ -1,11 +1,17 @@
+# -*- coding: utf-8 -*-
 from django.db import models
 from groups.models import Group
 from datetime import *
 
 class Member(models.Model):
     GENDER_CHOICES = (
-        ('M', 'Male'),
-        ('F', 'Female'),
+        ('M', u'男'),
+        ('F', u'女'),
+    )
+    GENDER_CHOICES_WITH_EMPTY = (
+        ('', u'不限'),
+        ('M', u'男'),
+        ('F', u'女'),
     )
     name = models.CharField(max_length=200)
     password = models.CharField(max_length=128)
@@ -20,7 +26,7 @@ class Member(models.Model):
     create_at = models.DateTimeField(auto_now_add=True, null=False)
     update_at = models.DateTimeField(auto_now=True, null=False)
     def __unicode__(self):
-        return u'%s : %s' % (self.name, self.gender)
+        return u'%s<%s>' % (self.name, self.gender)
     def get_absolute_url(self):
         return "/members/%i/show/" % self.id
     def set_password(self, raw_password):            
@@ -37,4 +43,6 @@ class Member(models.Model):
         self.balance += amount
         self.point += int(amount / 2)
         self.save()
+    class Meta:
+        ordering = ['-create_at']        
         

@@ -1,0 +1,23 @@
+{% extends "layout/two_col.html" %}
+{% load helper %}
+{% block title %}查看会员{% endblock %}
+{% block nav %}
+	<a href="../../../">首页</a>&gt;
+	<a href="../../">会员列表</a>&gt;
+	<a href="#">查看会员</a>
+{% endblock %}
+{% block main %}
+	<h1>查看会员</h1>
+	{% div_label_text member.id "id_id" "item" "编号" %}
+	{% div_label_text member.name "id_name" "item" "姓名" %}
+	{% div_label_text member.gender "id_gender" "item" "性别" %}
+	{% div_label_text member.birthday "id_birthday" "item" "生日" %}
+	{% div_label_text member.valid "id_valid" "item" "有效" %}
+	{% div_label_text member.valid_to "id_valid_to" "item" "有效期至" %}	
+	{% div_label_text member.identify_number "id_idnumber" "item" "身份证" %}
+	{% div_label_text member.point "id_point" "item" "积分" %}
+	{% div_label_text member.balance "id_balance" "item" "余额" %}
+	{% div_label_text member.group "id_group" "item" "会员组" %}
+	{% div_label_text member.create_at "id_create_at" "item" "创建时间" %}
+	{% div_label_text member.update_at "id_update_at" "item" "更新时间" %}
+{% endblock %}

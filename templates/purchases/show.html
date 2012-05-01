@@ -19,7 +19,12 @@
 	<a href="#">查看进货</a>
 {% endblock %}
 {% block main %}
-	<h1>查看进货</h1>
+	{% if message %}
+	<ul class="messagelist">
+		<li>{{message}}</li>
+	</ul>
+	{% endif %}
+	<h1>查看进货</h1>s
 	{%url purchases.views.edit purchase.id as u%}
 	{%div_link u "编辑" "" "edit link"%}
 	{%url purchases.views.delete purchase.id as u%}

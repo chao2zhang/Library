@@ -19,6 +19,11 @@
 	<a href="#">查看会员组</a>
 {% endblock %}
 {% block main %}
+	{% if message %}
+	<ul class="messagelist">
+		<li>{{message}}</li>
+	</ul>
+	{% endif %}
 	<h1>查看会员组</h1>
 	{%url groups.views.edit group.id as u%}
 	{%div_link u "编辑" "" "edit link"%}
@@ -27,12 +32,13 @@
 
 	{% div_label_text group.id "id_id" "" "编号" %}
 	{% div_label_text group.name "id_name" "" "名称" %}
+	{% div_label_text group.discount "id_discount" "" "折扣" %}
 	<label>会员</label>
 	<ul>
 		{% for member in group.members.all %}
 			<li>{{member}}</li>
 		{% endfor %}
-	</ul>
-	{% div_label_text group.create_at "id_create_at" "" "创建时间" %}
-	{% div_label_text group.update_at "id_update_at" "" "更新时间" %}
+	<h1>
+	{% div_label_text group.create_at "id_create_at" "item" "创建时间" %}
+	{% div_label_text group.update_at "id_update_at" "item" "更新时间" %}
 {% endblock %}
