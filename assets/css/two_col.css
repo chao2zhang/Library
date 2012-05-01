@@ -70,3 +70,8 @@ div.item label {
 div.item .text {
 	padding-left: 2em;
 }
+
+.book-form-item, .purchase-form-item, .sale-form-item, .member-form-item, .group-form-item {
+	margin: 2px;
+	padding: 2px;
+}

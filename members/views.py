@@ -70,6 +70,13 @@ class MemberChangePasswordForm(forms.Form):
         m.save()
         return m
     
+class MemberSearchForm(forms.Form):
+    id = forms.RegexField(required=False, regex='^[0-9]*$', label=u'编号')
+    name = forms.CharField(required=False, max_length=200, label=u'姓名')
+    gender = forms.ChoiceField(required=False, choices=Member.GENDER_CHOICES, label=u'性别')
+    birthday = forms.DateField(required=False, widget=forms.DateInput, label=u'生日')
+    identify_number = forms.CharField(required=False, max_length=18, label=u'身份证')
+    
 class MemberTopupForm(forms.Form):
     password = forms.CharField(max_length=16, label=u'密码', widget=forms.PasswordInput)
     amount = forms.FloatField(min_value=0, label=u'金额')
@@ -159,3 +166,37 @@ def topup(request, id):
             request.flash['message']=u'充值成功'
             return redirect(member)
     return render_to_response('members/topup.html', {'form': form}, context_instance=RequestContext(request))
+
+@login_required
+def search(request):
+    form = MemberSearchForm()
+    if request.POST:
+        form = MemberSearchForm(request.POST)
+        if form.is_valid():
+            f = form.fields
+            cd = form.cleaned_data
+            params = u''
+            message = u''
+            for k in cd:
+                if cd[k]:
+                    add_params = u'%s=%s' % (k, cd[k])
+                    add_message = u'%s包含"%s"' % (f[k].label, cd[k])
+                    if params: params += '&' 
+                    params += add_params
+                    if message: message += u'且'
+                    message += add_message
+            if params: params += '&'
+            params += 'message=' + message
+            return redirect('/members/result/?%s' % params)
+    return render_to_response('members/search.html', {'form':form}, context_instance=RequestContext(request))
+
+@login_required
+def result(request):
+    params = ''
+    for k in request.GET:
+        if k != 'message':
+            params += '%s__contains="%s",' % (k, request.GET[k])
+    query = 'Member.objects.filter(' + params +')'
+    members = eval(query)
+    return render_to_response('members/result.html', {'members':members, 'message':request.GET.get('message')}, context_instance=RequestContext(request))
+

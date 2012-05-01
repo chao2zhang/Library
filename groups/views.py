@@ -55,4 +55,3 @@ def show(request, id):
     group = get_object_or_404(Group, pk=id)
     return render_to_response('groups/show.html', {'group': group, 'message': request.flash.get('message')}, context_instance=RequestContext(request))
 
-

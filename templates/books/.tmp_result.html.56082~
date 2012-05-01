@@ -13,10 +13,11 @@
 {% endblock %}
 {% load helper %}
 {% load pagination_tags %}
-{% block title %}书目列表{% endblock %}
+{% block title %}查找结果{% endblock %}
 {% block nav %}
-	<a href="../">首页</a>&gt;
-	<a href="#">书目列表</a>
+	<a href="../../">首页</a>&gt;
+	<a href="../">书目列表</a>&gt;
+	<a href="#">查找结果</a>
 {% endblock %}
 {% block main %}
 	{% if message %}
@@ -24,9 +25,8 @@
 		<li>{{message}}</li>
 	</ul>
 	{% endif %}
-	<h1>书目列表</h1>
+	<h1>查找结果</h1>
 	{% url books.views.new as u %}
-	{% div_link u "添加书目" "" "add link"%}
 	{% autopaginate books 5 %}
 	<table cellspacing="0">
 		<thead>
