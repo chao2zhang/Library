@@ -73,7 +73,7 @@ class MemberChangePasswordForm(forms.Form):
 class MemberSearchForm(forms.Form):
     id = forms.RegexField(required=False, regex='^[0-9]*$', label=u'编号')
     name = forms.CharField(required=False, max_length=200, label=u'姓名')
-    gender = forms.ChoiceField(required=False, choices=Member.GENDER_CHOICES, label=u'性别')
+    gender = forms.TypedChoiceField(required=False, choices=Member.GENDER_CHOICES_WITH_EMPTY, label=u'性别')
     birthday = forms.DateField(required=False, widget=forms.DateInput, label=u'生日')
     identify_number = forms.CharField(required=False, max_length=18, label=u'身份证')
     

@@ -50,7 +50,7 @@
 				<tr>
 					<th>{{member.id}}</th>
 					<th>{{member.name}}</th>
-					<th>{{member.get_gender_display}}</th>
+					<th>{{member.gender}}</th>
 					<th>{{member.birthday}}</th>
 					<th>{{member.valid}}</th>
 					<th>{{member.valid_to}}</th>

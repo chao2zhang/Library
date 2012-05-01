@@ -27,6 +27,8 @@
 	<h1>书目列表</h1>
 	{% url books.views.new as u %}
 	{% div_link u "添加书目" "" "add link"%}
+	{% url books.views.search as u %}
+	{% div_link u "查找书目" "" "search link"%}
 	{% autopaginate books 5 %}
 	<table cellspacing="0">
 		<thead>

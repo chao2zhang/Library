@@ -1,11 +1,17 @@
+# -*- coding: utf-8 -*-
 from django.db import models
 from groups.models import Group
 from datetime import *
 
 class Member(models.Model):
     GENDER_CHOICES = (
-        ('M', 'Male'),
-        ('F', 'Female'),
+        ('M', u'男'),
+        ('F', u'女'),
+    )
+    GENDER_CHOICES_WITH_EMPTY = (
+        ('', u'不限'),
+        ('M', u'男'),
+        ('F', u'女'),
     )
     name = models.CharField(max_length=200)
     password = models.CharField(max_length=128)

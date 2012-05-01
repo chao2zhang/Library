@@ -67,16 +67,16 @@ a:hover {
 }
 
 .errorlist li {
-	margin:2px;
-	padding:2px;
-	background:#ffc0cb;
+	margin: 2px;
+	padding: 2px 2px 2px 22px;
+	background: #ffc0cb url(/media/image/icon_error.gif) 0.25em 0.25em no-repeat;
 	border: #ff0000 1px solid;
 }
 
 .messagelist li {
 	margin:2px;
-	padding:2px;
-	background: #c0ffc0;
+	padding: 2px 2px 2px 22px;
+	background: #c0ffc0 url(/media/image/icon_success.gif) 0.25em 0.25em no-repeat;
 	border: #00ff00 1px solid;
 }
 

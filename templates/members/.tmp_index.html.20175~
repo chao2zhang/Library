@@ -27,8 +27,6 @@
 	<h1>会员列表</h1>
 	{% url members.views.new as u %}
 	{% div_link u "添加会员" "" "add link"%}
-	{% url members.views.search as u %}
-	{% div_link u "查找会员" "" "search link"%}
 	{% autopaginate members 5 %}
 	<table cellspacing="0">
 		<thead>
@@ -50,7 +48,7 @@
 				<tr>
 					<th>{{member.id}}</th>
 					<th>{{member.name}}</th>
-					<th>{{member.get_gender_display}}</th>
+					<th>{{member.gender}}</th>
 					<th>{{member.birthday}}</th>
 					<th>{{member.valid}}</th>
 					<th>{{member.valid_to}}</th>
