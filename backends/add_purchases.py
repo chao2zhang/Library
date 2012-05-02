@@ -24,9 +24,9 @@ for i in range(t):
     p.count = random.randint(0, 20)
     p.paid = bool(random.randint(0, 1))
     p.price = round(p.book.sale_price * random.random(), 2)
-    print p
     p.save()
     if p.paid:
         p.paid = False
         p.pay()
+    print p
     

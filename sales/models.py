@@ -21,7 +21,7 @@ class Sale(models.Model):
         else:
             discount = 1
         book.count -= self.count
-        if not member == None:
+        if member:
             member.balance -= discount * self.count * book.sale_price
             member.point += self.count * book.sale_price
             member.save()
