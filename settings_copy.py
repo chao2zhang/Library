@@ -1,7 +1,7 @@
 # Django settings for library project.
 import os
 
-DEBUG = False
+DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
@@ -126,7 +126,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.admin',
     'pagination',
-    'templates_helper',
+    'helper',
     'registrations',
     'manage',
     'books',

@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 from django.db import models
 from groups.models import Group
-from datetime import *
 
 class Member(models.Model):
     GENDER_CHOICES = (
