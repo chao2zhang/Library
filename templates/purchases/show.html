@@ -25,10 +25,10 @@
 	</ul>
 	{% endif %}
 	<h1>查看进货</h1>
-	{% ifequal purchase.paid 0 %}
+	{% if not purchase.paid %}
 		{%url purchases.views.edit purchase.id as u%}
 		{%div_link u "编辑" "" "edit link"%}
-	{% endifequal %}
+	{% endif %}
 	{%url purchases.views.delete purchase.id as u%}
 	{%div_link u "删除" "" "delete link"%}
 	{% ifequal purchase.paid 0 %}

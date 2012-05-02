@@ -21,7 +21,7 @@
 {% endblock %}
 {% block main %}
 	<h1>查找结果{%if message%}({{message}}){%endif%}</h1>
-	{% autopaginate members 5 %}
+	{% autopaginate members 10 %}
 	<table cellspacing="0">
 		<thead>
 			<tr>

@@ -27,7 +27,7 @@
 	<h1>会员组列表</h1>
 	{% url groups.views.new as u %}
 	{% div_link u "添加会员组" "" "add link"%}
-	{% autopaginate groups 5 %}
+	{% autopaginate groups 10 %}
 	<table cellspacing="0">
 		<thead>
 			<tr>

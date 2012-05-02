@@ -26,6 +26,7 @@ class Sale(models.Model):
             member.point += self.count * book.sale_price
             member.save()
         book.save()
+        return self
     class Meta:
         ordering = ['-create_at']
         
