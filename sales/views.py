@@ -8,17 +8,15 @@ from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ValidationError
 from django.shortcuts import render_to_response, redirect, get_object_or_404
 from django.template import RequestContext
-from datetime import *
+import datetime
 
 class SaleForm(forms.ModelForm):
     book = forms.ModelChoiceField(queryset=Book.objects.all(), label=u'书目')
-    member = forms.ModelChoiceField(queryset=Member.objects.filter(valid_to__gte=date.today(), valid=1), required=False, label=u'会员', empty_label=u'匿名')
+    member = forms.ModelChoiceField(queryset=Member.objects.filter(valid_to__gte=datetime.date.today(), valid=1), required=False, label=u'会员', empty_label=u'匿名')
     password = forms.CharField(max_length=16, label=u'密码', widget=forms.PasswordInput, required=False)
     count = forms.IntegerField(min_value=1, label=u'数量')
     def clean(self):
         cd = self.cleaned_data
-        if not cd.has_key('book'):
-            raise ValidationError(u'书目不能为空')
         if cd['member']:
             if not(cd.has_key('password') and cd['member'].check_password(cd['password'])):
                 raise ValidationError(u'密码错误')

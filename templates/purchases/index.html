@@ -33,7 +33,7 @@
 	<h1>进货列表</h1>
 	{% url purchases.views.new as u %}
 	{% div_link u "添加进货" "" "add link"%}
-	{% autopaginate purchases 5 %}
+	{% autopaginate purchases 10 %}
 	<table cellspacing="0">
 		<thead>
 			<tr>
@@ -59,12 +59,12 @@
 						{%div_link u "查看" "" "show link"%}
 					</th>
 					<th>
-						{% ifequal purchase.paid 0 %}
+						{% if purchase.paid %}
+							{%div_text "无法编辑"%}
+						{% else %}
 							{%url purchases.views.edit p.id as u%}
 							{%div_link u "编辑" "" "edit link"%}
-						{% else %}
-							{%div_text "无法编辑"%}
-						{% endifequal %}
+						{% endif %}
 					</th>
 					<th>
 						{%url purchases.views.delete p.id as u%}

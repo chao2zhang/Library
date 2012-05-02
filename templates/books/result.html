@@ -22,7 +22,7 @@
 {% block main %}
 	<h1>查找结果{%if message%}({{message}}){%endif%}</h1>
 	{% url books.views.new as u %}
-	{% autopaginate books 5 %}
+	{% autopaginate books 10 %}
 	<table cellspacing="0">
 		<thead>
 			<tr>

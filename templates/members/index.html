@@ -29,7 +29,7 @@
 	{% div_link u "添加会员" "" "add link"%}
 	{% url members.views.search as u %}
 	{% div_link u "查找会员" "" "search link"%}
-	{% autopaginate members 5 %}
+	{% autopaginate members 10 %}
 	<table cellspacing="0">
 		<thead>
 			<tr>
