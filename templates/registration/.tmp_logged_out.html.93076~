@@ -5,7 +5,7 @@
 {% endblock %}
 {% block main %}
 	<div id='main-holder'>
-		<h1>登出</h1>
+		{% div_text "您已成功登出" %}
 		{% url django.contrib.auth.views.login as login_url %}
 		{% div_link login_url "返回此处登录" %}
 	</div>

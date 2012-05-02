@@ -1,31 +1,47 @@
 <!DOCTYPE HTML>
-{% load helper %}
+{% block loader %}
+	{% load helper %}
+{% endblock %}
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	{% js_tag "/media/javascripts/jquery-1.7.min.js" %}
-	{% js_tag "/media/javascripts/jquery.uniform.min.js" %}
-  	{% js_tag "/media/javascripts/renren-gc.js" %}
-	{% js_tag "/media/javascripts/jquery.custom.js" %}
-	{% css_tag "/media/stylesheets/uniform.default.css" %}	
-	{% css_tag "/media/stylesheets/common.css" %}
-	{% css_tag "/media/stylesheets/one_box.css" %}
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 	<title>{% block title %}{% endblock %}</title>
+	{% js_tag "/media/js/jquery-1.7.2.min.js" %}
+	{% js_tag "/media/js/jquery-ui-1.8.19.custom.min.js" %}
+	{% js_tag "/media/js/jquery.ui.datepicker-zh-CN.js" %}
+	{% css_tag "/media/css/common.css" %}
+	{% css_tag "/media/css/one_box.css" %}
+	{% css_tag "/media/css/jquery-ui-1.8.19.custom.css" %}
+	{% block media %}
+	{% endblock %}
+	{% block script %}
+	{% endblock %}
 </head>
 <body>
-	<div id='header-wrap'>
-			<div id="header-holder">
-			{% block header %}
-			{% endblock %}
+	<div id='header_wrap'>
+		<div id='header'>
+			<div id='branding'>
+				<h1 id='site_name'>Django 管理</h1>
 			</div>
-	</div>
-	<div id='main-wrap'>
-		{% block main %}
-		<div id='main-holder'>
+			<div id='user_tool'>
+				{% url django.contrib.auth.views.login as u%}
+				<a href='{{u}}'>登录</a>
+				{% url registrations.views.register as u%}
+				<a href='{{u}}'>注册</a>
+				{% url registrations.views.reactivate as u%}
+				<a href='{{u}}'>重新激活</a>
+			</div>
 		</div>
-		{% endblock %}
+		<div class='clearfix'></div>
 	</div>
-	<div id='footer-wrap'>
-		{% block footer %}
+	<div id='main_holder'>
+		<div id='nav'>
+		{% block nav %}
 		{% endblock %}
+		</div>
+		<div id='main'>
+		{% block main %}
+		{% endblock %}
+		</div>
+		<div class='clearfix'></div>
 	</div>
 </body>

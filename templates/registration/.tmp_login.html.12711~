@@ -5,7 +5,6 @@
 {% endblock %}
 {% block main %}
 <div id='main-holder'>
-	<h1>登录</h1>
 	<form class="login" action="" method="post">
 		{{ form.non_field_errors }}
 	    {%form_label_text form.username "用户名" "username" "login-item"%}

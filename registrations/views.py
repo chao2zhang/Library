@@ -1,18 +1,11 @@
 # -*- coding: utf-8 -*-
 # Create your views here.
 from django import forms
-from django.core import validators
 from django.core.mail import send_mail
-from django.core.files import File
 from django.core.exceptions import ValidationError
-from django.core.files.storage import FileSystemStorage
-from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import authenticate
 from django.shortcuts import render_to_response, get_object_or_404, redirect
-from django.http import HttpResponse, Http404
-from django.template import RequestContext
 from registrations.models import UserProfile
 import hashlib, random, datetime
 

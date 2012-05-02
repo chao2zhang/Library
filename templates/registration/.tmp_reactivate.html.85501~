@@ -5,7 +5,7 @@
 {% endblock %}
 {% block main %}
 <div id='main_holder'>
-	<h1>重新激活</h1>
+	{% div_text "重新激活" "react_title" "title" %}
 	{% if has_account %}
 		<ul class="errorlist"><li>
 			您已经登录！请登出后再激活！<a class="inner" href={% url django.contrib.auth.views.logout %}>点击此处</a>登出!
@@ -22,14 +22,14 @@
 		</li></ul>
 	{% endif %}
 	{% if success %}
-		<ul class="messagelist"><li>
+		<div class="message">
 			请登录邮箱{{ email }}完成激活！
-		</li></ul>
+		</div>
 	{% endif %}
 	{% if form %}
-		<ul class="messagelist"><li>
-			如果要更换邮箱，请填写；否则，邮箱一栏置空。
-		</li></ul>
+	<div class="message">
+		如果要更换邮箱，请填写；否则，邮箱一栏置空。
+	</div>
 	<form class="react" action="" method="post">
 		{{ form.non_field_errors }}
 	    {% form_label_text form.username "用户名" "id_username" "react-item" %}

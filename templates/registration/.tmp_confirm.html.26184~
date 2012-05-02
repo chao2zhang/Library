@@ -14,14 +14,14 @@
 		</li></ul>
 	{% endif %}
 	{% if resend %}
-		<ul class="messagelist"><li>
+		<div class="message">
 			请登录邮箱{{ email }}完成激活！
-		</li></ul>
+		</div>
 	{% endif %}
 	{% if success %}
-		<ul class="messagelist"><li>
-			成功激活！<a class="inner" href={% url django.contrib.auth.views.login %}>点击此处</a>登录完成激活！
-		</li></ul>
+		<div class="message">
+			成功激活！<a class="inner" href={% url django.contrib.auth.views.login %}>点击此处</a>登录
+		</div>
 	{% endif %}
 </div>
 {% endblock %}

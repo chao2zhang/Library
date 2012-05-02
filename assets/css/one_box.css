@@ -1,0 +1,25 @@
+#header {
+	padding: 5px;
+	background: #417690;
+	color: #FFC;
+	overflow: hidden;
+}
+
+#branding {
+	color: white;
+	float: left;
+}
+
+#user_tool {
+	color: white;
+	float: right;
+}
+
+#user_tool a {
+	color: #add8e6;;
+}
+
+.login-item, .react-item, .act-item{
+	margin: 2px;
+	padding: 2px;
+}
