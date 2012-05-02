@@ -2,12 +2,14 @@
 # Create your views here.
 from django import forms
 from django.contrib.auth.models import User
+from django.core.urlresolvers import reverse
 from django.core.exceptions import ValidationError
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render_to_response, redirect, get_object_or_404
 from django.template import RequestContext
 from models import Member
 from groups.models import Group
+from helper import helper
 
 class MemberForm(forms.ModelForm):
     name = forms.CharField(max_length=200, label=u'姓名')
@@ -173,28 +175,20 @@ def search(request):
     if request.POST:
         form = MemberSearchForm(request.POST)
         if form.is_valid():
-            f = form.fields
-            cd = form.cleaned_data
-            params = u''
-            message = u''
-            for k in cd:
-                if cd[k]:
-                    add_params = u'%s=%s' % (k, cd[k])
-                    add_message = u'%s包含"%s"' % (f[k].label, cd[k])
-                    if params: params += '&' 
-                    params += add_params
-                    if message: message += u'且'
-                    message += add_message
-            if params: params += '&'
-            params += 'message=' + message
-            return redirect('/members/result/?%s' % params)
+            d = {}
+            for k, v in form.cleaned_data.iteritems():
+                if v:
+                    d[k] = v
+            d['message'] = helper.get_search_message(form.fields, d)
+            return redirect(helper.url_with_querystring(reverse(result), d))
     return render_to_response('members/search.html', {'form':form}, context_instance=RequestContext(request))
 
 @login_required
 def result(request):
     params = ''
+    fields = MemberSearchForm().fields
     for k in request.GET:
-        if k != 'message':
+        if k in fields:
             params += '%s__contains="%s",' % (k, request.GET[k])
     query = 'Member.objects.filter(' + params +')'
     members = eval(query)

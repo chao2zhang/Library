@@ -2,9 +2,11 @@
 # Create your views here.
 from django import forms
 from django.contrib.auth.decorators import login_required
+from django.core.urlresolvers import reverse
 from django.shortcuts import render_to_response, redirect, get_object_or_404
 from django.template import RequestContext
 from models import Book
+from helper import helper
 
 class BookForm(forms.ModelForm):
     isbn = forms.RegexField(regex='^[0-9]{13}$', label=u'ISBN编号')
@@ -75,28 +77,20 @@ def search(request):
     if request.POST:
         form = BookSearchForm(request.POST)
         if form.is_valid():
-            f = form.fields
-            cd = form.cleaned_data
-            params = u''
-            message = u''
-            for k in cd:
-                if cd[k]:
-                    add_params = u'%s=%s' % (k, cd[k])
-                    add_message = u'%s包含"%s"' % (f[k].label, cd[k])
-                    if params: params += '&' 
-                    params += add_params
-                    if message: message += u'且'
-                    message += add_message
-            if params: params += '&'
-            params += 'message=' + message
-            return redirect('/books/result/?%s' % params)
+            d = {}
+            for k, v in form.cleaned_data.iteritems():
+                if v:
+                    d[k] = v
+            d['message'] = helper.get_search_message(form.fields, d)
+            return redirect(helper.url_with_querystring(reverse(result), d))
     return render_to_response('books/search.html', {'form':form}, context_instance=RequestContext(request))
 
 @login_required
 def result(request):
     params = ''
+    fields = BookSearchForm().fields
     for k in request.GET:
-        if k != 'message':
+        if k in fields:
             params += '%s__contains="%s",' % (k, request.GET[k])
     query = 'Book.objects.filter(' + params +')'
     books = eval(query)

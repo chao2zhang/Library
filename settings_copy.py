@@ -126,7 +126,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.admin',
     'pagination',
-    'templates_helper',
+    'helper',
     'registrations',
     'manage',
     'books',
