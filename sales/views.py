@@ -24,6 +24,14 @@ class SaleForm(forms.ModelForm):
                 raise ValidationError(u'密码错误')
         if cd['count'] > cd['book'].count:
             raise ValidationError(u'存货不够，当前存货量为%i。' % cd['book'].count)
+        if cd['member']:
+            mb = cd['member']
+            dc = 1
+            if mb.group:
+                dc = mb.group.discount
+            cost = cd['count'] * cd['book'].sale_price * dc
+            if mb.balance < cost:
+                raise ValidationError(u'余额不足，当前余额为%.2f。' % mb.balance)
         return self.cleaned_data
     class Meta:
         model = Sale
