@@ -6,7 +6,7 @@ from books.models import Book
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render_to_response, redirect, get_object_or_404
 from django.template import RequestContext
-
+from django.http import Http404
 
 class PurchaseForm(forms.ModelForm):
     book = forms.ModelChoiceField(queryset=Book.objects.all(), label=u'书目')
@@ -36,6 +36,8 @@ def new(request):
 def edit(request, id):
     id = int(id)
     purchase = get_object_or_404(Purchase, pk=id)
+    if purchase.paid == 1:
+        raise Http404 
     form = PurchaseForm(instance=purchase);
     if request.POST:
         form = PurchaseForm(request.POST, instance=purchase)
