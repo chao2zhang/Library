@@ -27,7 +27,8 @@ for i in range(t):
     m.birthday = datetime.datetime.now() - datetime.timedelta(days=random.randint(0, 30000))
     m.gender = get_rand(('M', 'F'))
     m.group = get_rand(groups)
-    m.identify_number = str(round(random.random() * (10 ** 9))) + str(round(random.random() * (10 ** 9))) 
+    for t in range(0, 18):
+        m.identify_number += get_rand('0123456789')
     m.name = get_rand(NAME_PREFIX) + get_rand(NAME_SUFFIX);
     if random.randint(0, 2) == 1:
         m.name += get_rand(NAME_SUFFIX)

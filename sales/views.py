@@ -30,7 +30,7 @@ class SaleForm(forms.ModelForm):
             cost = cd['count'] * cd['book'].sale_price * dc
             if mb.balance < cost:
                 raise ValidationError(u'余额不足，当前余额为%.2f。' % mb.balance)
-        return self.cleaned_data
+        return cd
     class Meta:
         model = Sale
         exclude = ('create_at', 'update_at')
