@@ -8,6 +8,8 @@
 {% endblock %}
 {% block main %}
 	<h1>会员充值</h1>
+	{% div_label_text member.id "id_id" "item" "编号" %}
+	{% div_label_text member.name "id_name" "item" "姓名" %}
 	{% url members.views.topup id as u%}
 	<form id="member_topup_form" action="{{u}}" method="post">
 		{{ form.non_field_errors }}

@@ -1,0 +1,31 @@
+{% extends "layout/two_col.html" %}
+{% block script %}
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$("div.delete a").click(function(event){
+				if (confirm("真的要删除这条交易?"))
+					return true;
+				else
+					return false;
+			});
+		});
+	</script>
+{% endblock %}
+{% load helper %}
+{% block title %}查看交易{% endblock %}
+{% block nav %}
+	<a href="../../../">首页</a>&gt;
+	<a href="../../">交易列表</a>&gt;
+	<a href="#">查看交易</a>
+{% endblock %}
+{% block main %}
+	<h1>查看交易</h1>
+	{% div_label_text sale.id "id_id" "" "编号" %}
+	{% div_label_text sale.book "id_book" "" "商品" %}
+	{% div_label_text sale.member "id_member" "" "购买者" %}
+	{% div_label_text sale.count "id_count" "" "数量" %}
+	{% div_label_text sale.create_at "id_create_at" "" "购买时间" %}
+	{% div_label_text sale.create_at "id_create_at" "" "购买时间" %}
+	{%url sales.views.delete sale.id as u%}
+	{%div_link u "删除" "" "delete link"%}
+{% endblock %}

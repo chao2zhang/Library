@@ -85,14 +85,12 @@ class MemberTopupForm(forms.Form):
     def __init__(self, instance, *args, **kwargs):
         self.instance = instance
         super(MemberTopupForm, self).__init__(*args, **kwargs)
-    def clean(self):
-        d = self.cleaned_data
+    def clean_password(self):
+        p = self.cleaned_data['password']
         m = self.instance
-        if not m.check_password(d['password']):
+        if not m.check_password(p):
             raise ValidationError(u'密码不正确')
-        if d['amount'] < 0:
-            raise ValidationError(u'金额填写错误')
-        return d
+        return p
     def save(self):        
         d = self.cleaned_data
         m = self.instance
@@ -167,7 +165,7 @@ def topup(request, id):
             form.save()
             request.flash['message']=u'充值成功'
             return redirect(member)
-    return render_to_response('members/topup.html', {'form': form}, context_instance=RequestContext(request))
+    return render_to_response('members/topup.html', {'member': member,'form': form}, context_instance=RequestContext(request))
 
 @login_required
 def search(request):

@@ -40,6 +40,11 @@ class Member(models.Model):
         from django.contrib.auth.models import check_password
         return check_password(raw_password, self.password)
     def topup(self, amount):
+        from topups.models import Topup
+        topup = Topup()
+        topup.member = self
+        topup.amount = amount
+        topup.save()
         self.balance += amount
         self.point += int(amount / 2)
         self.save()

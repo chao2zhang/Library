@@ -1,7 +1,6 @@
 from django.db import models
 from books.models import Book
 from members.models import Member
-from groups.models import Group
 
 class Sale(models.Model):
     book = models.ForeignKey(Book, related_name='sales')
