@@ -39,11 +39,9 @@
 	<div id="id_purchases" class="item">
 		<label>进货记录</label>
 		<ul class="text">
-			{% for p in book.purchases.all %}
-				<li>
-					<a href="{{p.get_absolute_url}}">{{p}}</a>
-				</li>
-			{% endfor %}
+			{% spaceless %}{% for p in book.purchases.all %}
+				<li><a href="{{p.get_absolute_url}}">{{p}}</a></li>
+			{% endfor %}{% endspaceless %}
 		</ul>
 	</div>
 	<div id="id_sales" class="item">

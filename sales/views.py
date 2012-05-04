@@ -17,13 +17,12 @@ class SaleForm(forms.ModelForm):
     count = forms.IntegerField(min_value=1, label=u'数量')
     def clean(self):
         cd = self.cleaned_data
-        if cd['member']:
-            if not(cd.has_key('password') and cd['member'].check_password(cd['password'])):
-                raise ValidationError(u'密码错误')
         if cd['count'] > cd['book'].count:
             raise ValidationError(u'存货不够，当前存货量为%i。' % cd['book'].count)
         if cd['member']:
             mb = cd['member']
+            if not(cd['password'] and mb.check_password(cd['password'])):
+                raise ValidationError(u'密码错误')
             dc = 1
             if mb.group:
                 dc = mb.group.discount
