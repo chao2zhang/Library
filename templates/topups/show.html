@@ -1,0 +1,34 @@
+{% extends "layout/two_col.html" %}
+{% block script %}
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$("div.delete a").click(function(event){
+				if (confirm("真的要删除这条交易?"))
+					return true;
+				else
+					return false;
+			});
+		});
+	</script>
+{% endblock %}
+{% load helper %}
+{% block title %}查看充值{% endblock %}
+{% block nav %}
+	<a href="../../../">首页</a>&gt;
+	<a href="../../">充值列表</a>&gt;
+	<a href="#">查看充值</a>
+{% endblock %}
+{% block main %}
+	{% if message %}
+	<ul class="messagelist">
+		<li>{{message}}</li>
+	</ul>
+	{% endif %}
+	<h1>查看充值</h1>
+	{%url topups.views.delete sale.id as u%}
+	{%div_link u "删除" "" "delete link"%}
+	{% div_label_text topup.member "id_member" "item" "购买者" %}
+	{% div_label_text topup.amount "id_amount" "item" "金额" %}
+	{% div_label_text topup.create_at "id_create_at" "item" "创建时间" %}
+	{% div_label_text topup.update_at "id_update_at" "item" "更新时间" %}
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends "layout/two_col.html" %}
+{% load helper %}
+{% block title %}添加充值{% endblock %}
+{% block nav %}
+	<a href="../../">首页</a>&gt;
+	<a href="../">充值列表</a>&gt;
+	<a href="#">添加充值</a>
+{% endblock %}
+{% block main %}
+	<h1>添加充值</h1>
+	<form id="new_topup_form" action="" method="post">
+		{{ form.non_field_errors }}
+	    {% for field in form %}
+	        <div class="topup-form-item">
+	            {{ field.errors }}
+	            {{ field.label_tag }}
+	            {{ field }}
+	        </div>
+	    {% endfor %}
+	    {% div_submit "添加" %}
+	</form>
+{% endblock %}

@@ -2,6 +2,9 @@
 from django.db import models
 from groups.models import Group
 
+def topup_point(amount):
+    return int(amount / 2)
+
 class Member(models.Model):
     GENDER_CHOICES = (
         ('M', u'男'),
@@ -46,7 +49,7 @@ class Member(models.Model):
         topup.amount = amount
         topup.save()
         self.balance += amount
-        self.point += int(amount / 2)
+        self.point += topup_point(amount)
         self.save()
     class Meta:
         ordering = ['-create_at']        

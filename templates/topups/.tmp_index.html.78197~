@@ -13,10 +13,10 @@
 {% endblock %}
 {% load helper %}
 {% load pagination_tags %}
-{% block title %}充值列表{% endblock %}
+{% block title %}充值记录{% endblock %}
 {% block nav %}
 	<a href="../">首页</a>&gt;
-	<a href="#">充值列表</a>
+	<a href="#">充值记录</a>
 {% endblock %}
 {% block main %}
 	{% if message %}
@@ -24,7 +24,7 @@
 		<li>{{message}}</li>
 	</ul>
 	{% endif %}
-	<h1>充值列表</h1>
+	<h1>充值记录</h1>
 	{% autopaginate topups 10 %}
 	<table cellspacing="0">
 		<thead>
@@ -42,10 +42,6 @@
 					<th>{{t.create_at}}</th>
 					<th>{{t.member.name}}</th>
 					<th>{{t.amount}}</th>
-					<th>
-						{%url topups.views.show t.id as u%}
-						{%div_link u "查看" "" "show link"%}
-					</th>
 					<th>
 						{%url topups.views.delete t.id as u%}
 						{%div_link u "删除" "" "delete link"%}

@@ -5,16 +5,20 @@
 	<a href="#">首页</a>
 {% endblock %}
 {% block main %}
-	{% url books.views.index as u%}
-	{% div_link u "书目管理" "" "module" %}
-	{% url purchases.views.index as u%}
-	{% div_link u "进货管理" "" "module" %}
-	{% url sales.views.index as u%}
-	{% div_link u "交易管理" "" "module" %}
-	{% url members.views.index as u%}
-	{% div_link u "会员管理" "" "module" %}
-	{% url groups.views.index as u%}
-	{% div_link u "会员组管理" "" "module" %}
-	{% url topups.views.index as u%}
-	{% div_link u "充值记录" "" "module" %}
+	<table><tbody>
+		{% url books.views.index as u%}
+		<tr>{% div_link u "书目管理" "" "module" %}</tr>
+		{% url purchases.views.index as u%}
+		<tr>{% div_link u "进货管理" "" "module" %}</tr>
+	</tbody></table>
+	<table><tbody>
+		{% url members.views.index as u%}
+		<tr>{% div_link u "会员管理" "" "module" %}</tr>
+		{% url groups.views.index as u%}
+		<tr><a href="{%url groups.views.index%}"</tr>
+		<tr><a href="{%url topups.views.index%}">充值管理</a></tr>
+	</tbody></table>
+	<table><tbody>
+		<tr><a href="{%url sales.views.index%}">交易管理</a></tr>
+	</tbody></table>
 {% endblock %}
