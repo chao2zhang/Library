@@ -80,3 +80,29 @@ div.item .text {
 	margin: 2px;
 	padding: 2px;
 }
+
+.manage-item {
+	border: 1px solid #DDD;
+	margin: 5px 0;
+	width: 400px;	
+}
+
+.manage-title {
+	background: linear-gradient(top, #bcd2e9, #7ba0c6);
+	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#bcd2e9), to(#7ba0c6));
+	background: -webkit-linear-gradient(top, #bcd2e9, #7ba0c6);
+	background: -moz-linear-gradient(top, #bcd2e9, #7ba0c6);
+	background: -ms-linear-gradient(top, #bcd2e9, #7ba0c6);
+	background: -o-linear-gradient(top, #bcd2e9, #7ba0c6);
+}
+
+.manage-title .text{
+	padding: 5px;
+	color: white;
+	font-size: 1.1em;
+	font-weight: bold;
+}
+
+.manage-module {
+	padding: 5px;
+}

@@ -8,25 +8,25 @@
 	<div class="manage-item">
 	{% div_text "书目" "" "manage-title" %}
 	{% url books.views.index as u%}
-	{% div_link u "书目管理" "" "manage-module" %}
+	{% div_link u "书目管理" "" "module" %}
 	{% hr_line %}
 	{% url purchases.views.index as u%}
-	{% div_link u "进货管理" "" "manage-module" %}
+	{% div_link u "进货管理" "" "module" %}
 	</div>
 	<div class="manage-item">
 	{% div_text "会员" "" "manage-title" %}
 	{% url members.views.index as u%}
-	{% div_link u "会员管理" "" "manage-module" %}
+	{% div_link u "会员管理" "" "module" %}
 	{% hr_line %}
 	{% url groups.views.index as u%}
-	{% div_link u "会员组管理" "" "manage-module" %}
+	{% div_link u "会员组管理" "" "module" %}
 	{% hr_line %}
 	{% url topups.views.index as u%}
-	{% div_link u "充值记录管理" "" "manage-module" %}
+	{% div_link u "充值记录管理" "" "module" %}
 	</div>
 	<div class="manage-item">
 	{% div_text "交易" "" "manage-title" %}
 	{% url sales.views.index as u%}
-	{% div_link u "交易管理" "" "manage-module" %}
+	{% div_link u "交易管理" "" "module" %}
 	</div>
 {% endblock %}

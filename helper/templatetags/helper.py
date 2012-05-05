@@ -17,12 +17,15 @@ def help_text():
 @register.inclusion_tag('templatetags/div_clearfix.html')
 def clearfix():
     return {}
+'''
+
+@register.inclusion_tag('templatetags/hr_line.html')
+def hr_line():
+    return {}
 
 @register.inclusion_tag('templatetags/hr_dot.html')
 def hr_dot():
     return {}
-
-'''
 
 @register.inclusion_tag('templatetags/js_tag.html')
 def js_tag(url):
