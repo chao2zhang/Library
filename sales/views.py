@@ -9,6 +9,7 @@ from django.core.exceptions import ValidationError
 from django.shortcuts import render_to_response, redirect, get_object_or_404
 from django.template import RequestContext
 import datetime
+from histories.models import History
 
 class SaleForm(forms.ModelForm):
     book = forms.ModelChoiceField(queryset=Book.objects.all(), label=u'书目')
@@ -48,6 +49,7 @@ def new(request):
             sale = form.save()
             sale.new()
             request.flash['message']=u'添加成功'
+            History(user=request.user, content=u'New sale#%d added.' % sale.id).save()
             return redirect(index)
     return render_to_response('sales/new.html', {'form':form}, context_instance=RequestContext(request))
 
@@ -63,4 +65,5 @@ def delete(request, id):
     sale = get_object_or_404(Sale, pk=id)
     sale.delete()
     request.flash['message']=u'删除成功'
+    History(user=request.user, content=u'Sale#%d deleted.' % sale.id).save()
     return redirect(index)

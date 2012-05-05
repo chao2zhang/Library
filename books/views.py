@@ -7,6 +7,7 @@ from django.shortcuts import render_to_response, redirect, get_object_or_404
 from django.template import RequestContext
 from models import Book
 from helper import helper
+from histories.models import History
 
 class BookForm(forms.ModelForm):
     isbn = forms.RegexField(regex='^[0-9]{13}$', label=u'ISBN编号')
@@ -40,6 +41,7 @@ def new(request):
         if form.is_valid():
             book = form.save()
             request.flash['message']=u'添加成功'
+            History(user=request.user, content=u'添加新书目#%d.' % book.id).save()
             return redirect(book)
     return render_to_response('books/new.html', {'form':form}, context_instance=RequestContext(request))
 
@@ -53,6 +55,7 @@ def edit(request, id):
         if form.is_valid():
             form.save()
             request.flash['message']=u'保存成功'
+            History(user=request.user, content=u'编辑书目#%d.' % book.id).save()
             return redirect(book)
     return render_to_response('books/edit.html', {'form': form, 'id': id}, context_instance=RequestContext(request))
 
@@ -60,6 +63,7 @@ def edit(request, id):
 def delete(request, id):
     id = int(id)
     book = get_object_or_404(Book, pk=id)
+    History(user=request.user, content=u'删除数目#%d.' % book.id).save()
     book.delete()
     request.flash['message']=u'删除成功'
     return redirect(index)

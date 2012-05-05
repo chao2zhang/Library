@@ -15,10 +15,14 @@
 		{% url members.views.index as u%}
 		<tr>{% div_link u "会员管理" "" "module" %}</tr>
 		{% url groups.views.index as u%}
-		<tr><a href="{%url groups.views.index%}"</tr>
+		<tr><a href="{%url groups.views.index%}">会员组管理</a></tr>
 		<tr><a href="{%url topups.views.index%}">充值管理</a></tr>
 	</tbody></table>
 	<table><tbody>
 		<tr><a href="{%url sales.views.index%}">交易管理</a></tr>
 	</tbody></table>
+	<table><tbody>
+		<tr><a href="{%url histories.views.index%}">日志</a></tr>
+	</tbody></table>
+	
 {% endblock %}
