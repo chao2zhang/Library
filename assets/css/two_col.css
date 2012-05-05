@@ -39,33 +39,45 @@
 }
 
 div.add a {
-    padding-left: 15px;
-    background: url(/media/image/icon_addlink.gif) .25em .25em no-repeat;
+    padding-left: 21px;
+    background: url(/media/image/plus.png) no-repeat;
+	background-size: contain;
 }
 
 div.edit a {
-	padding-left: 15px;
-	background: url(/media/image/icon_changelink.gif) .25em .25em no-repeat;
+	padding-left: 21px;
+	background: url(/media/image/edit.png) no-repeat;
+	background-size: contain;
 }
 
 div.show a {
-	padding-left: 15px;
-	background: url(/media/image/selector-addall.gif) .25em .25em no-repeat;
+	padding-left: 21px;
+	background: url(/media/image/info.png) no-repeat;
+	background-size: contain;
 }
 
 div.delete a {
-	padding-left: 15px;
-	background: url(/media/image/icon_deletelink.gif) .25em .25em no-repeat;
+	padding-left: 21px;
+	background: url(/media/image/trash.png) no-repeat;
+	background-size: contain;
 }
 
 div.search a {
-	padding-left: 15px;
-	background: url(/media/image/icon_searchbox.png) 0  no-repeat;	
+	padding-left: 21px;
+	background: url(/media/image/search.png) no-repeat;	
+	background-size: contain;
+}
+
+div.pay a {
+	padding-left: 21px;
+	background: url(/media/image/donate.png) no-repeat;	
+	background-size: contain;
 }
 
 div.true .text {
-	padding-left: 15px;
-	background: url(/media/image/icon-yes.gif) 0 .25em no-repeat;
+	padding-left: 21px;
+	background: url(/media/image/tick.png) no-repeat;
+	background-size: contain;
 }
 
 div.item label {

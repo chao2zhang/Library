@@ -10,6 +10,7 @@ from django.template import RequestContext
 from models import Member
 from groups.models import Group
 from helper import helper
+from histories.models import History
 
 class MemberForm(forms.ModelForm):
     name = forms.CharField(max_length=200, label=u'姓名')
@@ -111,6 +112,7 @@ def new(request):
         if form.is_valid():
             member = form.save()
             request.flash['message']=u'添加成功'
+            History(user=request.user, content=u'添加新会员#%d.' % member.id).save()
             return redirect(member)
     return render_to_response('members/new.html', {'form':form}, context_instance=RequestContext(request))
 
@@ -123,8 +125,9 @@ def edit(request, id):
         form = MemberEditForm(request.POST, instance=member)
         if form.is_valid():
             form.save()
-            return redirect(member)
             request.flash['message']=u'保存成功'
+            History(user=request.user, content=u'编辑会员#%d.' % member.id).save()
+            return redirect(member)
     return render_to_response('members/edit.html', {'form': form, 'id': id}, context_instance=RequestContext(request))
 
 @login_required
@@ -133,6 +136,7 @@ def delete(request, id):
     member = get_object_or_404(Member, pk=id)
     member.delete()
     request.flash['message']=u'删除成功'
+    History(user=request.user, content=u'删除会员#%d.' % member.id).save()
     return redirect(index)
 
 @login_required
@@ -151,6 +155,7 @@ def change_password(request, id):
         if form.is_valid():
             form.save()
             request.flash['message']=u'密码修改成功'
+            History(user=request.user, content=u'修改会员#%d密码.' % member.id).save()
             return redirect(member)
     return render_to_response('members/change_password.html', {'form': form}, context_instance=RequestContext(request))
 
@@ -164,6 +169,7 @@ def topup(request, id):
         if form.is_valid():
             form.save()
             request.flash['message']=u'充值成功'
+            History(user=request.user, content=u'会员#%d充值.' % member.id).save()
             return redirect(member)
     return render_to_response('members/topup.html', {'member': member,'form': form}, context_instance=RequestContext(request))
 

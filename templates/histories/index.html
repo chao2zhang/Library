@@ -1,0 +1,38 @@
+{% extends "layout/two_col.html" %}
+{% load helper %}
+{% load pagination_tags %}
+{% block title %}操作日志{% endblock %}
+{% block nav %}
+	<a href="../">首页</a>&gt;
+	<a href="#">操作日志</a>
+{% endblock %}
+{% block main %}
+	{% if message %}
+	<ul class="messagelist">
+		<li>{{message}}</li>
+	</ul>
+	{% endif %}
+	<h1>操作日志</h1>
+	{% autopaginate histories 10 %}
+	<table cellspacing="0">
+		<thead>
+			<tr>
+				<th>编号</th>
+				<th>时间</th>
+				<th>行为</th>
+				<th>操作者</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for h in histories %}
+				<tr>
+					<th>{{h.id}}</th>
+					<th>{{h.create_at}}</th>
+					<th>{{h.content}}</th>
+					<th>{{h.user}}</th>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+	{% paginate %}
+{% endblock %}

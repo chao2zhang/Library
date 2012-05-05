@@ -6,8 +6,8 @@ from django.core.exceptions import ValidationError
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render_to_response, redirect, get_object_or_404
 from django.template import RequestContext
-
 from members.models import Member
+from histories.models import History
 
 class TopupForm(forms.Form):
     member = forms.ModelChoiceField(queryset=Member.objects.all(), label=u'会员组')
@@ -40,9 +40,10 @@ def new(request):
     if request.POST:
         form = TopupForm(request.POST)
         if form.is_valid():
-            member = form.save()
+            topup = form.save()
             request.flash['message']=u'添加成功'
-            return redirect(member)
+            History(user=request.user, content=u'添加充值记录#%d.' % topup.id).save()
+            return redirect(topup)
     return render_to_response('topups/new.html', {'form':form}, context_instance=RequestContext(request))
 
 @login_required
@@ -51,6 +52,7 @@ def delete(request, id):
     topup = get_object_or_404(Topup, pk=id)
     topup.delete()
     request.flash['message']=u'删除成功'
+    History(user=request.user, content=u'删除充值记录#%d.' % topup.id).save()
     return redirect(index)
 
 @login_required
