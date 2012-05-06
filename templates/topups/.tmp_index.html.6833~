@@ -30,11 +30,10 @@
 	<table cellspacing="0">
 		<thead>
 			<tr>
-				<th align="center">编号</th>			
-				<th align="center">时间</th>
-				<th align="center">会员</th>
-				<th align="center">金额</th>
-				<th colspan="2" align="center">操作</th>
+				<th>编号</th>			
+				<th>时间</th>
+				<th>会员</th>
+				<th>金额</th>
 			</tr>
 		</thead>
 		<tbody>

@@ -20,7 +20,7 @@
 	<div id='header_wrap'>
 		<div id='header'>
 			<div id='branding'>
-				<h1 id='site_name'>图书销售管理系统</h1>
+				<h1 id='site_name'>Django 管理</h1>
 			</div>
 			<div id='user_tool'>
 				{% url django.contrib.auth.views.login as u%}

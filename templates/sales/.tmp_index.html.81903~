@@ -32,13 +32,12 @@
 	<table cellspacing="0">
 		<thead>
 			<tr>
-				<th align="center">编号</th>			
-				<th align="center">时间</th>
-				<th align="center">书名</th>
-				<th align="center">单价</th>
-				<th align="center">数量</th>
-				<th align="center">购买者</th>
-				<th align="center" colspan="2">操作</th>
+				<th>编号</th>			
+				<th>时间</th>
+				<th>书名</th>
+				<th>单价</th>
+				<th>数量</th>
+				<th>购买者</th>
 			</tr>
 		</thead>
 		<tbody>

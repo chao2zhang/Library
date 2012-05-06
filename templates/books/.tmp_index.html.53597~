@@ -34,14 +34,13 @@
 	<table cellspacing="0">
 		<thead>
 			<tr>
-				<th align="center">编号</th>
-				<th align="center">ISBN编号</th>
-				<th align="center">标题</th>
-				<th align="center">作者</th>
-				<th align="center">出版社</th>
-				<th align="center">库存</th>
-				<th align="center">零售价</th>
-				<th align="center" colspan="3">操作</th>
+				<th>编号</th>
+				<th>ISBN编号</th>
+				<th>标题</th>
+				<th>作者</th>
+				<th>出版社</th>
+				<th>库存</th>
+				<th>零售价</th>
 			</tr>
 		</thead>
 		<tbody>

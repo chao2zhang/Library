@@ -38,6 +38,108 @@
 	float: left;
 }
 
+#book_module {
+	padding-left: 32px;
+	background: url(/media/image/book.png) no-repeat;
+	background-size: contain;	
+}
+
+#member_module {
+	padding-left: 32px;
+	background: url(/media/image/user.png) no-repeat;
+	background-size: contain;	
+}
+
+#group_module {
+	padding-left: 32px;
+	background: url(/media/image/group.png) no-repeat;
+	background-size: contain;	
+}
+
+#purchase_module {
+	padding-left: 32px;
+	background: url(/media/image/purchase.png) no-repeat;
+	background-size: contain;	
+}
+
+#topup_module {
+	padding-left: 32px;
+	background: url(/media/image/donate.png) no-repeat;
+	background-size: contain;	
+}
+
+#sale_module {
+	padding-left: 32px;
+	background: url(/media/image/transfer.png) no-repeat;
+	background-size: contain;	
+}
+
+#manage_wrap, #history_wrap {
+	float: left;
+}
+
+.manage-item {
+	border: 1px solid #DDD;
+	overflow: hidden;
+	margin: 5px;
+	width: 600px;	
+}
+
+.manage-title {
+	background: linear-gradient(top, #bcd2e9, #7ba0c6);
+	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#bcd2e9), to(#7ba0c6));
+	background: -webkit-linear-gradient(top, #bcd2e9, #7ba0c6);
+	background: -moz-linear-gradient(top, #bcd2e9, #7ba0c6);
+	background: -ms-linear-gradient(top, #bcd2e9, #7ba0c6);
+	background: -o-linear-gradient(top, #bcd2e9, #7ba0c6);
+}
+
+.manage-title .text{
+	padding: 5px;
+	color: white;
+	font-size: 1.1em;
+	font-weight: bold;
+}
+
+.manage-module {
+	padding: 5px;
+}
+
+.history {
+	border: 1px solid #DDD;
+	margin: 5px;
+	width: 300px;
+	overflow: hidden;
+}
+
+.history-title {
+	padding: 5px;
+	background: linear-gradient(top, #ffffff, #e1e1e1);
+	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#ffffff), to(#e1e1e1));
+	background: -webkit-linear-gradient(top, #ffffff, #e1e1e1);
+	background: -moz-linear-gradient(top, #ffffff, #e1e1e1);
+	background: -ms-linear-gradient(top, #ffffff, #e1e1e1);
+	background: -o-linear-gradient(top, #ffffff, #e1e1e1);
+}
+
+.history-title a {
+	font-size: 1.1em;
+	font-weight: bold;
+	color: black;
+}
+
+.history-item {
+	padding: 5px;
+}
+
+.history-item .text, .history-item a{
+	font-size: 0.8em;
+}
+
+.history-item .fade .text{
+	color: #CCC;
+}
+
 div.add a {
     padding-left: 21px;
     background: url(/media/image/plus.png) no-repeat;
@@ -88,33 +190,11 @@ div.item .text {
 	padding-left: 2em;
 }
 
+div.item ul {
+	padding-left: 2em;
+}
+
 .book-form-item, .purchase-form-item, .sale-form-item, .member-form-item, .group-form-item {
 	margin: 2px;
 	padding: 2px;
-}
-
-.manage-item {
-	border: 1px solid #DDD;
-	margin: 5px 0;
-	width: 400px;	
-}
-
-.manage-title {
-	background: linear-gradient(top, #bcd2e9, #7ba0c6);
-	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#bcd2e9), to(#7ba0c6));
-	background: -webkit-linear-gradient(top, #bcd2e9, #7ba0c6);
-	background: -moz-linear-gradient(top, #bcd2e9, #7ba0c6);
-	background: -ms-linear-gradient(top, #bcd2e9, #7ba0c6);
-	background: -o-linear-gradient(top, #bcd2e9, #7ba0c6);
-}
-
-.manage-title .text{
-	padding: 5px;
-	color: white;
-	font-size: 1.1em;
-	font-weight: bold;
-}
-
-.manage-module {
-	padding: 5px;
 }

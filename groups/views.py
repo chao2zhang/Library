@@ -14,6 +14,12 @@ class MemberForm(forms.ModelForm):
         model = Group
         exclude = ('create_at', 'update_at')
 
+def add_history(user, content, topup, link):
+    if link:
+        History(user=user, content=content, klass='Group', unicode=topup, url=topup.get_absolute_url()).save()
+    else:
+        History(user=user, content=content, klass='Group', unicode=topup).save()
+
 def index(request):
     groups = Group.objects.all()
     return render_to_response('groups/index.html', {'groups':groups, 'message': request.flash.get('message')}, context_instance=RequestContext(request))
@@ -26,7 +32,7 @@ def new(request):
         if form.is_valid():
             group = form.save()
             request.flash['message']=u'添加成功'
-            History(user=request.user, content=u'添加会员组#%d.' % group.id).save()
+            add_history(request.user, u'添加会员组', group, True)
             return redirect(group)
     return render_to_response('groups/new.html', {'form':form}, context_instance=RequestContext(request))
 
@@ -40,7 +46,7 @@ def edit(request, id):
         if form.is_valid():
             form.save()
             request.flash['message']=u'保存成功'
-            History(user=request.user, content=u'编辑会员组#%d.' % group.id).save()
+            add_history(request.user, u'编辑会员组', group, True)
             return redirect(group)
     return render_to_response('groups/edit.html', {'form': form, 'id': id}, context_instance=RequestContext(request))
 
@@ -48,7 +54,7 @@ def edit(request, id):
 def delete(request, id):
     id = int(id)
     group = get_object_or_404(Group, pk=id)
-    History(user=request.user, content=u'删除会员组#%d.' % group.id).save()
+    add_history(request.user, u'删除会员组', group, False)
     group.delete()
     request.flash['message']=u'删除成功'
     return redirect(index)

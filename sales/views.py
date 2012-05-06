@@ -35,6 +35,12 @@ class SaleForm(forms.ModelForm):
         model = Sale
         exclude = ('create_at', 'update_at')
 
+def add_history(user, content, topup, link):
+    if link:
+        History(user=user, content=content, klass='Sale', unicode=topup, url=topup.get_absolute_url()).save()
+    else:
+        History(user=user, content=content, klass='Sale', unicode=topup).save()
+
 @login_required
 def index(request):
     sales = Sale.objects.all()
@@ -49,7 +55,7 @@ def new(request):
             sale = form.save()
             sale.new()
             request.flash['message']=u'添加成功'
-            History(user=request.user, content=u'添加新交易#%d.' % sale.id).save()
+            add_history(request.user, u'添加交易', sale, True)
             return redirect(index)
     return render_to_response('sales/new.html', {'form':form}, context_instance=RequestContext(request))
 
@@ -65,5 +71,5 @@ def delete(request, id):
     sale = get_object_or_404(Sale, pk=id)
     sale.delete()
     request.flash['message']=u'删除成功'
-    History(user=request.user, content=u'删除交易#%d.' % sale.id).save()
+    add_history(request.user, u'删除交易', sale, False)
     return redirect(index)

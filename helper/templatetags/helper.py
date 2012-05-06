@@ -8,16 +8,11 @@ def trunc(value, arg):
 
 @register.filter(name='wrap_par')
 def wrap_par(value):
-    return '(' + str(value) + ')'
-
-@register.inclusion_tag('templatetags/help_text.html')
-def help_text():
-    return {}
+'''
 
 @register.inclusion_tag('templatetags/div_clearfix.html')
 def clearfix():
     return {}
-'''
 
 @register.inclusion_tag('templatetags/hr_line.html')
 def hr_line():

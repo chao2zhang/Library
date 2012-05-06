@@ -38,13 +38,12 @@
 	<table cellspacing="0">
 		<thead>
 			<tr>
-				<th align="center">编号</th>
-				<th align="center">时间</th>
-				<th align="center">书目</th>
-				<th align="center">进价</th>
-				<th align="center">数量</th>
-				<th align="center">是否支付</th>
-				<th align="center" colspan="4">操作</th>
+				<th>编号</th>
+				<th>时间</th>
+				<th>书目</th>
+				<th>进价</th>
+				<th>数量</th>
+				<th>是否支付</th>
 			</tr>
 		</thead>
 		<tbody>

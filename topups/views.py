@@ -30,6 +30,12 @@ class TopupForm(forms.Form):
         m.save()
         return self
 
+def add_history(user, content, topup, link):
+    if link:
+        History(user=user, content=content, klass='Topup', unicode=topup, url=topup.get_absolute_url()).save()
+    else:
+        History(user=user, content=content, klass='Topup', unicode=topup).save()
+
 def index(request):
     topups = Topup.objects.all()
     return render_to_response('topups/index.html', {'topups': topups, 'message': request.flash.get('message')}, context_instance=RequestContext(request))
@@ -42,7 +48,7 @@ def new(request):
         if form.is_valid():
             topup = form.save()
             request.flash['message']=u'添加成功'
-            History(user=request.user, content=u'添加充值记录#%d.' % topup.id).save()
+            add_history(request.user, u'添加充值记录', topup, True)
             return redirect(topup)
     return render_to_response('topups/new.html', {'form':form}, context_instance=RequestContext(request))
 
@@ -52,7 +58,7 @@ def delete(request, id):
     topup = get_object_or_404(Topup, pk=id)
     topup.delete()
     request.flash['message']=u'删除成功'
-    History(user=request.user, content=u'删除充值记录#%d.' % topup.id).save()
+    add_history(request.user, u'删除充值记录', topup, False)
     return redirect(index)
 
 @login_required

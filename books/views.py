@@ -26,6 +26,12 @@ class BookSearchForm(forms.Form):
     author = forms.CharField(required=False, max_length=200, label=u'作者')
     press = forms.CharField(required=False, max_length=200, label=u'出版社')
 
+def add_history(user, content, topup, link):
+    if link:
+        History(user=user, content=content, klass='Book', unicode=topup, url=topup.get_absolute_url()).save()
+    else:
+        History(user=user, content=content, klass='Book', unicode=topup).save()
+
 def index(request):
     books = Book.objects.all()
     return render_to_response('books/index.html', {
@@ -41,7 +47,7 @@ def new(request):
         if form.is_valid():
             book = form.save()
             request.flash['message']=u'添加成功'
-            History(user=request.user, content=u'添加新书目#%d.' % book.id).save()
+            add_history(request.user, u'添加书目', book, True)
             return redirect(book)
     return render_to_response('books/new.html', {'form':form}, context_instance=RequestContext(request))
 
@@ -55,7 +61,7 @@ def edit(request, id):
         if form.is_valid():
             form.save()
             request.flash['message']=u'保存成功'
-            History(user=request.user, content=u'编辑书目#%d.' % book.id).save()
+            add_history(request.user, u'编辑书目', book, True)
             return redirect(book)
     return render_to_response('books/edit.html', {'form': form, 'id': id}, context_instance=RequestContext(request))
 
@@ -63,7 +69,7 @@ def edit(request, id):
 def delete(request, id):
     id = int(id)
     book = get_object_or_404(Book, pk=id)
-    History(user=request.user, content=u'删除数目#%d.' % book.id).save()
+    add_history(request.user, u'删除书目', book, False)
     book.delete()
     request.flash['message']=u'删除成功'
     return redirect(index)
@@ -73,7 +79,6 @@ def show(request, id):
     id = int(id)
     book = get_object_or_404(Book, pk=id)
     return render_to_response('books/show.html', {'book': book, 'message': request.flash.get('message')}, context_instance=RequestContext(request))
-
 
 @login_required
 def search(request):

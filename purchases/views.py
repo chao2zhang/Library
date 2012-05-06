@@ -17,7 +17,12 @@ class PurchaseForm(forms.ModelForm):
         model = Purchase
         exclude = ('paid', 'create_at', 'update_at')
 
-
+def add_history(user, content, topup, link):
+    if link:
+        History(user=user, content=content, klass='Purchase', unicode=topup, url=topup.get_absolute_url()).save()
+    else:
+        History(user=user, content=content, klass='Purchase', unicode=topup).save()
+        
 def index(request):
     purchases = Purchase.objects.all()
     return render_to_response('purchases/index.html', {'purchases': purchases, 'message': request.flash.get('message')}, context_instance=RequestContext(request))
@@ -30,7 +35,7 @@ def new(request):
         if form.is_valid():
             purchase = form.save()
             request.flash['message']=u'添加成功'
-            History(user=request.user, content=u'添加新进货#%d.' % purchase.id).save()
+            add_history(request.user, u'添加进货', purchase, True)
             return redirect(purchase)
     return render_to_response('purchases/new.html', {'form':form}, context_instance=RequestContext(request))
 
@@ -46,7 +51,7 @@ def edit(request, id):
         if form.is_valid():
             form.save()
             request.flash['message']=u'保存成功'
-            History(user=request.user, content=u'编辑进货#%d.' % purchase.id).save()
+            add_history(request.user, u'编辑进货', purchase, True)
             return redirect(purchase)
     return render_to_response('purchases/edit.html', {'form': form, 'id': id}, context_instance=RequestContext(request))
 
@@ -56,7 +61,7 @@ def delete(request, id):
     purchase = get_object_or_404(Purchase, pk=id)
     purchase.delete()
     request.flash['message']=u'删除成功'
-    History(user=request.user, content=u'删除进货#%d.' % purchase.id).save()
+    add_history(request.user, u'删除进货', purchase, False)
     return redirect(index)
 
 @login_required
@@ -73,5 +78,5 @@ def pay(request, id):
     purchase = get_object_or_404(Purchase, pk=id)
     purchase.pay()
     request.flash['message']=u'支付成功'
-    History(user=request.user, content=u'支付进货#%d.' % purchase.id).save()
+    add_history(request.user, u'支付进货', purchase, True)
     return redirect(purchase)

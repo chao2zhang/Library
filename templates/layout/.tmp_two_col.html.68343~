@@ -9,7 +9,7 @@
 	{% js_tag "/media/js/jquery-ui-1.8.19.custom.min.js" %}
 	{% js_tag "/media/js/jquery.ui.datepicker-zh-CN.js" %}
 	{% css_tag "/media/css/common.css" %}
-	{% css_tag "/media/css/one_box.css" %}
+	{% css_tag "/media/css/two_col.css" %}
 	{% css_tag "/media/css/jquery-ui-1.8.19.custom.css" %}
 	{% block media %}
 	{% endblock %}
@@ -20,15 +20,12 @@
 	<div id='header_wrap'>
 		<div id='header'>
 			<div id='branding'>
-				<h1 id='site_name'>图书销售管理系统</h1>
+				<h1 id='site_name'>Django 管理</h1>
 			</div>
 			<div id='user_tool'>
-				{% url django.contrib.auth.views.login as u%}
-				<a href='{{u}}'>登录</a>
-				{% url registrations.views.register as u%}
-				<a href='{{u}}'>注册</a>
-				{% url registrations.views.reactivate as u%}
-				<a href='{{u}}'>重新激活</a>
+				欢迎，<strong>{{user.username}}</strong>.
+				{% url django.contrib.auth.views.logout as u%}
+				<a href='{{u}}'>注销</a>
 			</div>
 		</div>
 		<div class='clearfix'></div>

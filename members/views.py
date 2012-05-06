@@ -98,8 +98,13 @@ class MemberTopupForm(forms.Form):
         m.topup(d['amount'])
         m.save()
         return m
-    
-    
+
+def add_history(user, content, topup, link):
+    if link:
+        History(user=user, content=content, klass='Member', unicode=topup, url=topup.get_absolute_url()).save()
+    else:
+        History(user=user, content=content, klass='Member', unicode=topup).save()
+
 def index(request):
     members = Member.objects.all()
     return render_to_response('members/index.html', {'members':members, 'message': request.flash.get('message')}, context_instance=RequestContext(request))
@@ -112,7 +117,7 @@ def new(request):
         if form.is_valid():
             member = form.save()
             request.flash['message']=u'添加成功'
-            History(user=request.user, content=u'添加新会员#%d.' % member.id).save()
+            add_history(request.user, u'添加会员', member, True)
             return redirect(member)
     return render_to_response('members/new.html', {'form':form}, context_instance=RequestContext(request))
 
@@ -126,7 +131,7 @@ def edit(request, id):
         if form.is_valid():
             form.save()
             request.flash['message']=u'保存成功'
-            History(user=request.user, content=u'编辑会员#%d.' % member.id).save()
+            add_history(request.user, u'编辑会员', member, True)
             return redirect(member)
     return render_to_response('members/edit.html', {'form': form, 'id': id}, context_instance=RequestContext(request))
 
@@ -136,7 +141,7 @@ def delete(request, id):
     member = get_object_or_404(Member, pk=id)
     member.delete()
     request.flash['message']=u'删除成功'
-    History(user=request.user, content=u'删除会员#%d.' % member.id).save()
+    add_history(request.user, u'删除会员', member, False)
     return redirect(index)
 
 @login_required
@@ -169,7 +174,7 @@ def topup(request, id):
         if form.is_valid():
             form.save()
             request.flash['message']=u'充值成功'
-            History(user=request.user, content=u'会员#%d充值.' % member.id).save()
+            add_history(request.user, u'会员充值', member, False)
             return redirect(member)
     return render_to_response('members/topup.html', {'member': member,'form': form}, context_instance=RequestContext(request))
 

@@ -1,0 +1,48 @@
+{% extends "layout/two_col.html" %}
+{% load helper %}
+{% block title %}管理系统{% endblock %}
+{% block nav %}
+	<a href="#">首页</a>
+{% endblock %}
+{% block main %}
+	<div class="manage-item">
+	{% div_text "书目" "" "manage-title" %}
+	{% url books.views.index as u%}
+	{% div_link u "书目管理" "book_module" "manage-module" %}
+	{% hr_line %}
+	{% url purchases.views.index as u%}
+	{% div_link u "进货管理" "purchase_module" "manage-module" %}
+	</div>
+	<div class="manage-item">
+	{% div_text "会员" "" "manage-title" %}
+	{% url members.views.index as u%}
+	{% div_link u "会员管理" "member_module" "manage-module" %}
+	{% hr_line %}
+	{% url groups.views.index as u%}
+	{% div_link u "会员组管理" "group_module" "manage-module" %}
+	{% hr_line %}
+	{% url topups.views.index as u%}
+	{% div_link u "充值记录管理" "topup_module" "manage-module" %}
+	</div>
+	<div class="manage-item">
+	{% div_text "交易" "" "manage-title" %}
+	{% url sales.views.index as u%}
+	{% div_link u "交易管理" "sale_module" "manage-module" %}
+	</div>
+	<div class="history">
+		{% div_text "操作记录" "" "history-title" %}
+		<ul class="history-item">
+		{% for h in histories %}
+			<li>
+			{% div_text h.content "" "history-item-item" %}
+			{% if h.url %}
+				{% div_link h.url h.unicode "" "history-item-item" %}
+			{% else %}
+				{% div_text h.unicode "" "history-item-item" %}
+			{% endif %}
+			{% div_text h.create_at "" "history-item-item" %}
+			</li>
+		{% endfor %}
+		</ul>
+	</div>
+{% endblock %}
