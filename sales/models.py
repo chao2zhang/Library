@@ -12,7 +12,7 @@ class Sale(models.Model):
         return u'%s * %s -> %s' % (self.book.title, self.count, self.member.name if self.member else 'Anonymous')
     def get_absolute_url(self):
         return "/sales/%i/show/" % self.id
-    def new(self):
+    def new(self):#新交易时更新书库存量和会员余额积分
         member = self.member
         book = self.book
         if member and member.group:
@@ -27,5 +27,5 @@ class Sale(models.Model):
         book.save()
         return self
     class Meta:
-        ordering = ['-create_at']
+        ordering = ['-create_at']#指定交易记录的默认排序方式为时间降序
         

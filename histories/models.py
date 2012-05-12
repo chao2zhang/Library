@@ -9,4 +9,4 @@ class History(models.Model):
     user = models.ForeignKey(User)
     create_at = models.DateTimeField(auto_now=True)
     class Meta:
-        ordering = ['-create_at']
+        ordering = ['-create_at']#指定默认排序方式为按时间降序

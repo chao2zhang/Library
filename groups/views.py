@@ -20,12 +20,12 @@ def add_history(user, content, topup, link):
     else:
         History(user=user, content=content, klass='Group', unicode=topup).save()
 
-def index(request):
+def index(request):#显示会员组列表
     groups = Group.objects.all()
     return render_to_response('groups/index.html', {'groups':groups, 'message': request.flash.get('message')}, context_instance=RequestContext(request))
 
 @login_required
-def new(request):
+def new(request):#新增会员组
     form = MemberForm()
     if request.POST:
         form = MemberForm(request.POST)
@@ -37,7 +37,7 @@ def new(request):
     return render_to_response('groups/new.html', {'form':form}, context_instance=RequestContext(request))
 
 @login_required
-def edit(request, id):
+def edit(request, id):#编辑指定会员组
     id = int(id)
     group = get_object_or_404(Group, pk=id)
     form = MemberForm(instance=group);
@@ -51,7 +51,7 @@ def edit(request, id):
     return render_to_response('groups/edit.html', {'form': form, 'id': id}, context_instance=RequestContext(request))
 
 @login_required
-def delete(request, id):
+def delete(request, id):#删除指定会员组
     id = int(id)
     group = get_object_or_404(Group, pk=id)
     add_history(request.user, u'删除会员组', group, False)
@@ -60,7 +60,7 @@ def delete(request, id):
     return redirect(index)
 
 @login_required
-def show(request, id):
+def show(request, id):#显示指定会员组详细信息
     id = int(id)
     group = get_object_or_404(Group, pk=id)
     return render_to_response('groups/show.html', {'group': group, 'message': request.flash.get('message')}, context_instance=RequestContext(request))

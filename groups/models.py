@@ -10,4 +10,4 @@ class Group(models.Model):
     def get_absolute_url(self):
         return "/groups/%i/show/" % self.id
     class Meta:
-        ordering = ['-create_at']
+        ordering = ['-create_at']#指定默认排序方式为按生成时间降序

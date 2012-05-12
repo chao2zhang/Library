@@ -31,7 +31,7 @@ class Member(models.Model):
         return u'%s<%s>' % (self.name, self.gender)
     def get_absolute_url(self):
         return "/members/%i/show/" % self.id
-    def set_password(self, raw_password):            
+    def set_password(self, raw_password):#使用sha1算法加密密码串
         import random
         from django.contrib.auth.models import get_hexdigest
         algo = 'sha1'
@@ -39,10 +39,10 @@ class Member(models.Model):
         hsh = get_hexdigest(algo, salt, raw_password)
         self.password = '%s$%s$%s' % (algo, salt, hsh)
         self.save()
-    def check_password(self, raw_password):
+    def check_password(self, raw_password):#检查密码是否匹配
         from django.contrib.auth.models import check_password
         return check_password(raw_password, self.password)
-    def topup(self, amount):
+    def topup(self, amount):#为此会员充值
         from topups.models import Topup
         topup = Topup()
         topup.member = self
@@ -52,5 +52,5 @@ class Member(models.Model):
         self.point += topup_point(amount)
         self.save()
     class Meta:
-        ordering = ['-create_at']        
+        ordering = ['-create_at']#指定默认排序方式为按时间降序
         

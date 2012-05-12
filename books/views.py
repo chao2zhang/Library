@@ -9,7 +9,7 @@ from models import Book
 from helper import helper
 from histories.models import History
 
-class BookForm(forms.ModelForm):
+class BookForm(forms.ModelForm):#用于生成一条Book记录的表单结构
     isbn = forms.RegexField(regex='^[0-9]{13}$', label=u'ISBN编号')
     title = forms.CharField(max_length=200, label=u'标题')
     author = forms.CharField(max_length=200, label=u'作者')
@@ -19,20 +19,20 @@ class BookForm(forms.ModelForm):
         model = Book
         exclude = ('count', 'create_at', 'update_at')
 
-class BookSearchForm(forms.Form):
+class BookSearchForm(forms.Form):#用于搜索数目信息的表单结构
     id = forms.RegexField(required=False, regex='^[0-9]*$', label=u'编号')
     isbn = forms.CharField(required=False, max_length=13, label=u'ISBN编号')
     title = forms.CharField(required=False, max_length=200, label=u'标题')
     author = forms.CharField(required=False, max_length=200, label=u'作者')
     press = forms.CharField(required=False, max_length=200, label=u'出版社')
 
-def add_history(user, content, topup, link):
+def add_history(user, content, topup, link):#记录操作所用的函数
     if link:
         History(user=user, content=content, klass='Book', unicode=topup, url=topup.get_absolute_url()).save()
     else:
         History(user=user, content=content, klass='Book', unicode=topup).save()
 
-def index(request):
+def index(request):#显示Book列表
     books = Book.objects.all()
     return render_to_response('books/index.html', {
         'books':books, 
@@ -40,7 +40,7 @@ def index(request):
         }, context_instance=RequestContext(request))
 
 @login_required
-def new(request):
+def new(request):#添加新书目
     form = BookForm()
     if request.POST:
         form = BookForm(request.POST)
@@ -52,7 +52,7 @@ def new(request):
     return render_to_response('books/new.html', {'form':form}, context_instance=RequestContext(request))
 
 @login_required
-def edit(request, id):
+def edit(request, id):#编辑指定编号的书目
     id = int(id)
     book = get_object_or_404(Book, pk=id)
     form = BookForm(instance=book);
@@ -66,7 +66,7 @@ def edit(request, id):
     return render_to_response('books/edit.html', {'form': form, 'id': id}, context_instance=RequestContext(request))
 
 @login_required
-def delete(request, id):
+def delete(request, id):#删除指定编号的书目
     id = int(id)
     book = get_object_or_404(Book, pk=id)
     add_history(request.user, u'删除书目', book, False)
@@ -75,13 +75,13 @@ def delete(request, id):
     return redirect(index)
 
 @login_required
-def show(request, id):
+def show(request, id):#显示指定编号书目的详细信息
     id = int(id)
     book = get_object_or_404(Book, pk=id)
     return render_to_response('books/show.html', {'book': book, 'message': request.flash.get('message')}, context_instance=RequestContext(request))
 
 @login_required
-def search(request):
+def search(request):#搜索数目
     form = BookSearchForm()
     if request.POST:
         form = BookSearchForm(request.POST)
@@ -95,7 +95,7 @@ def search(request):
     return render_to_response('books/search.html', {'form':form}, context_instance=RequestContext(request))
 
 @login_required
-def result(request):
+def result(request):#执行搜索书目的请求
     params = ''
     fields = BookSearchForm().fields
     for k in request.GET:

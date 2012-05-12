@@ -11,12 +11,12 @@ from django.template import RequestContext
 import datetime
 from histories.models import History
 
-class SaleForm(forms.ModelForm):
+class SaleForm(forms.ModelForm):#新交易的表单结构
     book = forms.ModelChoiceField(queryset=Book.objects.all(), label=u'书目')
     member = forms.ModelChoiceField(queryset=Member.objects.filter(valid_to__gte=datetime.date.today(), valid=1), required=False, label=u'会员', empty_label=u'匿名')
     password = forms.CharField(max_length=16, label=u'密码', widget=forms.PasswordInput, required=False)
     count = forms.IntegerField(min_value=1, label=u'数量')
-    def clean(self):
+    def clean(self):#新交易合法性检查
         cd = self.cleaned_data
         if cd['count'] > cd['book'].count:
             raise ValidationError(u'存货不够，当前存货量为%i。' % cd['book'].count)
@@ -35,19 +35,19 @@ class SaleForm(forms.ModelForm):
         model = Sale
         exclude = ('create_at', 'update_at')
 
-def add_history(user, content, topup, link):
+def add_history(user, content, topup, link):#记录交易相关操作
     if link:
         History(user=user, content=content, klass='Sale', unicode=topup, url=topup.get_absolute_url()).save()
     else:
         History(user=user, content=content, klass='Sale', unicode=topup).save()
 
 @login_required
-def index(request):
+def index(request):#交易列表
     sales = Sale.objects.all()
     return render_to_response('sales/index.html', {'sales': sales, 'message': request.flash.get('message')}, context_instance=RequestContext(request))
 
 @login_required
-def new(request):
+def new(request):#添加新交易
     form = SaleForm()
     if request.POST:
         form = SaleForm(request.POST)
@@ -60,13 +60,13 @@ def new(request):
     return render_to_response('sales/new.html', {'form':form}, context_instance=RequestContext(request))
 
 @login_required
-def show(request, id):
+def show(request, id):#显示指定交易详细信息
     id = int(id)
     sale = get_object_or_404(Sale, pk=id)
     return render_to_response('sales/show.html', {'sale':sale, 'message': request.flash.get('message')}, context_instance=RequestContext(request))
 
 @login_required
-def delete(request, id):
+def delete(request, id):#删除指定交易
     id = int(id)
     sale = get_object_or_404(Sale, pk=id)
     sale.delete()

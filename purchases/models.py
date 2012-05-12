@@ -16,11 +16,11 @@ class Purchase(models.Model):
         return s
     def get_absolute_url(self):
         return "/purchases/%i/show/" % self.id
-    def pay(self):
+    def pay(self):#执行支付后对书库存量进行更改
         if not self.paid:
             self.paid = True
             self.save()
             self.book.count += self.count
             self.book.save()
     class Meta:
-        ordering = ['paid', '-create_at']
+        ordering = ['paid', '-create_at']#指定默认排序方式为未支付优先，按时间降序

@@ -9,7 +9,7 @@ from django.template import RequestContext
 from members.models import Member
 from histories.models import History
 
-class TopupForm(forms.Form):
+class TopupForm(forms.Form):#新充值记录的表单结构
     member = forms.ModelChoiceField(queryset=Member.objects.all(), label=u'会员组')
     password = forms.CharField(max_length=16, label=u'密码', widget=forms.PasswordInput)
     amount = forms.FloatField(min_value=0, label=u'金额')
@@ -30,18 +30,18 @@ class TopupForm(forms.Form):
         m.save()
         return self
 
-def add_history(user, content, topup, link):
+def add_history(user, content, topup, link):#记录充值相关操作
     if link:
         History(user=user, content=content, klass='Topup', unicode=topup, url=topup.get_absolute_url()).save()
     else:
         History(user=user, content=content, klass='Topup', unicode=topup).save()
 
-def index(request):
+def index(request):#充值记录列表
     topups = Topup.objects.all()
     return render_to_response('topups/index.html', {'topups': topups, 'message': request.flash.get('message')}, context_instance=RequestContext(request))
 
 @login_required
-def new(request):
+def new(request):#添加新充值记录
     form = TopupForm()
     if request.POST:
         form = TopupForm(request.POST)
@@ -53,7 +53,7 @@ def new(request):
     return render_to_response('topups/new.html', {'form':form}, context_instance=RequestContext(request))
 
 @login_required
-def delete(request, id):
+def delete(request, id):#删除指定充值记录
     id = int(id)
     topup = get_object_or_404(Topup, pk=id)
     topup.delete()
@@ -62,7 +62,7 @@ def delete(request, id):
     return redirect(index)
 
 @login_required
-def show(request, id):
+def show(request, id):#显示指定充值记录详细信息
     id = int(id)
     topup = get_object_or_404(Topup, pk=id)    
     return render_to_response('topups/show.html', {'topup': topup, 'message': request.flash.get('message')}, context_instance=RequestContext(request))

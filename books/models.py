@@ -9,11 +9,9 @@ class Book(models.Model):
     sale_price = models.FloatField()
     create_at = models.DateTimeField(auto_now_add=True, null=False)
     update_at = models.DateTimeField(auto_now=True, null=False)
-    def __unicode__(self):
+    def __unicode__(self):#显示此Book记录的默认格式
         return u'<%s> by %s' % (self.title, self.author)
-    def get_absolute_url(self):
+    def get_absolute_url(self):#显示此记录对应详细信息的url
         return "/books/%i/show/" % self.id
     class Meta:
-        ordering = ['-create_at']
-    
-    
+        ordering = ['-create_at']#指定默认排序方式为时间降序

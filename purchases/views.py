@@ -9,7 +9,7 @@ from django.template import RequestContext
 from django.http import Http404
 from histories.models import History
 
-class PurchaseForm(forms.ModelForm):
+class PurchaseForm(forms.ModelForm):#新进货的表单结构
     book = forms.ModelChoiceField(queryset=Book.objects.all(), label=u'书目')
     price = forms.FloatField(min_value=0, label=u'进货价')
     count = forms.IntegerField(min_value=1, label=u'数量')
@@ -17,18 +17,18 @@ class PurchaseForm(forms.ModelForm):
         model = Purchase
         exclude = ('paid', 'create_at', 'update_at')
 
-def add_history(user, content, topup, link):
+def add_history(user, content, topup, link):#记录进货相关操作
     if link:
         History(user=user, content=content, klass='Purchase', unicode=topup, url=topup.get_absolute_url()).save()
     else:
         History(user=user, content=content, klass='Purchase', unicode=topup).save()
         
-def index(request):
+def index(request):#进货列表
     purchases = Purchase.objects.all()
     return render_to_response('purchases/index.html', {'purchases': purchases, 'message': request.flash.get('message')}, context_instance=RequestContext(request))
 
 @login_required
-def new(request):
+def new(request):#添加进货
     form = PurchaseForm()
     if request.POST:
         form = PurchaseForm(request.POST)
@@ -40,7 +40,7 @@ def new(request):
     return render_to_response('purchases/new.html', {'form':form}, context_instance=RequestContext(request))
 
 @login_required
-def edit(request, id):
+def edit(request, id):#编辑指定进货
     id = int(id)
     purchase = get_object_or_404(Purchase, pk=id)
     if purchase.paid == 1:
@@ -56,7 +56,7 @@ def edit(request, id):
     return render_to_response('purchases/edit.html', {'form': form, 'id': id}, context_instance=RequestContext(request))
 
 @login_required
-def delete(request, id):
+def delete(request, id):#删除指定进货
     id = int(id)
     purchase = get_object_or_404(Purchase, pk=id)
     purchase.delete()
@@ -65,7 +65,7 @@ def delete(request, id):
     return redirect(index)
 
 @login_required
-def show(request, id):
+def show(request, id):#显示指定进货详细信息
     id = int(id)
     purchase = get_object_or_404(Purchase, pk=id)
     if purchase.paid == 0:
@@ -73,7 +73,7 @@ def show(request, id):
     return render_to_response('purchases/show.html', {'purchase': purchase, 'message': request.flash.get('message')}, context_instance=RequestContext(request))
     
 @login_required
-def pay(request, id):
+def pay(request, id):#完成指定进货
     id = int(id)
     purchase = get_object_or_404(Purchase, pk=id)
     purchase.pay()

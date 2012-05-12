@@ -12,7 +12,7 @@ from groups.models import Group
 from helper import helper
 from histories.models import History
 
-class MemberForm(forms.ModelForm):
+class MemberForm(forms.ModelForm):#添加新会员的表单结构
     name = forms.CharField(max_length=200, label=u'姓名')
     password = forms.CharField(max_length=16, label=u'密码', widget=forms.PasswordInput)
     gender = forms.ChoiceField(choices=Member.GENDER_CHOICES, label=u'性别')
@@ -32,7 +32,7 @@ class MemberForm(forms.ModelForm):
         model = Member
         exclude = ('password', 'balance', 'point', 'create_at', 'update_at')
         
-class MemberEditForm(forms.ModelForm):
+class MemberEditForm(forms.ModelForm):#编辑会员的表单结构
     name = forms.CharField(max_length=200, label=u'姓名')
     password = forms.CharField(max_length=16, label=u'密码验证', widget=forms.PasswordInput)
     gender = forms.ChoiceField(choices=Member.GENDER_CHOICES, label=u'性别')
@@ -51,7 +51,7 @@ class MemberEditForm(forms.ModelForm):
         model = Member
         exclude = ('password', 'balance', 'point', 'create_at', 'update_at')
         
-class MemberChangePasswordForm(forms.Form):
+class MemberChangePasswordForm(forms.Form):#修改密码的表单结构
     password = forms.CharField(max_length=16, label=u'原密码', widget=forms.PasswordInput)
     new_password = forms.CharField(max_length=16, label=u'新密码', widget=forms.PasswordInput)
     new_password_confirm = forms.CharField(max_length=16, label=u'新密码确认', widget=forms.PasswordInput)
@@ -73,14 +73,14 @@ class MemberChangePasswordForm(forms.Form):
         m.save()
         return m
     
-class MemberSearchForm(forms.Form):
+class MemberSearchForm(forms.Form):#搜索会员的表单结构
     id = forms.RegexField(required=False, regex='^[0-9]*$', label=u'编号')
     name = forms.CharField(required=False, max_length=200, label=u'姓名')
     gender = forms.TypedChoiceField(required=False, choices=Member.GENDER_CHOICES_WITH_EMPTY, label=u'性别')
     birthday = forms.DateField(required=False, widget=forms.DateInput, label=u'生日')
     identify_number = forms.CharField(required=False, max_length=18, label=u'身份证')
     
-class MemberTopupForm(forms.Form):
+class MemberTopupForm(forms.Form):#充值的表单结构
     password = forms.CharField(max_length=16, label=u'密码', widget=forms.PasswordInput)
     amount = forms.FloatField(min_value=0, label=u'金额')
     def __init__(self, instance, *args, **kwargs):
@@ -99,18 +99,18 @@ class MemberTopupForm(forms.Form):
         m.save()
         return m
 
-def add_history(user, content, topup, link):
+def add_history(user, content, topup, link):#记录与会员相关的事件
     if link:
         History(user=user, content=content, klass='Member', unicode=topup, url=topup.get_absolute_url()).save()
     else:
         History(user=user, content=content, klass='Member', unicode=topup).save()
 
-def index(request):
+def index(request):#会员列表
     members = Member.objects.all()
     return render_to_response('members/index.html', {'members':members, 'message': request.flash.get('message')}, context_instance=RequestContext(request))
 
 @login_required
-def new(request):
+def new(request):#添加新会员
     form = MemberForm()
     if request.POST:
         form = MemberForm(request.POST)
@@ -122,7 +122,7 @@ def new(request):
     return render_to_response('members/new.html', {'form':form}, context_instance=RequestContext(request))
 
 @login_required
-def edit(request, id):
+def edit(request, id):#编辑指定会员
     id = int(id)
     member = get_object_or_404(Member, pk=id)
     form = MemberEditForm(instance=member);
@@ -136,7 +136,7 @@ def edit(request, id):
     return render_to_response('members/edit.html', {'form': form, 'id': id}, context_instance=RequestContext(request))
 
 @login_required
-def delete(request, id):
+def delete(request, id):#删除指定会员
     id = int(id)
     member = get_object_or_404(Member, pk=id)
     member.delete()
@@ -145,13 +145,13 @@ def delete(request, id):
     return redirect(index)
 
 @login_required
-def show(request, id):
+def show(request, id):#显示指定会员详细信息
     id = int(id)
     member = get_object_or_404(Member, pk=id)
     return render_to_response('members/show.html', {'member': member, 'message': request.flash.get('message')}, context_instance=RequestContext(request))
 
 @login_required
-def change_password(request, id):
+def change_password(request, id):#更改密码
     id = int(id)
     member = get_object_or_404(Member, pk=id)
     form = MemberChangePasswordForm(member)
@@ -165,7 +165,7 @@ def change_password(request, id):
     return render_to_response('members/change_password.html', {'form': form}, context_instance=RequestContext(request))
 
 @login_required
-def topup(request, id):
+def topup(request, id):#会员充值
     id = int(id)
     member = get_object_or_404(Member, pk=id)
     form = MemberTopupForm(member)
@@ -179,7 +179,7 @@ def topup(request, id):
     return render_to_response('members/topup.html', {'member': member,'form': form}, context_instance=RequestContext(request))
 
 @login_required
-def search(request):
+def search(request):#搜索会员
     form = MemberSearchForm()
     if request.POST:
         form = MemberSearchForm(request.POST)
@@ -193,7 +193,7 @@ def search(request):
     return render_to_response('members/search.html', {'form':form}, context_instance=RequestContext(request))
 
 @login_required
-def result(request):
+def result(request):#执行会员搜索
     params = ''
     fields = MemberSearchForm().fields
     for k in request.GET:
