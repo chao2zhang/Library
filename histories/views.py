@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # Create your views here.
 from models import History
 from django.contrib.auth.decorators import login_required

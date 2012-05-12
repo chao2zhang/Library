@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from django.db import models
 from books.models import Book
 from members.models import Member
